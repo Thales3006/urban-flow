@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://b304p5vhgs1gb"]
+
+[ext_resource type="Script" uid="uid://cnt2rf14173pp" path="res://scenes/scripts/grid.gd" id="1_2q6dc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7u6i3"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.34321898, 0.66615456, 0.71633834, 1)
+border_width_right = 10
+border_color = Color(0.109077685, 0.43712097, 0.54090965, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[node name="Level" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -886.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7u6i3")
+
+[node name="Grid" type="Node2D" parent="."]
+position = Vector2(314, 103)
+script = ExtResource("1_2q6dc")
