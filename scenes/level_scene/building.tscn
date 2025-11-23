@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://beqaxe1jj2r4m"]
 
-[ext_resource type="Texture2D" uid="uid://dd6tqsywkpi5w" path="res://resources/icons/icon.svg" id="1_n8bkc"]
-[ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/building.gd" id="1_uvy8r"]
+[ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level_scene/building.gd" id="1_rc8dk"]
+[ext_resource type="Texture2D" uid="uid://dd6tqsywkpi5w" path="res://resources/icons/icon.svg" id="2_2jaqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvy8r"]
 size = Vector2(123, 120.5)
 
 [node name="Building" type="Node2D"]
-script = ExtResource("1_uvy8r")
+script = ExtResource("1_rc8dk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6238607, 0.6227105)
-texture = ExtResource("1_n8bkc")
+texture = ExtResource("2_2jaqi")
 
 [node name="Area2D" type="Area2D" parent="."]
 

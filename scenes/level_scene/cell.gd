@@ -1,7 +1,7 @@
 extends StaticBody2D
 class_name Cell
 
-const cell = preload("res://scenes/cell.tscn")
+const cell = preload("res://scenes/level_scene/cell.tscn")
 
 func _ready() -> void:
 	pass

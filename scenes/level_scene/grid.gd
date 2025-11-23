@@ -1,24 +1,19 @@
 extends Node2D
 
-var level: LevelData
-
 var cell_size: int = 100
 const inset: int = 10
-var max_size = 600
-
+var main_scene: Control
+var level: LevelData
 var cell_instances = []
 
-func _ready():
-	level = load(global.current_level_path) as LevelData
-	if not level:
-		push_error("Failed to load level: " + global.current_level_path)
-		return
+func _ready() -> void:
+	level = global.level
 	create_cells()
-	add_child(Building.create(Vector2(100,100)))
 
 func _draw():
+	if not level:
+		return
 	draw_grid_lines()
-	
 
 func draw_grid_lines():
 	for x in range(level.grid_width + 1):

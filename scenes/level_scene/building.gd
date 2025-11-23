@@ -1,7 +1,7 @@
 extends Node2D
 class_name Building
 
-const building = preload("res://scenes/building.tscn")
+const building = preload("res://scenes/level_scene/building.tscn")
 
 var mouse_in: bool = false
 var dragging: bool = false
@@ -10,7 +10,7 @@ var initialPos: Vector2
 
 static func create(pos: Vector2) -> Building:
 	var new_building: Building = building.instantiate()
-	new_building.global_position = pos
+	new_building.position = pos
 	new_building.initialPos = pos
 	return new_building
 
@@ -32,16 +32,10 @@ func _input(event: InputEvent) -> void:
 		elif not event.pressed and dragging:
 			dragging = false
 			global.is_dragging = false
-			print("MINHA POS: ")
-			print(self.global_position)
-			
+		
 			var tween = get_tree().create_tween()
-			
 			var closest_cell = get_closest_overlapping_cell()
-			print(closest_cell)
 			if closest_cell:
-				print("TARGET CELL: ")
-				print(self.global_position)
 				tween.tween_property(self, "global_position", closest_cell.global_position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
 				tween.tween_property(self, "global_position", initialPos, 0.2).set_ease(Tween.EASE_OUT)
@@ -65,18 +59,18 @@ func get_closest_overlapping_cell():
 	return closest_cell
 
 func _on_area_2d_body_entered(body) -> void:
-	body.scale = Vector2(1.05,1.05)
+	get_tree().create_tween().tween_property(body, "scale", Vector2(1.05,1.1), 0.2).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_body_exited(body) -> void:
-	body.scale = Vector2(1.0,1.0)
+	get_tree().create_tween().tween_property(body, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
 	if not global.is_dragging:
 		mouse_in = true
-		scale = Vector2(1.05,1.05)
+		get_tree().create_tween().tween_property(self, "scale", Vector2(1.05,1.05), 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
 	if not global.is_dragging:
 		mouse_in = false
-		scale = Vector2(1,1)
+		get_tree().create_tween().tween_property(self, "scale", Vector2(1,1), 0.05).set_ease(Tween.EASE_OUT)
 	
