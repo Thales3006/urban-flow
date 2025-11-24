@@ -29,6 +29,7 @@ func _input(event: InputEvent) -> void:
 		if event.pressed:
 			dragging = true
 			global.is_dragging = true
+			global_position = get_global_mouse_position()
 		elif not event.pressed and dragging:
 			dragging = false
 			global.is_dragging = false
