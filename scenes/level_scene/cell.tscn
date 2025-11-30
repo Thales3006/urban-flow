@@ -5,13 +5,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ngbm"]
 size = Vector2(40, 40)
 
-[node name="Cell" type="StaticBody2D" groups=["dropable"]]
+[node name="Cell" type="Node2D"]
 script = ExtResource("1_yngal")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Content" type="StaticBody2D" parent="." groups=["dropable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Content"]
 shape = SubResource("RectangleShape2D_6ngbm")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Content"]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0

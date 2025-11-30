@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dps43m0ugt0av"]
+
+[ext_resource type="Script" uid="uid://5bd777agpxud" path="res://scenes/level_scene/grid.gd" id="1_np0kd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np0kd"]
+size = Vector2(753, 560)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_np0kd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(376.5, 280)
+shape = SubResource("RectangleShape2D_np0kd")
+disabled = true

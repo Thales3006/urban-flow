@@ -15,7 +15,18 @@ static func create(pos: Vector2) -> Building:
 	return new_building
 
 func _ready() -> void:
-	area2D = $Area2D
+	area2D = $Content/Area2D
+	var grid = get_tree().get_first_node_in_group("Grid")
+	if grid:
+		grid.connect("resized", Callable(self, "_on_resize"))
+	
+func on_resize(cell_size: Vector2):
+	var base_size = $Content/Area2D/CollisionShape2D.shape.size
+	var scale_factor = min(
+		cell_size.x / base_size.x,
+		cell_size.y / base_size.y
+	)
+	scale = Vector2(scale_factor, scale_factor)
 	
 func _process(_delta: float) -> void:
 	pass
@@ -60,10 +71,12 @@ func get_closest_overlapping_cell():
 	return closest_cell
 
 func _on_area_2d_body_entered(body) -> void:
-	get_tree().create_tween().tween_property(body, "scale", Vector2(1.05,1.1), 0.2).set_ease(Tween.EASE_OUT)
+	var cell = body.get_parent()
+	get_tree().create_tween().tween_property(cell, "scale", Vector2(1.1,1.1), 0.2).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_body_exited(body) -> void:
-	get_tree().create_tween().tween_property(body, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
+	var cell = body.get_parent()
+	get_tree().create_tween().tween_property(cell, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
 	if not global.is_dragging:
