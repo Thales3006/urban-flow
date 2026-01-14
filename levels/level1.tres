@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://fpq5cb6n8grw"]
+
+[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="1_a2b3c"]
+
+[resource]
+script = ExtResource("1_a2b3c")
+level_name = "1"
+grid_width = 8
+grid_height = 6
+grid_layout = Array[int]([2, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2])
+available_buildings = {
+"bus": 3,
+"hospital": 2,
+"house": 1
+}

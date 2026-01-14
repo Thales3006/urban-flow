@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://b304p5vhgs1gb"]
+
+[ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world.gd" id="1_3dm31"]
+[ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/grid/grid.tscn" id="2_3dm31"]
+[ext_resource type="PackedScene" uid="uid://5io576ht1fb8" path="res://scenes/level/catalog/catalog.tscn" id="2_i166f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dm31"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.59992963, 0.6210435, 0.59540397, 1)
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.35428062, 0.35658672, 0.38782108, 1)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Level" type="Node"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.30138263, 0.830506, 0.4931013, 1)
+
+[node name="WorldLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="World" type="Node2D" parent="WorldLayer"]
+script = ExtResource("1_3dm31")
+
+[node name="Toolbox" parent="WorldLayer/World" instance=ExtResource("2_i166f")]
+position = Vector2(148, 374)
+
+[node name="Camera2D" type="Camera2D" parent="WorldLayer/World"]
+position = Vector2(576, 324)
+
+[node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
+position = Vector2(314, 111)
+scale = Vector2(0.99886906, 0.9371659)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="UILayer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3dm31")
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
