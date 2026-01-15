@@ -9,4 +9,4 @@ enum Kind {
 @export var kind: Kind
 @export var sprite: Texture2D
 @export var sprite_scale: float
-@export var radius: int
+@export var radius: float

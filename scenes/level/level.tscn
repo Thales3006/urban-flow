@@ -35,15 +35,15 @@ follow_viewport_enabled = true
 [node name="World" type="Node2D" parent="WorldLayer"]
 script = ExtResource("1_3dm31")
 
-[node name="Toolbox" parent="WorldLayer/World" instance=ExtResource("2_i166f")]
-position = Vector2(148, 374)
-
 [node name="Camera2D" type="Camera2D" parent="WorldLayer/World"]
 position = Vector2(576, 324)
 
 [node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
-position = Vector2(314, 111)
+position = Vector2(679.00006, 377.00003)
 scale = Vector2(0.99886906, 0.9371659)
+
+[node name="Toolbox" parent="WorldLayer/World" instance=ExtResource("2_i166f")]
+position = Vector2(148, 374)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 

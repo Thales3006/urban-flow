@@ -7,25 +7,27 @@ var cell_instances = []
 
 func _ready() -> void:
 	level = global.level
-	create_cells()
+	spawn_cells_from_tilemap()
 
-func _draw():
-	if not level:
-		return
-	draw_grid_lines()
+func spawn_cells_from_tilemap():
+	for cell in cell_instances:
+		cell.queue_free()
+	cell_instances.clear()
 
-func draw_grid_lines():
-	var cell_size = $CollisionShape2D.shape.size / Vector2(level.grid_width,level.grid_height)
-	
-	for x in range(level.grid_width + 1):
-		var start = Vector2(x, 0) * cell_size
-		var end = Vector2(x, level.grid_height) * cell_size
-		draw_line(start, end, Color(0.3, 0.8, 0.3, 1), 2.0)
-	
-	for y in range(level.grid_height + 1):
-		var start = Vector2(0, y) * cell_size
-		var end = Vector2(level.grid_width, y)* cell_size
-		draw_line(start, end, Color(0.3, 0.8, 0.3, 1), 2.0)
+	var tile_size = $TileMap.tile_set.tile_size
+
+	for y in range(level.grid_height):
+		for x in range(level.grid_width):
+			var index = x + y * level.grid_width
+			var cell_coord := Vector2i(x, y) - Vector2i(level.grid_width, level.grid_height) / 2
+			var world_pos = $TileMap.map_to_local(cell_coord)
+			
+			match level.grid_layout[index]:
+				LevelData.CellType.EMPTY:
+					var cell := Cell.create(world_pos)
+					add_child(cell)
+					cell_instances.append(cell)
+
 
 func create_cells():
 	for cell in cell_instances:
