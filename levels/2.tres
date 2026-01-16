@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://bqshvhuei2jib"]
+
+[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="1_e28t1"]
+[ext_resource type="PackedScene" uid="uid://did5vpg1yj3pe" path="res://levels/maps/level2.tscn" id="2_50u6p"]
+
+[resource]
+script = ExtResource("1_e28t1")
+tilemap_scene = ExtResource("2_50u6p")
+available_buildings = Dictionary[int, int]({
+0: 3,
+1: 1
+})
+metadata/_custom_type_script = "uid://b2di8yjhlf3sq"

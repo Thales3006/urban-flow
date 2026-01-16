@@ -64,6 +64,7 @@ func _input(event: InputEvent) -> void:
 				current_cell = closest_cell
 				for cell: Cell in will_affect:
 					cell.affecting.push_back(self)
+				will_affect.clear()
 				tween.tween_property(self, "global_position", closest_cell.global_position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
 				tween.tween_property(self, "position", initialPos, 0.5).set_ease(Tween.EASE_OUT)
