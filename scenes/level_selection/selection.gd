@@ -9,11 +9,9 @@ func _ready():
 		return
 	
 	for file_name in dir.get_files():
-		if file_name.ends_with(".tres"):
-			var level_data: LevelData = load(global.levels_path + file_name)
-			
+		if file_name.ends_with(".tres"):	
 			var button := Button.new()
-			button.text = level_data.level_name if level_data else file_name.get_basename()
+			button.text = file_name.get_basename()
 			button.custom_minimum_size = Vector2(80, 80)
 			button.focus_mode = Control.FOCUS_NONE
 			button.connect("pressed", Callable(self, "_on_level_selected").bind(file_name))

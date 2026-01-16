@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 	
 static func create(pos: Vector2) -> Cell:
 	var new_cell: Cell = cell.instantiate()
-	new_cell.position = pos
+	new_cell.global_position = pos
 	return new_cell
 	
 func get_size() -> Vector2:

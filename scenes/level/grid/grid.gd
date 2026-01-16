@@ -1,54 +1,36 @@
-extends Area2D
+extends Node2D
 
-const inset: int = 20
+const CELL_KIND_DROPABLE := "dropable"
+
 var main_scene: Node2D
 var level: LevelData
 var cell_instances = []
+var tile_map: TileMapLayer
 
 func _ready() -> void:
 	level = global.level
+	tile_map = level.tilemap_scene.instantiate()
+	add_child(tile_map)
 	spawn_cells_from_tilemap()
 
 func spawn_cells_from_tilemap():
-	for cell in cell_instances:
-		cell.queue_free()
-	cell_instances.clear()
+	for cell_pos: Vector2i in tile_map.get_used_cells():
+		var tile_data := tile_map.get_cell_tile_data(cell_pos)
+		if tile_data == null:
+			continue
 
-	var tile_size = $TileMap.tile_set.tile_size
+		var kind: String = tile_data.get_custom_data("cell_kind")
+		if kind != CELL_KIND_DROPABLE:
+			continue
 
-	for y in range(level.grid_height):
-		for x in range(level.grid_width):
-			var index = x + y * level.grid_width
-			var cell_coord := Vector2i(x, y) - Vector2i(level.grid_width, level.grid_height) / 2
-			var world_pos = $TileMap.map_to_local(cell_coord)
-			
-			match level.grid_layout[index]:
-				LevelData.CellType.EMPTY:
-					var cell := Cell.create(world_pos)
-					add_child(cell)
-					cell_instances.append(cell)
+		var cell := Cell.create(tile_map.map_to_local(cell_pos))
+		add_child(cell)
+		
+func get_tilemap_world_rect() -> Rect2:
+	var used := tile_map.get_used_rect() # in cells
+	var cell_size := tile_map.tile_set.tile_size
 
+	var world_pos := tile_map.map_to_local(used.position)
+	var world_size := used.size * cell_size
 
-func create_cells():
-	for cell in cell_instances:
-		cell.queue_free()
-	cell_instances.clear()
-	
-	var cell_size = $CollisionShape2D.shape.size / Vector2(level.grid_width,level.grid_height) - Vector2(inset,inset)
-	
-	for y in range(level.grid_height):
-		for x in range(level.grid_width):
-			var index = y * level.grid_width + x
-			var cell_type = level.grid_layout[index]
-			
-			var pos = Vector2(x, y) * (cell_size  + Vector2(inset,inset)) + cell_size/2 + Vector2(inset,inset)/2
-			
-			match cell_type:
-				LevelData.CellType.EMPTY:
-					var cell_instance = Cell.create(pos)
-					add_child(cell_instance)
-					cell_instances.append(cell_instance)
-				LevelData.CellType.FILLED:
-					var cell_instance = Cell.create(pos)
-					add_child(cell_instance)
-					cell_instances.append(cell_instance)
+	return Rect2(world_pos, world_size)
