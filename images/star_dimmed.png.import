@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bltupg4ynbtnd"
-path="res://.godot/imported/reciclagem.svg-dd922b3d7ff6e880a33f150776c6fbd5.ctex"
+uid="uid://banviutas6j4w"
+path="res://.godot/imported/star_dimmed.png-52f4415a88cf099383604781c4800a2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://buildings/sprites/reciclagem.svg"
-dest_files=["res://.godot/imported/reciclagem.svg-dd922b3d7ff6e880a33f150776c6fbd5.ctex"]
+source_file="res://images/star_dimmed.png"
+dest_files=["res://.godot/imported/star_dimmed.png-52f4415a88cf099383604781c4800a2f.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

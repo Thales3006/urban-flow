@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diiesm5qx8h6s"
-path="res://.godot/imported/hospital.svg-1f2a831eb938e45290a7fcde3325ccb2.ctex"
+uid="uid://c4q281mutpxag"
+path="res://.godot/imported/star_lit.png-2c95cf2cbdb707db0d36bc7ab6a64c97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://buildings/sprites/hospital.svg"
-dest_files=["res://.godot/imported/hospital.svg-1f2a831eb938e45290a7fcde3325ccb2.ctex"]
+source_file="res://images/star_lit.png"
+dest_files=["res://.godot/imported/star_lit.png-2c95cf2cbdb707db0d36bc7ab6a64c97.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

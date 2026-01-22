@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq6xvg47utduu"
-path="res://.godot/imported/onibus.svg-c8eae997ea980ce0e7a9bbd0050d3ab5.ctex"
+uid="uid://r3glgthqlpdk"
+path="res://.godot/imported/recicling.png-ed6e9a6d0ae574e061529cab2f2363b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://buildings/sprites/onibus.svg"
-dest_files=["res://.godot/imported/onibus.svg-c8eae997ea980ce0e7a9bbd0050d3ab5.ctex"]
+source_file="res://buildings/sprites/recicling.png"
+dest_files=["res://.godot/imported/recicling.png-ed6e9a6d0ae574e061529cab2f2363b0.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o3c3bo61e2xj"
-path="res://.godot/imported/house.svg-2126b3169f8f18a0d595c074052f25fb.ctex"
+uid="uid://fvk00mi6bq5n"
+path="res://.godot/imported/red.png-5929249a5ae682854f7453c92fc1bc45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://buildings/sprites/house.svg"
-dest_files=["res://.godot/imported/house.svg-2126b3169f8f18a0d595c074052f25fb.ctex"]
+source_file="res://icons/red.png"
+dest_files=["res://.godot/imported/red.png-5929249a5ae682854f7453c92fc1bc45.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
