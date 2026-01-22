@@ -3,4 +3,4 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBox/CompletionStatus.set_progress(90)
+	$UI/VBox/CompletionStatus.set_progress(90)

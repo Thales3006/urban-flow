@@ -7,14 +7,21 @@ const BUILDING_DATA := {
 	BuildingData.Kind.HOSPITAL: preload("res://buildings/hospital.tres"),
 }
 
+enum State {
+	LOCKED,
+	FIXED,
+	FREE
+}
+
 @export var data: BuildingData
 var mouse_in: bool = false
 var dragging: bool = false
 var current_cell: Cell = null
-var area2D: Area2D
+var state: State = State.FREE
 var will_affect = []
 var affecting = []
 
+var area2D: Area2D
 var initialPos: Vector2
 var initialScale: Vector2
 
@@ -112,7 +119,22 @@ func get_overlapping_cells() -> Array[Cell]:
 		if cell is Cell:
 			cells.push_back(cell)
 	return cells
-	
+
+# VISUAL FEEDBACK =========================
+
+func set_free():
+	state = State.FREE
+	$Sprite2D.modulate.a = 1
+
+func set_locked():
+	state = State.LOCKED
+	$Sprite2D.modulate.a = 0.5
+
+func set_fixed():
+	state = State.FIXED
+	$Sprite2D.modulate.a = 1
+
+
 func set_affect_feedback(cell: Cell):
 	cell.set_negative()
 

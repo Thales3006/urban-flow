@@ -1,51 +1,12 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cnkxw3hufjeor"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cnkxw3hufjeor"]
 
-[ext_resource type="StyleBox" uid="uid://qmvhw8fkywp1" path="res://styles/button_normal_style_box_flat.tres" id="1_touxu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmjyp"]
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_touxu"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.0033212143, 0.63362736, 0.96394557, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06t4h"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.37301925, 0.71160054, 0.9714293, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.10969605, 0.35661638, 0.5672877, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[ext_resource type="StyleBox" uid="uid://bdl7i5f132dcf" path="res://styles/button/button_hover.tres" id="1_60ml0"]
+[ext_resource type="StyleBox" uid="uid://40dkrct2il8t" path="res://styles/button/button_normal.tres" id="1_y6a5e"]
 
 [resource]
 default_font_size = 30
-Button/styles/disabled = SubResource("StyleBoxFlat_dmjyp")
-Button/styles/focus = SubResource("StyleBoxFlat_touxu")
-Button/styles/hover = SubResource("StyleBoxFlat_06t4h")
-Button/styles/normal = ExtResource("1_touxu")
-Button/styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-VBoxContainer/constants/separation = 20
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.9297147, 0.9297146, 0.929715, 1)
+Button/colors/font_hover_pressed_color = Color(0.7708395, 0.77083945, 0.77083945, 1)
+Button/styles/hover = ExtResource("1_60ml0")
+Button/styles/normal = ExtResource("1_y6a5e")
