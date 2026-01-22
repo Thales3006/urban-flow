@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5io576ht1fb8"]
 
-[ext_resource type="Script" uid="uid://byy6ntioodbju" path="res://scenes/level/catalog/catalog.gd" id="1_15alm"]
+[ext_resource type="Script" uid="uid://byy6ntioodbju" path="res://scenes/level/world/catalog/catalog.gd" id="1_15alm"]
 [ext_resource type="Texture2D" uid="uid://dd6tqsywkpi5w" path="res://icons/icon.svg" id="1_c2l48"]
 
 [node name="Catalog" type="Node2D"]

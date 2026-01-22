@@ -23,7 +23,7 @@ func spawn_cells_from_tilemap():
 		if kind != CELL_KIND_DROPABLE:
 			continue
 
-		var cell := Cell.create(tile_map.map_to_local(cell_pos))
+		var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
 		add_child(cell)
 		
 func get_tilemap_world_rect() -> Rect2:

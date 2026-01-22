@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://p8vf6uet7sup"]
+
+[ext_resource type="Script" uid="uid://cxqbr6n0owg6u" path="res://scenes/level/ui/star/star.gd" id="1_o8ksg"]
+[ext_resource type="Texture2D" uid="uid://banviutas6j4w" path="res://images/star_dimmed.png" id="2_v41w3"]
+
+[node name="Sprite" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -469.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_v41w3")
+script = ExtResource("1_o8ksg")

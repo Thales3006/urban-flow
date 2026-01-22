@@ -1,9 +1,41 @@
 [gd_scene load_steps=8 format=3 uid="uid://b3w5uxwdno12l"]
 
-[ext_resource type="Script" uid="uid://dm20d5dlamab4" path="res://scenes/level_selection/selection.gd" id="1_g3bd0"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_pssaq"]
-[ext_resource type="Texture2D" uid="uid://7204v5bw8psn" path="res://images/background.png" id="2_krrsl"]
+[ext_resource type="Texture2D" uid="uid://cf6xrxiixo3ji" path="res://images/background.png" id="2_krrsl"]
 [ext_resource type="StyleBox" uid="uid://ddrw3s1md0lmm" path="res://styles/button_level.tres" id="4_7obll"]
+
+[sub_resource type="GDScript" id="GDScript_ns00s"]
+script/source = "extends Control
+
+@onready var grid = $MarginContainer/VBoxContainer/GridContainer
+
+func _ready():
+	var dir := DirAccess.open(global.levels_path)
+	if dir == null:
+		push_error(\"Levels folder not found!\")
+		return
+	
+	for file_name in dir.get_files():
+		if file_name.ends_with(\".tres\"):	
+			var button := Button.new()
+			button.text = file_name.get_basename()
+			button.custom_minimum_size = Vector2(80, 80)
+			button.focus_mode = Control.FOCUS_NONE
+			button.connect(\"pressed\", Callable(self, \"_on_level_selected\").bind(file_name))
+			grid.add_child(button)
+
+func _on_level_selected(file_name: String):
+	global.current_level_path = global.levels_path + file_name
+	global.level = null
+	global.level = load(global.current_level_path) as LevelData
+	if not global.level:
+		push_error(\"Failed to load level: \" + global.current_level_path)
+		return
+	get_tree().change_scene_to_file(global.level_scene_path)
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file(global.main_menu_scene_path)
+"
 
 [sub_resource type="Shader" id="Shader_fu7sn"]
 code = "shader_type canvas_item;
@@ -46,7 +78,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pssaq")
-script = ExtResource("1_g3bd0")
+script = SubResource("GDScript_ns00s")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_lnidy")

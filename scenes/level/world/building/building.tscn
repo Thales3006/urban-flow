@@ -1,19 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://beqaxe1jj2r4m"]
 
-[ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level/building/building.gd" id="1_ioggs"]
-[ext_resource type="Texture2D" uid="uid://o3c3bo61e2xj" path="res://buildings/sprites/house.svg" id="2_rc8dk"]
+[ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level/world/building/building.gd" id="1_ioggs"]
+[ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="2_rc8dk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvy8r"]
 size = Vector2(123, 120.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ioggs"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2d06"]
 
 [node name="Building" type="Node2D"]
 script = ExtResource("1_ioggs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -15)
-scale = Vector2(0.22860892, 0.2233654)
+position = Vector2(1.9073486e-06, 1.1920929e-07)
+scale = Vector2(0.6446281, 0.6178862)
 texture = ExtResource("2_rc8dk")
 
 [node name="Drag" type="Area2D" parent="."]
@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_uvy8r")
 [node name="EffectArea" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="EffectArea"]
-shape = SubResource("CircleShape2D_ioggs")
+shape = SubResource("RectangleShape2D_j2d06")
 debug_color = Color(0.9154516, 0.37736717, 0.37065628, 0.41960785)
 
 [connection signal="body_entered" from="Drag" to="." method="_on_area_2d_body_entered"]

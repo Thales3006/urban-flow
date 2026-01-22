@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dd8okyp8kgrnw"]
 
-[ext_resource type="Script" uid="uid://djar10r34nt6l" path="res://scenes/level/catalog/building_catalog.gd" id="1_gbbgp"]
+[ext_resource type="Script" uid="uid://djar10r34nt6l" path="res://scenes/level/world/catalog/building_catalog.gd" id="1_gbbgp"]
 
 [node name="AvailableBuilding" type="HBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
