@@ -40,6 +40,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
@@ -47,6 +48,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="Margin" type="MarginContainer" parent="Margin"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
@@ -55,6 +57,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ProgressBar" type="ProgressBar" parent="Margin/Margin"]
 layout_mode = 2
 size_flags_vertical = 1
+mouse_filter = 2
 value = 40.0
 
 [node name="StarHBox" type="HBoxContainer" parent="Margin"]
@@ -65,36 +68,45 @@ script = ExtResource("1_sdjqs")
 
 [node name="Star1" parent="Margin/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 3
 
 [node name="Spacer1" type="Control" parent="Margin/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Star2" parent="Margin/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 3
 
 [node name="Spacer2" type="Control" parent="Margin/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Star3" parent="Margin/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 3
 
 [node name="Spacer3" type="Control" parent="Margin/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Star4" parent="Margin/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 3
 
 [node name="Spacer4" type="Control" parent="Margin/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Star5" parent="Margin/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 3

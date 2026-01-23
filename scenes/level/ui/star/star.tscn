@@ -16,5 +16,6 @@ offset_bottom = -224.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 50)
+mouse_filter = 2
 texture = ExtResource("2_v41w3")
 script = ExtResource("1_o8ksg")

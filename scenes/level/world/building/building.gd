@@ -28,7 +28,7 @@ var initialScale: Vector2
 static func create(kind: BuildingData.Kind, pos: Vector2) -> Building:
 	var new := building.instantiate()
 	new.position = pos
-	new.initialPos = pos
+	new.initialPos = new.position
 	new.data = BUILDING_DATA[kind]
 	
 	return new

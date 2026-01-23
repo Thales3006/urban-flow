@@ -38,6 +38,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+mouse_filter = 1
 icon = ExtResource("3_dcqqt")
 icon_alignment = 1
 expand_icon = true

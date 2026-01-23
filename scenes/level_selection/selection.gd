@@ -21,6 +21,7 @@ func _on_level_selected(file_name: String):
 	global.current_level_path = global.levels_path + file_name
 	global.level = null
 	global.level = load(global.current_level_path) as LevelData
+	global.progress = 0
 	if not global.level:
 		push_error("Failed to load level: " + global.current_level_path)
 		return

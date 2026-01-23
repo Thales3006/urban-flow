@@ -7,17 +7,26 @@
 script = ExtResource("1_15alm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.8146973e-06, -0.99999994)
-scale = Vector2(2.4726565, 2.6484377)
+scale = Vector2(1.7734374, 2.6484377)
 texture = ExtResource("1_c2l48")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-offset_left = -141.0
-offset_top = -153.0
-offset_right = 137.0
-offset_bottom = 149.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -884.0
+offset_top = -681.0
+offset_right = 2243.0
+offset_bottom = 781.0
 mouse_filter = 1
 
-[node name="List" type="VBoxContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 528.0
+offset_right = 988.0
+offset_bottom = 830.0
+mouse_filter = 1
+
+[node name="List" type="VBoxContainer" parent="Control/PanelContainer"]
 layout_mode = 2
 focus_behavior_recursive = 1
