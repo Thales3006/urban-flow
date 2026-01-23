@@ -50,6 +50,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if state != State.FREE:
+		return
 	if event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position()
 	if event is InputEventMouseButton:

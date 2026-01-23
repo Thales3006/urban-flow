@@ -8,7 +8,7 @@ var buildings: Array[Building] = []
 
 static func create(kind: BuildingData.Kind, n: int) -> BuildingCatalog:
 	var new := buildingCatalog.instantiate()
-	var hbox := new.get_node("AvailableBuilding")
+	var hbox := new.get_node("HBoxContainer").get_node("AvailableBuilding")
 	for i in n:
 		var new_y = sin((i + new.global_position.y - new.global_position.x) * 4) * 10
 		var building := Building.create(kind, hbox.position + Vector2(distance * i, new_y))

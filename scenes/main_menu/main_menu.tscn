@@ -64,16 +64,17 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 135.0
-offset_top = 74.0
-offset_right = -115.0
-offset_bottom = -33.862396
+offset_left = 238.0
+offset_top = 109.0
+offset_right = -251.0
+offset_bottom = -56.131653
 grow_horizontal = 2
 texture = ExtResource("4_5seab")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Buttons" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
