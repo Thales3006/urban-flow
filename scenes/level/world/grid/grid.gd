@@ -8,7 +8,7 @@ var cell_instances = []
 var tile_map: TileMapLayer
 
 func _ready() -> void:
-	level = global.level
+	level = GameState.level
 	tile_map = level.tilemap_scene.instantiate()
 	add_child(tile_map)
 	spawn_cells_from_tilemap()

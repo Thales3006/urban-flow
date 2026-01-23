@@ -9,7 +9,7 @@ script/source = "extends Control
 @onready var grid = $MarginContainer/VBoxContainer/GridContainer
 
 func _ready():
-	var dir := DirAccess.open(global.levels_path)
+	var dir := DirAccess.open(Global.levels_path)
 	if dir == null:
 		push_error(\"Levels folder not found!\")
 		return
@@ -24,16 +24,15 @@ func _ready():
 			grid.add_child(button)
 
 func _on_level_selected(file_name: String):
-	global.current_level_path = global.levels_path + file_name
-	global.level = null
-	global.level = load(global.current_level_path) as LevelData
-	if not global.level:
-		push_error(\"Failed to load level: \" + global.current_level_path)
+	Global.current_level_path = Global.levels_path + file_name
+	GameState.level = load(Global.current_level_path) as LevelData
+	if GameState.level == null:
+		push_error(\"Failed to load level: \" + Global.current_level_path)
 		return
-	get_tree().change_scene_to_file(global.level_scene_path)
+	get_tree().change_scene_to_file(Global.level_scene_path)
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file(global.main_menu_scene_path)
+	get_tree().change_scene_to_file(Global.main_menu_scene_path)
 "
 
 [sub_resource type="Shader" id="Shader_fu7sn"]

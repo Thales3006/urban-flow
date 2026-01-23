@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_e28t1")
+level_name = "2"
+max_score = 100
 tilemap_scene = ExtResource("2_50u6p")
 available_buildings = Dictionary[int, int]({
 0: 3,

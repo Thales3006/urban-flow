@@ -7,4 +7,5 @@
 script = ExtResource("1_hdb41")
 sprite = ExtResource("2_2ugcv")
 sprite_scale = 0.8
+score = 50.0
 metadata/_custom_type_script = "uid://rp5o0hd3nc3e"

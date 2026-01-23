@@ -17,7 +17,8 @@ config/icon="res://icons/icon.svg"
 
 [autoload]
 
-global="*res://global.gd"
+Global="*res://global/global.gd"
+GameState="*res://global/game_state.gd"
 
 [global_group]
 

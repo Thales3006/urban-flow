@@ -10,10 +10,9 @@ const BUILDING_DATA := {
 enum State {
 	LOCKED,
 	FIXED,
-	FREE
+	FREE,
 }
 
-@export var data: BuildingData
 var mouse_in: bool = false
 var dragging: bool = false
 var current_cell: Cell = null
@@ -21,6 +20,7 @@ var state: State = State.FREE
 var will_affect = []
 var affecting = []
 
+@export var data: BuildingData
 var area2D: Area2D
 var initialPos: Vector2
 var initialScale: Vector2
@@ -58,9 +58,9 @@ func _input(event: InputEvent) -> void:
 		if not mouse_in:
 			return
 		# Grabbed building ======================
-		if event.pressed and not global.is_dragging:
+		if event.pressed and not Global.is_dragging:
 			dragging = true
-			global.is_dragging = true
+			Global.is_dragging = true
 			if current_cell != null:
 				current_cell.is_filled = false
 				current_cell = null
@@ -73,7 +73,7 @@ func _input(event: InputEvent) -> void:
 	 	# Droped building =======================
 		elif not event.pressed and dragging:
 			dragging = false
-			global.is_dragging = false
+			Global.is_dragging = false
 		
 			var tween = get_tree().create_tween()
 			var closest_cell: Cell = get_closest_overlapping_cell()
@@ -89,6 +89,15 @@ func _input(event: InputEvent) -> void:
 			will_affect.clear()
 					
 
+func compute_score() -> float:
+	if current_cell == null:
+		return 0
+	var score := data.score
+	for effect: Building in current_cell.affecting:
+		if effect == self:
+			continue
+		score *= effect.data.effect
+	return score
 # =============================
 # Overlaping cells
 # =============================
@@ -159,31 +168,31 @@ func remove_affect_all():
 # =============================
 
 func _on_area_2d_body_entered(body) -> void:
-	if not global.is_dragging:
+	if not Global.is_dragging:
 		return
 	var cell = body.get_parent()
 	if cell is Cell:
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1.1,1.1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_body_exited(body) -> void:
-	if not global.is_dragging:
+	if not Global.is_dragging:
 		return
 	var cell = body.get_parent()
 	if cell is Cell:
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
-	if not global.is_dragging:
+	if not Global.is_dragging:
 		mouse_in = true
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
-	if not global.is_dragging:
+	if not Global.is_dragging:
 		mouse_in = false
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
 	
 func _on_effect_area_entered(body) -> void:
-	if not global.is_dragging:
+	if not Global.is_dragging:
 		return
 	var cell = body.get_parent()
 	

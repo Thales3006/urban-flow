@@ -17,11 +17,7 @@ static func create(kind: BuildingData.Kind, n: int) -> BuildingCatalog:
 		new.buildings.push_back(building)
 		
 	return new
-
-func _ready() -> void:
-	pass
-
-
+	
 func _on_button_pressed() -> void:
 	for building: Building in buildings:
 		building.set_free()

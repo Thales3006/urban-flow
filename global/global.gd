@@ -7,5 +7,4 @@ const level_selector_scene_path: String = "res://scenes/level_selection/selectio
 const level_scene_path: String = "res://scenes/level/level.tscn"
 
 var current_level_path: String
-var level: LevelData
 var is_dragging: bool = false
