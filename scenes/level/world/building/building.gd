@@ -83,6 +83,7 @@ func _input(event: InputEvent) -> void:
 				push_affect_all()
 				tween.tween_property(self, "global_position", closest_cell.global_position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
+				current_cell = null
 				tween.tween_property(self, "position", initialPos, 0.5).set_ease(Tween.EASE_OUT)
 			for cell in will_affect:
 				remove_affect_feedback(cell)
@@ -187,7 +188,6 @@ func _on_area_2d_mouse_entered() -> void:
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
-	if not Global.is_dragging:
 		mouse_in = false
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
 	

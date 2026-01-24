@@ -10,5 +10,5 @@ sprite = ExtResource("2_7wk1m")
 sprite_scale = 0.8
 radius = 1.25
 score = 50.0
-effect = 2.0
+effect = 1.2
 metadata/_custom_type_script = "uid://rp5o0hd3nc3e"
