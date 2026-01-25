@@ -13,13 +13,13 @@ enum State {
 	FREE,
 }
 
-var mouse_in: bool = false
 var dragging: bool = false
 var current_cell: Cell = null
 var state: State = State.FREE
 var will_affect = []
 var affecting = []
 
+@onready var sprite: Sprite2D = $Sprite2D
 @export var data: BuildingData
 var area2D: Area2D
 var initialPos: Vector2
@@ -38,9 +38,9 @@ func _ready() -> void:
 		push_error("Building sem tipo!")
 		return
 	area2D = $Drag
-	$Sprite2D.texture = data.sprite
-	$Sprite2D.scale *= data.sprite_scale
-	initialScale = $Sprite2D.scale
+	sprite.texture = data.sprite
+	sprite.scale *= data.sprite_scale
+	initialScale = sprite.scale
 	var shape = $EffectArea/Shape.shape.duplicate()
 	if shape is RectangleShape2D:
 			shape.size = Vector2.ONE * data.radius * 180
@@ -50,28 +50,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if state != State.FREE:
-		return
 	if event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position()
 	if event is InputEventMouseButton:
-		if not mouse_in:
-			return
-		# Grabbed building ======================
-		if event.pressed and not Global.is_dragging:
-			dragging = true
-			Global.is_dragging = true
-			if current_cell != null:
-				current_cell.is_filled = false
-				current_cell = null
-			for cell: Cell in get_overlapping_cells(): 
-				will_affect.push_back(cell)
-				set_affect_feedback(cell)
-			remove_affect_all()
-			global_position = get_global_mouse_position()
-			
-	 	# Droped building =======================
-		elif not event.pressed and dragging:
+		if not event.pressed and dragging:
 			dragging = false
 			Global.is_dragging = false
 		
@@ -87,8 +69,8 @@ func _input(event: InputEvent) -> void:
 				tween.tween_property(self, "position", initialPos, 0.5).set_ease(Tween.EASE_OUT)
 			for cell in will_affect:
 				remove_affect_feedback(cell)
+			Signals.building_placed.emit()
 			will_affect.clear()
-					
 
 func compute_score() -> float:
 	if current_cell == null:
@@ -184,11 +166,9 @@ func _on_area_2d_body_exited(body) -> void:
 		
 func _on_area_2d_mouse_entered() -> void:
 	if not Global.is_dragging and  state == State.FREE:
-		mouse_in = true
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
-		mouse_in = false
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
 	
 func _on_effect_area_entered(body) -> void:
@@ -205,3 +185,22 @@ func _on_effect_area_exited(body) -> void:
 	if cell is Cell:
 		will_affect.erase(cell)
 		remove_affect_feedback(cell)
+
+
+func _on_drag_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if state != State.FREE:
+		return
+	if event is InputEventMouseButton:
+		# Grabbed building ======================
+		if event.pressed and not Global.is_dragging:
+			dragging = true
+			Global.is_dragging = true
+			if current_cell != null:
+				current_cell.is_filled = false
+				current_cell = null
+			for cell: Cell in get_overlapping_cells(): 
+				will_affect.push_back(cell)
+				set_affect_feedback(cell)
+			remove_affect_all()
+			global_position = get_global_mouse_position()
+		Signals.building_placed.emit()

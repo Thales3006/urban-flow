@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b304p5vhgs1gb"]
+[gd_scene load_steps=9 format=3 uid="uid://b304p5vhgs1gb"]
 
 [ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
 [ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/world/grid/grid.tscn" id="2_3dm31"]
 [ext_resource type="PackedScene" uid="uid://5io576ht1fb8" path="res://scenes/level/world/catalog/catalog.tscn" id="2_i166f"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
+[ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui.gd" id="5_wcngd"]
+[ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
+[ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
 
 [node name="Level" type="Node"]
 
@@ -45,21 +48,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("5_vpf64")
+script = ExtResource("5_wcngd")
 
-[node name="VBox" type="VBoxContainer" parent="UILayer/UI"]
+[node name="CompletionStatus" parent="UILayer/UI" instance=ExtResource("5_hnne4")]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = 0.28645834
+anchor_right = 0.72
+anchor_bottom = 0.17400001
+offset_right = 0.5599365
+offset_bottom = 0.24799347
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="UILayer/UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-mouse_filter = 2
+offset_left = -86.0
+offset_top = -73.0
+offset_right = -19.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("7_xv074")
+icon_alignment = 1
+expand_icon = true
 
-[node name="CompletionStatus" parent="UILayer/UI/VBox" instance=ExtResource("5_hnne4")]
-layout_mode = 2
+[node name="WinCard" parent="UILayer/UI" instance=ExtResource("8_xv074")]
+visible = false
+layout_mode = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="UILayer/UI/VBox"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
+[connection signal="pressed" from="UILayer/UI/Back" to="UILayer/UI" method="_on_back_pressed"]

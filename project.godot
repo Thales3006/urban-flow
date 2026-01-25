@@ -19,6 +19,7 @@ config/icon="res://icons/icon.svg"
 
 Global="*res://global/global.gd"
 GameState="*res://global/game_state.gd"
+Signals="*res://global/signals.gd"
 
 [global_group]
 

@@ -30,6 +30,7 @@ debug_color = Color(0.9154516, 0.37736717, 0.37065628, 0.41960785)
 
 [connection signal="body_entered" from="Drag" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Drag" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Drag" to="." method="_on_drag_input_event"]
 [connection signal="mouse_entered" from="Drag" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Drag" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="body_entered" from="EffectArea" to="." method="_on_effect_area_entered"]

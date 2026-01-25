@@ -21,4 +21,5 @@ static func create(kind: BuildingData.Kind, n: int) -> BuildingCatalog:
 func _on_button_pressed() -> void:
 	for building: Building in buildings:
 		building.set_free()
-		
+	$HBoxContainer/VBoxContainer/Button.disabled = true
+	$HBoxContainer/VBoxContainer/Button.visible = false
