@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://brfm4g7iqxnge"]
 
 [ext_resource type="Script" uid="uid://c0v0cis5d448r" path="res://scenes/level/world/cell/cell.gd" id="1_yngal"]
-[ext_resource type="Texture2D" uid="uid://dg0xohcf6j653" path="res://tilesets/area_effect.png" id="2_n2rfl"]
+[ext_resource type="Texture2D" uid="uid://dg0xohcf6j653" path="res://tilesets/effect_tileset.png" id="2_n2rfl"]
 [ext_resource type="Texture2D" uid="uid://d3voxlphpk8qi" path="res://images/cell.png" id="3_q0nmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ngbm"]
@@ -17,7 +17,8 @@ scale = Vector2(2.0111263, 2.0111263)
 shape = SubResource("RectangleShape2D_6ngbm")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.3362501, 0.29125)
+position = Vector2(-3.0994415e-06, -1.9073486e-06)
+scale = Vector2(0.39999998, 0.39999995)
 texture = ExtResource("3_q0nmo")
 
 [node name="NegativeEffect" type="Sprite2D" parent="."]

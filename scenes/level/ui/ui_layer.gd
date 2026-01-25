@@ -7,3 +7,4 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	$UI/VBox/CompletionStatus.set_progress(GameState.compute_percentage())
+	print("Total score: ", GameState.compute_score())

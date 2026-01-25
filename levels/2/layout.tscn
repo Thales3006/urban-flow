@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=4 uid="uid://buu47fclmhoq1"]
+
+[ext_resource type="TileSet" uid="uid://bm5r1usw2badl" path="res://tilesets/terrain_tileset.tres" id="1_c04s2"]
+[ext_resource type="TileSet" uid="uid://nuh8o5ej2nxh" path="res://tilesets/placement_tileset.tres" id="2_4fl5y"]
+
+[node name="Layout" type="Node2D"]
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+position = Vector2(50, 50)
+tile_map_data = PackedByteArray("AAD///7/AQACAAAAAAD/////AQADAAAAAAD//wAAAQACAAAAADAAAP7/AQAAAAAAAFAAAP//AQADAAAAAAAAAAAAAQADAAAAAAABAP//AQAEAAAAAAABAAAAAQAAAAAAAFD9//7/AQAAAAAAAAD9////AQACAAAAAGD9/wAAAQAAAAAAAGD+//7/AQACAAAAAAD+////AQACAAAAADD+/wAAAQABAAAAAAAAAAEAAQAAAAAAAGABAAEAAQAAAAAAADA=")
+tile_set = ExtResource("1_c04s2")
+
+[node name="Placement" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAP//AAABAAAAAAD9//7/AAAAAAAAAAD9/wIAAAAAAAAAAAD+////AAABAAAAAAD/////AAABAAAAAAD//wAAAAABAAAAAAAAAAAAAAABAAAAAAACAP7/AAAAAAAAAAACAAIAAAAAAAAAAAD+/wAAAAABAAAAAAA=")
+tile_set = ExtResource("2_4fl5y")
+rendering_quadrant_size = 100
+physics_quadrant_size = 100

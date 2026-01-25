@@ -29,7 +29,7 @@ script = ExtResource("1_3dm31")
 position = Vector2(576, 324)
 
 [node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
-position = Vector2(679.00006, 377.00003)
+position = Vector2(576, 324)
 scale = Vector2(0.99886906, 0.9371659)
 
 [node name="Catalog" parent="WorldLayer/World" instance=ExtResource("2_i166f")]

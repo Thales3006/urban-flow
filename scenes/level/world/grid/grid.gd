@@ -9,8 +9,12 @@ var tile_map: TileMapLayer
 
 func _ready() -> void:
 	level = GameState.level
-	tile_map = level.tilemap_scene.instantiate()
-	add_child(tile_map)
+	
+	var layout = level.layout.instantiate()
+	
+	tile_map = layout.get_node("Placement")
+	tile_map.visible = false
+	add_child(layout)
 	spawn_cells_from_tilemap()
 
 func spawn_cells_from_tilemap():
@@ -19,7 +23,7 @@ func spawn_cells_from_tilemap():
 		if tile_data == null:
 			continue
 
-		var kind: String = tile_data.get_custom_data("cell_kind")
+		var kind: String = tile_data.get_custom_data("placement")
 		if kind != CELL_KIND_DROPABLE:
 			continue
 
