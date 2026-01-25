@@ -80,3 +80,7 @@ size_flags_horizontal = 3
 icon = ExtResource("5_jvxlc")
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

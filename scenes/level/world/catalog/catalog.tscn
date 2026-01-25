@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5io576ht1fb8"]
 
 [ext_resource type="Script" uid="uid://byy6ntioodbju" path="res://scenes/level/world/catalog/catalog.gd" id="1_15alm"]
-[ext_resource type="Texture2D" uid="uid://dd6tqsywkpi5w" path="res://icons/icon.svg" id="1_c2l48"]
+[ext_resource type="Texture2D" uid="uid://cfm1o5w0fulkc" path="res://images/truck.png" id="2_1h7dr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h7dr"]
 content_margin_left = 0.0
@@ -20,8 +20,9 @@ corner_detail = 5
 script = ExtResource("1_15alm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.7734374, 2.6484377)
-texture = ExtResource("1_c2l48")
+position = Vector2(8.999986, -4.7683716e-06)
+scale = Vector2(0.4866667, 0.49333334)
+texture = ExtResource("2_1h7dr")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

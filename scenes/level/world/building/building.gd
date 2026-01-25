@@ -48,7 +48,6 @@ func _ready() -> void:
 			shape.radius = data.radius * 100
 	$EffectArea/Shape.shape = shape
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position()
@@ -130,10 +129,18 @@ func set_fixed():
 
 
 func set_affect_feedback(cell: Cell):
-	cell.set_negative()
+	match data.kind:
+		BuildingData.Kind.HOUSE:
+			pass
+		BuildingData.Kind.HOSPITAL:
+			cell.set_positive()
+	
+	
+	
+	
 
 func remove_affect_feedback(cell: Cell):
-	cell.remove_negative()
+	cell.set_no_effect()
 	
 	
 func push_affect_all():
@@ -187,7 +194,7 @@ func _on_effect_area_exited(body) -> void:
 		remove_affect_feedback(cell)
 
 
-func _on_drag_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if state != State.FREE:
 		return
 	if event is InputEventMouseButton:

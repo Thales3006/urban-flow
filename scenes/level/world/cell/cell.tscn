@@ -21,7 +21,29 @@ position = Vector2(-3.0994415e-06, -1.9073486e-06)
 scale = Vector2(0.39999998, 0.39999995)
 texture = ExtResource("3_q0nmo")
 
+[node name="PositiveEffect" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_n2rfl")
+region_enabled = true
+region_rect = Rect2(101.961105, 1.3939214, 95.90578, 95.34105)
+
 [node name="NegativeEffect" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(202, 201)
+position = Vector2(0, -1)
 texture = ExtResource("2_n2rfl")
+region_enabled = true
+region_rect = Rect2(3.3390656, 3.7110004, 93.830826, 91.88415)
+
+[node name="WaterEffect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+texture = ExtResource("2_n2rfl")
+region_enabled = true
+region_rect = Rect2(300.91907, 1.1731491, 99.33649, 96.6722)
+
+[node name="CleanEffect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+texture = ExtResource("2_n2rfl")
+region_enabled = true
+region_rect = Rect2(202.0006, 1.7831535, 94.843735, 94.843735)

@@ -35,7 +35,7 @@ position = Vector2(576, 324)
 scale = Vector2(0.99886906, 0.9371659)
 
 [node name="Catalog" parent="WorldLayer/World" instance=ExtResource("2_i166f")]
-position = Vector2(148, 374)
+position = Vector2(153, 431)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -58,7 +58,6 @@ anchor_right = 0.72
 anchor_bottom = 0.17400001
 offset_right = 0.5599365
 offset_bottom = 0.24799347
-grow_vertical = 2
 
 [node name="Back" type="Button" parent="UILayer/UI"]
 layout_mode = 1

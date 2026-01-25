@@ -6,5 +6,5 @@ const main_menu_scene_path: String = "res://scenes/main_menu/main_menu.tscn"
 const level_selector_scene_path: String = "res://scenes/selection/selection.tscn"
 const level_scene_path: String = "res://scenes/level/level.tscn"
 
-var current_level_path: String
 var is_dragging: bool = false
+var levels_unlocked: int = 1
