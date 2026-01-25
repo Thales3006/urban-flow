@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b304p5vhgs1gb"]
+[gd_scene load_steps=6 format=3 uid="uid://b304p5vhgs1gb"]
 
-[ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world.gd" id="1_3dm31"]
+[ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
 [ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/world/grid/grid.tscn" id="2_3dm31"]
 [ext_resource type="PackedScene" uid="uid://5io576ht1fb8" path="res://scenes/level/world/catalog/catalog.tscn" id="2_i166f"]
-[ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui_layer.gd" id="4_hnne4"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
 
@@ -36,7 +35,6 @@ scale = Vector2(0.99886906, 0.9371659)
 position = Vector2(148, 374)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
-script = ExtResource("4_hnne4")
 
 [node name="UI" type="Control" parent="UILayer"]
 layout_mode = 3
