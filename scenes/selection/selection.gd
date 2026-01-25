@@ -3,15 +3,12 @@ extends Control
 @onready var grid = $MarginContainer/VBoxContainer/GridContainer
 
 func _ready():
-	print("aasasdasdasdasd")
 	var dir := DirAccess.open(Global.levels_path)
 	if dir == null:
 		push_error("Levels folder not found!")
 		return
-	print(dir.get_directories())
 	for level_name in dir.get_directories():
 		var level_path := Global.levels_path + "/" + level_name
-		print(level_path)
 		var level_dir := DirAccess.open(level_path)
 		if level_dir == null:
 			continue

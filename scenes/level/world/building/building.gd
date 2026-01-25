@@ -136,15 +136,15 @@ func get_overlapping_cells() -> Array[Cell]:
 
 func set_free():
 	state = State.FREE
-	$Sprite2D.modulate.a = 1
+	$Sprite2D.modulate = Color(1, 1, 1, 1)
 
 func set_locked():
 	state = State.LOCKED
-	$Sprite2D.modulate.a = 0.5
+	$Sprite2D.modulate = Color(0.1, 0.1, 0.1, 1.0)
 
 func set_fixed():
 	state = State.FIXED
-	$Sprite2D.modulate.a = 1
+	$Sprite2D.modulate = Color(1, 1, 1, 1)
 
 
 func set_affect_feedback(cell: Cell):
@@ -183,7 +183,7 @@ func _on_area_2d_body_exited(body) -> void:
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
-	if not Global.is_dragging:
+	if not Global.is_dragging and  state == State.FREE:
 		mouse_in = true
 		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
