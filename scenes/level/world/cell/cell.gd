@@ -4,10 +4,12 @@ class_name Cell
 const cell = preload("res://scenes/level/world/cell/cell.tscn")
 var affecting = []
 
-@onready var negative = $NegativeEffect
-@onready var clean = $CleanEffect
-@onready var water = $WaterEffect
-@onready var positive = $PositiveEffect
+@onready var sprite: Sprite2D = $MainSprite
+@onready var negative: Sprite2D = $NegativeEffect
+@onready var clean: Sprite2D = $CleanEffect
+@onready var water: Sprite2D = $WaterEffect
+@onready var positive: Sprite2D = $PositiveEffect
+@onready var collision_shape: CollisionShape2D = $Content/CollisionShape2D
 
 var tile: Vector2i
 var is_filled: bool = false
@@ -19,7 +21,7 @@ static func create(pos: Vector2, tile_coord: Vector2i) -> Cell:
 	return new_cell
 	
 func get_size() -> Vector2:
-	return $Content/CollisionShape2D.shape.size
+	return collision_shape.shape.size
 
 func set_no_effect():
 	negative.visible = false

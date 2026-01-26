@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=3 format=3 uid="uid://b4kyfl55jsp3x"]
+
+[ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="1_dpty2"]
+[ext_resource type="Texture2D" uid="uid://r3glgthqlpdk" path="res://buildings/sprites/recicling.png" id="2_f32pj"]
+
+[resource]
+script = ExtResource("1_dpty2")
+kind = 2
+sprite = ExtResource("2_f32pj")
+sprite_scale = 0.8
+radius = 2.0
+score = 50.0
+effect = 1.2
+metadata/_custom_type_script = "uid://rp5o0hd3nc3e"

@@ -28,7 +28,7 @@ follow_viewport_enabled = true
 script = ExtResource("1_3dm31")
 
 [node name="Camera2D" type="Camera2D" parent="WorldLayer/World"]
-position = Vector2(576, 324)
+position = Vector2(415, 325)
 
 [node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
 position = Vector2(576, 324)

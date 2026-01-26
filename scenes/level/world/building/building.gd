@@ -5,6 +5,7 @@ const building = preload("res://scenes/level/world/building/building.tscn")
 const BUILDING_DATA := {
 	BuildingData.Kind.HOUSE: preload("res://buildings/house.tres"),
 	BuildingData.Kind.HOSPITAL: preload("res://buildings/hospital.tres"),
+	BuildingData.Kind.RECYCLING: preload("res://buildings/recycling.tres"),
 }
 
 enum State {
@@ -74,11 +75,28 @@ func _input(event: InputEvent) -> void:
 func compute_score() -> float:
 	if current_cell == null:
 		return 0
+	var affected := {
+		BuildingData.Kind.HOUSE: false,
+		BuildingData.Kind.HOSPITAL: false,
+		BuildingData.Kind.RECYCLING: false,
+	}
+	var is_happy := false
 	var score := data.score
 	for effect: Building in current_cell.affecting:
 		if effect == self:
 			continue
-		score *= effect.data.effect
+		match effect.data.kind:
+			BuildingData.Kind.HOSPITAL:
+				if affected[BuildingData.Kind.HOSPITAL]:
+					continue
+					
+				if data.kind != BuildingData.Kind.HOUSE:
+					continue
+					
+				is_happy = true
+				score *= effect.data.effect
+				affected[BuildingData.Kind.HOSPITAL] = true
+	$happy.visible = is_happy
 	return score
 # =============================
 # Overlaping cells
@@ -134,11 +152,10 @@ func set_affect_feedback(cell: Cell):
 			pass
 		BuildingData.Kind.HOSPITAL:
 			cell.set_positive()
+		BuildingData.Kind.RECYCLING:
+			cell.set_clean()
+			
 	
-	
-	
-	
-
 func remove_affect_feedback(cell: Cell):
 	cell.set_no_effect()
 	
@@ -173,10 +190,10 @@ func _on_area_2d_body_exited(body) -> void:
 		
 func _on_area_2d_mouse_entered() -> void:
 	if not Global.is_dragging and  state == State.FREE:
-		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
+		get_tree().create_tween().tween_property(sprite, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
-		get_tree().create_tween().tween_property($Sprite2D, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
+		get_tree().create_tween().tween_property(sprite, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
 	
 func _on_effect_area_entered(body) -> void:
 	if not Global.is_dragging:

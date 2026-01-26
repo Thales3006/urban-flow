@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_e28t1")
 level = 2
-max_score = 220
+max_score = 230
 layout = ExtResource("1_lwa5a")
 available_buildings = Dictionary[int, int]({
 0: 3,

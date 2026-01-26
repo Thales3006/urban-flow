@@ -3,7 +3,8 @@ class_name BuildingData
 
 enum Kind {
 	HOUSE,
-	HOSPITAL
+	HOSPITAL,
+	RECYCLING,
 }
 
 @export var kind: Kind
