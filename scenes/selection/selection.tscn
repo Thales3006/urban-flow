@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3w5uxwdno12l"]
+[gd_scene format=3 uid="uid://b3w5uxwdno12l"]
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_msfa0"]
 [ext_resource type="Script" uid="uid://dm20d5dlamab4" path="res://scenes/selection/selection.gd" id="2_5ef5c"]
@@ -35,7 +35,7 @@ void fragment() {
 shader = SubResource("Shader_fu7sn")
 shader_parameter/blur_size = 3.0
 
-[node name="Selection" type="Control"]
+[node name="Selection" type="Control" unique_id=1567779928]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ grow_vertical = 2
 theme = ExtResource("1_msfa0")
 script = ExtResource("2_5ef5c")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2080556659]
 material = SubResource("ShaderMaterial_lnidy")
 layout_mode = 1
 anchors_preset = 15
@@ -56,7 +56,7 @@ grow_vertical = 2
 texture = ExtResource("3_kv5yx")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1343679525]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,14 +68,14 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=1244276836]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 40
 columns = 6
 
-[node name="backButton" type="Button" parent="."]
+[node name="backButton" type="Button" parent="." unique_id=1492512967]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

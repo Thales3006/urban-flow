@@ -3,16 +3,16 @@ extends Node2D
 const CELL_KIND_DROPABLE := "dropable"
 
 var main_scene: Node2D
-var level: LevelData
 var cell_instances = []
 var tile_map: TileMapLayer
+var terrain_map: TileMapLayer
 
 func _ready() -> void:
-	level = GameState.level
+	Signals.add_building.connect(_on_add_building)
 	
-	var layout = level.layout.instantiate()
-	
+	var layout = GameState.level.layout.instantiate()
 	tile_map = layout.get_node("Placement")
+	terrain_map = layout.get_node("Terrain")
 	tile_map.visible = false
 	add_child(layout)
 	spawn_cells_from_tilemap()
@@ -31,10 +31,14 @@ func spawn_cells_from_tilemap():
 		add_child(cell)
 		
 func get_tilemap_world_rect() -> Rect2:
-	var used := tile_map.get_used_rect() # in cells
+	var used := tile_map.get_used_rect()
 	var cell_size := tile_map.tile_set.tile_size
 
 	var world_pos := tile_map.map_to_local(used.position)
 	var world_size := used.size * cell_size
 
 	return Rect2(world_pos, world_size)
+	
+func _on_add_building(building: Building):
+	add_child(building)
+	building.global_position = building.initialPos

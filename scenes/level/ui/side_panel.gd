@@ -1,4 +1,6 @@
-extends Node2D
+extends PanelContainer
+
+@onready var buildingVBox: VBoxContainer = $PanelContainer/List
 
 var children: Array[BuildingCatalog] = []
 
@@ -7,9 +9,12 @@ func _ready() -> void:
 	for kind in dict:
 		var child := BuildingCatalog.create(kind, dict[kind])
 		children.push_back(child)
-		$Control/PanelContainer/List.add_child(child)
-	GameState.set_buildings(get_buildings())
+		buildingVBox.add_child(child)
+	call_deferred("set_game_state_buildings")
 
+func set_game_state_buildings():
+	GameState.set_buildings(get_buildings())
+	
 func get_buildings() -> Array[Building]:
 	var buildings: Array[Building] = []
 	for child: BuildingCatalog in children:

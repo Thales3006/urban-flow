@@ -1,56 +1,98 @@
-[gd_scene load_steps=9 format=3 uid="uid://b304p5vhgs1gb"]
+[gd_scene format=3 uid="uid://b304p5vhgs1gb"]
 
 [ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
 [ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/world/grid/grid.tscn" id="2_3dm31"]
-[ext_resource type="PackedScene" uid="uid://5io576ht1fb8" path="res://scenes/level/world/catalog/catalog.tscn" id="2_i166f"]
+[ext_resource type="Script" uid="uid://bftmflcq7w4cv" path="res://scenes/level/ui/side_panel.gd" id="2_sytrn"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
 [ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui.gd" id="5_wcngd"]
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
 [ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
 
-[node name="Level" type="Node"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv074"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="Level" type="Node" unique_id=1193504177]
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.30138263, 0.830506, 0.4931013, 1)
+[node name="Background" type="CanvasLayer" parent="." unique_id=644466657]
 
-[node name="WorldLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="World" type="Node2D" parent="WorldLayer"]
-script = ExtResource("1_3dm31")
-
-[node name="Camera2D" type="Camera2D" parent="WorldLayer/World"]
-position = Vector2(415, 325)
-
-[node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
-position = Vector2(576, 324)
-scale = Vector2(0.99886906, 0.9371659)
-
-[node name="Catalog" parent="WorldLayer/World" instance=ExtResource("2_i166f")]
-position = Vector2(153, 431)
-
-[node name="UILayer" type="CanvasLayer" parent="."]
-
-[node name="UI" type="Control" parent="UILayer"]
-layout_mode = 3
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=312516689]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0.30138263, 0.830506, 0.4931013, 1)
+
+[node name="BackUI" type="HBoxContainer" parent="Background" unique_id=967378589]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_vpf64")
+
+[node name="SidePanel" type="PanelContainer" parent="Background/BackUI" unique_id=1964726576]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("5_vpf64")
+script = ExtResource("2_sytrn")
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/BackUI/SidePanel" unique_id=336384168]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
+
+[node name="List" type="VBoxContainer" parent="Background/BackUI/SidePanel/PanelContainer" unique_id=686186045]
+layout_mode = 2
+focus_behavior_recursive = 1
+
+[node name="Spacer" type="Control" parent="Background/BackUI" unique_id=390403809]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.8
+mouse_filter = 2
+
+[node name="WorldLayer" type="CanvasLayer" parent="." unique_id=1254438683]
+follow_viewport_enabled = true
+
+[node name="World" type="Node2D" parent="WorldLayer" unique_id=1860023793]
+position = Vector2(576, 324)
+script = ExtResource("1_3dm31")
+
+[node name="Camera2D" type="Camera2D" parent="WorldLayer/World" unique_id=1359002401]
+
+[node name="Grid" parent="WorldLayer/World" unique_id=1890802538 instance=ExtResource("2_3dm31")]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=474775640]
+
+[node name="UI" type="Control" parent="UILayer" unique_id=706075068]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("5_vpf64")
 script = ExtResource("5_wcngd")
+metadata/_edit_use_anchors_ = true
 
-[node name="CompletionStatus" parent="UILayer/UI" instance=ExtResource("5_hnne4")]
+[node name="CompletionStatus" parent="UILayer/UI" unique_id=714219907 instance=ExtResource("5_hnne4")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.28645834
@@ -59,7 +101,7 @@ anchor_bottom = 0.17400001
 offset_right = 0.5599365
 offset_bottom = 0.24799347
 
-[node name="Back" type="Button" parent="UILayer/UI"]
+[node name="Back" type="Button" parent="UILayer/UI" unique_id=1768598203]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -76,7 +118,7 @@ icon = ExtResource("7_xv074")
 icon_alignment = 1
 expand_icon = true
 
-[node name="WinCard" parent="UILayer/UI" instance=ExtResource("8_xv074")]
+[node name="WinCard" parent="UILayer/UI" unique_id=540069684 instance=ExtResource("8_xv074")]
 visible = false
 layout_mode = 1
 

@@ -5,10 +5,10 @@ var buildings: Array[Building] = []
 
 func compute_percentage() -> float:
 	return clamp(
-	compute_score() / level.max_score * 100.0,
-	0.0,
-	100.0
-)
+		compute_score() / level.max_score * 100.0,
+		0.0,
+		100.0
+	)
 
 func compute_score() -> float:
 	var score: float = 0

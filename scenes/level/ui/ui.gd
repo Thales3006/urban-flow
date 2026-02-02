@@ -9,6 +9,7 @@ func _ready() -> void:
 	Signals.progress_state_changed.emit(0)
 
 func _on_back_pressed() -> void:
+	GameState.clear()
 	get_tree().change_scene_to_file(Global.level_selector_scene_path)
 
 func _on_building_placed():
@@ -17,5 +18,3 @@ func _on_building_placed():
 
 func _on_level_won():
 	win_card.visible = true
-	
-	
