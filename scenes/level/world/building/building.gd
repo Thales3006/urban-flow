@@ -21,6 +21,8 @@ var will_affect = []
 var affecting = []
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var grabed_sound := $GrabedSound
+@onready var droped_sound := $DropedSound
 @export var data: BuildingData
 @export var catalog: BuildingCatalog
 var area2D: Area2D
@@ -59,6 +61,7 @@ func _input(event: InputEvent) -> void:
 		global_position = get_global_mouse_position()
 	if event is InputEventMouseButton:
 		if not event.pressed and dragging:
+			# Droped =====================================
 			dragging = false
 			Global.is_dragging = false
 		
@@ -74,8 +77,11 @@ func _input(event: InputEvent) -> void:
 				tween.tween_property(self, "global_position", get_world_catalog_pos() + initialPos, 0.5).set_ease(Tween.EASE_OUT)
 			for cell in will_affect:
 				remove_affect_feedback(cell)
-			Signals.building_placed.emit()
 			will_affect.clear()
+				
+			droped_sound.play()
+			Signals.building_placed.emit()
+			
 
 func compute_score() -> float:
 	if current_cell == null:
@@ -232,6 +238,8 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 				set_affect_feedback(cell)
 			remove_affect_all()
 			global_position = get_global_mouse_position()
+			
+			grabed_sound.play()
 			Signals.building_placed.emit()
 
 func _on_window_resized():

@@ -1,39 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://beqaxe1jj2r4m"]
+[gd_scene format=3 uid="uid://beqaxe1jj2r4m"]
 
 [ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level/world/building/building.gd" id="1_ioggs"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="2_rc8dk"]
 [ext_resource type="Texture2D" uid="uid://btt5qy5lq16ij" path="res://icons/green.png" id="3_ssl55"]
+[ext_resource type="AudioStream" uid="uid://bfxi44sim1go7" path="res://sounds/pop1.mp3" id="4_pms8i"]
+[ext_resource type="AudioStream" uid="uid://q235he1aue3k" path="res://sounds/pop2.mp3" id="5_nsq2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvy8r"]
 size = Vector2(123, 120.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2d06"]
 
-[node name="Building" type="Node2D"]
+[node name="Building" type="Node2D" unique_id=661556545]
 script = ExtResource("1_ioggs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1626619923]
 position = Vector2(1.9073486e-06, 1.1920929e-07)
 scale = Vector2(0.6446281, 0.6178862)
 texture = ExtResource("2_rc8dk")
 
-[node name="Drag" type="Area2D" parent="."]
+[node name="Drag" type="Area2D" parent="." unique_id=220717646]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Drag"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Drag" unique_id=2020824423]
 scale = Vector2(0.6380408, 0.6380408)
 shape = SubResource("RectangleShape2D_uvy8r")
 
-[node name="EffectArea" type="Area2D" parent="."]
+[node name="EffectArea" type="Area2D" parent="." unique_id=215513498]
 
-[node name="Shape" type="CollisionShape2D" parent="EffectArea"]
+[node name="Shape" type="CollisionShape2D" parent="EffectArea" unique_id=1989292843]
 shape = SubResource("RectangleShape2D_j2d06")
 debug_color = Color(0.9154516, 0.37736717, 0.37065628, 0.41960785)
 
-[node name="happy" type="Sprite2D" parent="."]
+[node name="happy" type="Sprite2D" parent="." unique_id=50785104]
 visible = false
 position = Vector2(0, -44)
 scale = Vector2(0.41483516, 0.38186812)
 texture = ExtResource("3_ssl55")
+
+[node name="GrabedSound" type="AudioStreamPlayer" parent="." unique_id=1006194591]
+stream = ExtResource("4_pms8i")
+volume_db = -25.0
+
+[node name="DropedSound" type="AudioStreamPlayer" parent="." unique_id=1676560083]
+stream = ExtResource("5_nsq2e")
+volume_db = -25.0
 
 [connection signal="body_entered" from="Drag" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Drag" to="." method="_on_area_2d_body_exited"]

@@ -17,4 +17,5 @@ func _on_building_placed():
 	print("Total score: ", GameState.compute_score())
 
 func _on_level_won():
-	win_card.visible = true
+	await get_tree().create_timer(0.5).timeout
+	win_card.set_won()

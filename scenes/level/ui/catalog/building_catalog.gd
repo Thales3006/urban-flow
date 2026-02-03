@@ -24,7 +24,6 @@ func _ready() -> void:
 
 func _emit_add_building(index: int):
 	var building := Building.create(kind, Vector2(50, 0) + generate_position(index))
-	print(global_position)
 	building.catalog = self
 	building.set_locked()
 	Signals.add_building.emit(building)

@@ -24,4 +24,5 @@ func fit_world() -> void:
 	var fit_scale: float = min(scale_x, scale_y)
 
 	camera.zoom = Vector2.ONE * fit_scale
+	camera.position = rect.position + rect.size / 2
 	
