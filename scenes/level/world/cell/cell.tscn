@@ -1,46 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://brfm4g7iqxnge"]
+[gd_scene format=3 uid="uid://brfm4g7iqxnge"]
 
 [ext_resource type="Script" uid="uid://c0v0cis5d448r" path="res://scenes/level/world/cell/cell.gd" id="1_yngal"]
 [ext_resource type="Texture2D" uid="uid://dg0xohcf6j653" path="res://tilesets/effect_tileset.png" id="2_n2rfl"]
 [ext_resource type="Texture2D" uid="uid://d3voxlphpk8qi" path="res://images/cell.png" id="3_q0nmo"]
+[ext_resource type="Texture2D" uid="uid://cfpj527oivaj0" path="res://images/trash.png" id="4_omfdl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ngbm"]
 size = Vector2(74, 72)
 
-[node name="Cell" type="Node2D"]
+[node name="Cell" type="Node2D" unique_id=1643556831]
 script = ExtResource("1_yngal")
 
-[node name="Content" type="StaticBody2D" parent="." groups=["dropable"]]
+[node name="Content" type="StaticBody2D" parent="." unique_id=2074246178 groups=["dropable"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Content"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Content" unique_id=1793045022]
 shape = SubResource("RectangleShape2D_6ngbm")
 
-[node name="MainSprite" type="Sprite2D" parent="."]
+[node name="MainSprite" type="Sprite2D" parent="." unique_id=1559075203]
 position = Vector2(0, -3.8146973e-06)
 scale = Vector2(0.42, 0.399)
 texture = ExtResource("3_q0nmo")
 
-[node name="PositiveEffect" type="Sprite2D" parent="."]
+[node name="Trash" type="Sprite2D" parent="." unique_id=107317745]
+visible = false
+position = Vector2(-1.0000002, 2.0000005)
+scale = Vector2(0.48165137, 0.5297619)
+texture = ExtResource("4_omfdl")
+
+[node name="PositiveEffect" type="Sprite2D" parent="." unique_id=397441027]
 visible = false
 texture = ExtResource("2_n2rfl")
 region_enabled = true
 region_rect = Rect2(101.961105, 1.3939214, 95.90578, 95.34105)
 
-[node name="NegativeEffect" type="Sprite2D" parent="."]
+[node name="NegativeEffect" type="Sprite2D" parent="." unique_id=1790482194]
 visible = false
 position = Vector2(0, -1)
 texture = ExtResource("2_n2rfl")
 region_enabled = true
 region_rect = Rect2(3.3390656, 3.7110004, 93.830826, 91.88415)
 
-[node name="WaterEffect" type="Sprite2D" parent="."]
+[node name="WaterEffect" type="Sprite2D" parent="." unique_id=624364349]
 visible = false
 position = Vector2(-1, -1)
 texture = ExtResource("2_n2rfl")
 region_enabled = true
 region_rect = Rect2(300.91907, 1.1731491, 99.33649, 96.6722)
 
-[node name="CleanEffect" type="Sprite2D" parent="."]
+[node name="CleanEffect" type="Sprite2D" parent="." unique_id=1897323388]
 visible = false
 position = Vector2(0, -2)
 texture = ExtResource("2_n2rfl")

@@ -21,6 +21,7 @@ var will_affect = []
 var affecting = []
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var recycling_balloon: Sprite2D = $RecyclingBalloon
 @onready var grabed_sound := $GrabedSound
 @onready var droped_sound := $DropedSound
 @export var data: BuildingData
@@ -93,9 +94,18 @@ func compute_score() -> float:
 	}
 	var is_happy := false
 	var score := data.score
+	
+	if current_cell.is_trashed and not current_cell.is_recycled():
+		recycling_balloon.visible = true
+		score /= 2
+	else:
+		recycling_balloon.visible = false
+		
+			
 	for effect: Building in current_cell.affecting:
 		if effect == self:
 			continue
+			
 		match effect.data.kind:
 			BuildingData.Kind.HOSPITAL:
 				if affected[BuildingData.Kind.HOSPITAL]:
@@ -109,6 +119,7 @@ func compute_score() -> float:
 				affected[BuildingData.Kind.HOSPITAL] = true
 	$happy.visible = is_happy
 	return score
+	
 # =============================
 # Overlaping cells
 # =============================
@@ -243,14 +254,9 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			Signals.building_placed.emit()
 
 func _on_window_resized():
-	var viewport := get_viewport()
-	var cam := viewport.get_camera_2d()
-	
 	global_position = get_world_catalog_pos() + initialPos
 	
 func get_world_catalog_pos() -> Vector2:
 	var viewport := get_viewport()
-	var cam := viewport.get_camera_2d()
-
 	var screen_pos: Vector2 = catalog.buildingHBox.get_global_rect().position
 	return viewport.get_canvas_transform().affine_inverse() * screen_pos

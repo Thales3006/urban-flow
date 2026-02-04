@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca6amhgxsej5"
-path="res://.godot/imported/placement_tileset.png-b48bfffc40fdd5ecfdab1d137c86bdf6.ctex"
+uid="uid://dk53r7fjmfyio"
+path="res://.godot/imported/recycling_balloon.png-ec94e0bf7bd929d05abdab34b011bfb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/placement_tileset.png"
-dest_files=["res://.godot/imported/placement_tileset.png-b48bfffc40fdd5ecfdab1d137c86bdf6.ctex"]
+source_file="res://images/recycling_balloon.png"
+dest_files=["res://.godot/imported/recycling_balloon.png-ec94e0bf7bd929d05abdab34b011bfb0.ctex"]
 
 [params]
 

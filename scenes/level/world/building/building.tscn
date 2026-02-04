@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level/world/building/building.gd" id="1_ioggs"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="2_rc8dk"]
 [ext_resource type="Texture2D" uid="uid://btt5qy5lq16ij" path="res://icons/green.png" id="3_ssl55"]
+[ext_resource type="Texture2D" uid="uid://cfpj527oivaj0" path="res://images/trash.png" id="4_nsq2e"]
 [ext_resource type="AudioStream" uid="uid://bfxi44sim1go7" path="res://sounds/pop1.mp3" id="4_pms8i"]
+[ext_resource type="Texture2D" uid="uid://dk53r7fjmfyio" path="res://images/recycling_balloon.png" id="5_gxgpf"]
 [ext_resource type="AudioStream" uid="uid://q235he1aue3k" path="res://sounds/pop2.mp3" id="5_nsq2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvy8r"]
@@ -33,9 +35,21 @@ debug_color = Color(0.9154516, 0.37736717, 0.37065628, 0.41960785)
 
 [node name="happy" type="Sprite2D" parent="." unique_id=50785104]
 visible = false
-position = Vector2(0, -44)
-scale = Vector2(0.41483516, 0.38186812)
+position = Vector2(1, -42.000004)
+scale = Vector2(0.57005495, 0.5425824)
 texture = ExtResource("3_ssl55")
+
+[node name="Trash" type="Sprite2D" parent="." unique_id=1343691144]
+visible = false
+position = Vector2(0, 23)
+scale = Vector2(0.47068128, 0.44920853)
+texture = ExtResource("4_nsq2e")
+
+[node name="RecyclingBalloon" type="Sprite2D" parent="." unique_id=281826606]
+visible = false
+position = Vector2(-1, -49)
+scale = Vector2(0.24623632, 0.24181604)
+texture = ExtResource("5_gxgpf")
 
 [node name="GrabedSound" type="AudioStreamPlayer" parent="." unique_id=1006194591]
 stream = ExtResource("4_pms8i")

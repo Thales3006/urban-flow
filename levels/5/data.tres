@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://b4ro182yg0fpi"]
+
+[ext_resource type="PackedScene" uid="uid://ubjyupoydyt7" path="res://levels/5/layout.tscn" id="1_0wqff"]
+[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="2_1ngyl"]
+
+[resource]
+script = ExtResource("2_1ngyl")
+level = 5
+max_score = 500
+layout = ExtResource("1_0wqff")
+available_buildings = Dictionary[int, int]({
+0: 5,
+2: 2
+})

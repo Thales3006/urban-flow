@@ -1,6 +1,7 @@
 extends Node2D
 
 const CELL_KIND_DROPABLE := "dropable"
+const CELL_KIND_TRASHED := "trashed"
 
 var main_scene: Node2D
 var cell_instances = []
@@ -24,11 +25,16 @@ func spawn_cells_from_tilemap():
 			continue
 
 		var kind: String = tile_data.get_custom_data("placement")
-		if kind != CELL_KIND_DROPABLE:
-			continue
+		match kind:
+			CELL_KIND_DROPABLE:
+				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
+				add_child(cell)
+			CELL_KIND_TRASHED:
+				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
+				add_child(cell)
+				cell.set_trashed()
 
-		var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
-		add_child(cell)
+		
 		
 func get_tilemap_world_rect() -> Rect2:
 	var used := tile_map.get_used_rect()
