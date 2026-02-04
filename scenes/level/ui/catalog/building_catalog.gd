@@ -35,6 +35,9 @@ func generate_position(index: int) -> Vector2:
 	return Vector2(x, y)
 
 func _on_button_pressed() -> void:
+	Signals.write_word.emit(kind, self)
+	
+func unlock_buildings():
 	for building: Building in buildings:
 		building.set_free()
 	$HBoxContainer/VBoxContainer/Button.disabled = true

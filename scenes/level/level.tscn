@@ -7,7 +7,8 @@
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
 [ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui.gd" id="5_wcngd"]
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
-[ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
+[ext_resource type="PackedScene" uid="uid://p4tx68w38bha" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
+[ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/blackboard/blackboard.tscn" id="9_sytrn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv074"]
 content_margin_left = 0.0
@@ -118,7 +119,11 @@ icon = ExtResource("7_xv074")
 icon_alignment = 1
 expand_icon = true
 
-[node name="WinCard" parent="UILayer/UI" unique_id=540069684 instance=ExtResource("8_xv074")]
+[node name="WinCard" parent="UILayer/UI" unique_id=1656096447 instance=ExtResource("8_xv074")]
+visible = false
+layout_mode = 1
+
+[node name="Blackboard" parent="UILayer/UI" unique_id=810955824 instance=ExtResource("9_sytrn")]
 visible = false
 layout_mode = 1
 

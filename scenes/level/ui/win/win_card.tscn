@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dv8xo103bpvdp"]
+[gd_scene format=3 uid="uid://p4tx68w38bha"]
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_4ta5k"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="2_rog8x"]
@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.38039216)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1229861082]
+[node name="Card" type="PanelContainer" parent="." unique_id=1229861082]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,14 +41,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_jvxlc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=846485810]
+[node name="VBoxContainer" type="VBoxContainer" parent="Card" unique_id=846485810]
 layout_mode = 2
 
-[node name="CompletionStatus" parent="PanelContainer/VBoxContainer" unique_id=148197875 instance=ExtResource("2_rog8x")]
+[node name="CompletionStatus" parent="Card/VBoxContainer" unique_id=148197875 instance=ExtResource("2_rog8x")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.62
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=458683221]
+[node name="MarginContainer" type="MarginContainer" parent="Card/VBoxContainer" unique_id=458683221]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 100
@@ -56,26 +56,26 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1592173580]
+[node name="HBoxContainer" type="HBoxContainer" parent="Card/VBoxContainer/MarginContainer" unique_id=1592173580]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1168870719]
+[node name="RestartButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1168870719]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("3_egysd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MenuButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=337988012]
+[node name="MenuButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=337988012]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("4_t1wpr")
 icon_alignment = 1
 expand_icon = true
 
-[node name="NextButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=789755522]
+[node name="NextButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=789755522]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("5_jvxlc")
@@ -86,6 +86,6 @@ expand_icon = true
 stream = ExtResource("8_jvxlc")
 volume_db = -16.0
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Card/VBoxContainer/MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Card/VBoxContainer/MarginContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Card/VBoxContainer/MarginContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

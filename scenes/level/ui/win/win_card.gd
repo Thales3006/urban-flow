@@ -1,7 +1,9 @@
 extends Control
 
-@onready var stars :CompletionStatus = $PanelContainer/VBoxContainer/CompletionStatus
+@onready var stars :CompletionStatus = $Card/VBoxContainer/CompletionStatus
 @onready var win_sound := $AudioStreamPlayer
+@onready var dimmer := $Dimmer
+@onready var card := $Card
 
 func _ready() -> void:
 	stars.set_progress(GameState.compute_percentage())
@@ -28,5 +30,26 @@ func _on_level_selected(level_path: String):
 
 func set_won():
 	win_sound.play()
+	
+	var viewport_size := get_viewport().get_visible_rect().size
+
+	card.position.y = viewport_size.y + card.size.y
+	var target_y: float = viewport_size.y / 2 - card.size.y / 2
+	
+	dimmer.modulate.a = 0.0
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(card, "position:y", target_y, 0.6)
+
+	tween.parallel().tween_property(
+		dimmer,
+		"modulate:a",
+		0.6,
+		0.4,
+	)
+	
 	visible = true
 	

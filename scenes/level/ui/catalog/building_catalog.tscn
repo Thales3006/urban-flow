@@ -4,18 +4,6 @@
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_ra2l8"]
 [ext_resource type="Texture2D" uid="uid://1fsee51ycnc6" path="res://icons/write.png" id="3_dcqqt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcqqt"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [node name="BuildingCatalog" type="PanelContainer" unique_id=1747442615]
 custom_minimum_size = Vector2(0, 150)
 offset_right = 337.0
@@ -23,7 +11,6 @@ offset_bottom = 161.0
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_ra2l8")
-theme_override_styles/panel = SubResource("StyleBoxFlat_dcqqt")
 script = ExtResource("1_gbbgp")
 
 [node name="AvailableBuilding" type="HBoxContainer" parent="." unique_id=1130753921]
