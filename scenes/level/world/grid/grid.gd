@@ -3,6 +3,9 @@ extends Node2D
 const CELL_KIND_DROPABLE := "dropable"
 const CELL_KIND_TRASHED := "trashed"
 
+@onready var buildings: Node2D = $Buildings
+@onready var cells: Node2D = $Cells
+
 var main_scene: Node2D
 var cell_instances = []
 var tile_map: TileMapLayer
@@ -16,6 +19,7 @@ func _ready() -> void:
 	terrain_map = layout.get_node("Terrain")
 	tile_map.visible = false
 	add_child(layout)
+	move_child(layout, 0)
 	spawn_cells_from_tilemap()
 
 func spawn_cells_from_tilemap():
@@ -28,10 +32,10 @@ func spawn_cells_from_tilemap():
 		match kind:
 			CELL_KIND_DROPABLE:
 				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
-				add_child(cell)
+				cells.add_child(cell)
 			CELL_KIND_TRASHED:
 				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
-				add_child(cell)
+				cells.add_child(cell)
 				cell.set_trashed()
 
 		
@@ -46,5 +50,5 @@ func get_tilemap_world_rect() -> Rect2:
 	return Rect2(world_pos, world_size)
 	
 func _on_add_building(building: Building):
-	add_child(building)
+	buildings.add_child(building)
 	building.global_position = building.initialPos

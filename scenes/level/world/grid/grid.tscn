@@ -4,3 +4,8 @@
 
 [node name="Grid" type="Node2D" unique_id=1410503908]
 script = ExtResource("1_np0kd")
+
+[node name="Cells" type="Node2D" parent="." unique_id=6060038]
+
+[node name="Buildings" type="Node2D" parent="." unique_id=928542098]
+y_sort_enabled = true
