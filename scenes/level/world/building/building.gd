@@ -183,12 +183,16 @@ func remove_affect_feedback(cell: Cell):
 	
 	
 func push_affect_all():
-	for cell in will_affect:
+	for cell: Cell in will_affect:
+		if data.kind == BuildingData.Kind.RECYCLING:
+			cell.trash.modulate.a = 0.3
 		cell.affecting.push_back(self)
 		affecting.push_back(cell)
 
 func remove_affect_all():
-	for cell in affecting:
+	for cell: Cell in affecting:
+		if data.kind == BuildingData.Kind.RECYCLING:
+			cell.trash.modulate.a = 1
 		cell.affecting.erase(self)
 
 
