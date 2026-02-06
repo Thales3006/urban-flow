@@ -38,8 +38,6 @@ func spawn_cells_from_tilemap():
 				cells.add_child(cell)
 				cell.set_trashed()
 
-		
-		
 func get_tilemap_world_rect() -> Rect2:
 	var used := tile_map.get_used_rect()
 	var cell_size := tile_map.tile_set.tile_size
@@ -52,3 +50,9 @@ func get_tilemap_world_rect() -> Rect2:
 func _on_add_building(building: Building):
 	buildings.add_child(building)
 	building.global_position = building.initialPos
+	
+func get_first_empty_cell() -> Cell:
+	for child: Cell in cells.get_children():
+		if not child.is_filled:
+			return child
+	return null

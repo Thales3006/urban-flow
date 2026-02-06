@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b304p5vhgs1gb"]
 
 [ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
+[ext_resource type="Script" uid="uid://dy1s7a1rni51h" path="res://scenes/level/level.gd" id="1_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/world/grid/grid.tscn" id="2_3dm31"]
 [ext_resource type="Script" uid="uid://bftmflcq7w4cv" path="res://scenes/level/ui/side_panel.gd" id="2_sytrn"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
 [ext_resource type="PackedScene" uid="uid://p4tx68w38bha" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
 [ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/blackboard/blackboard.tscn" id="9_sytrn"]
+[ext_resource type="PackedScene" uid="uid://by431uov5cbcp" path="res://scenes/level/ui/tutorial/tutorial.tscn" id="10_tf2q7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv074"]
 content_margin_left = 0.0
@@ -24,6 +26,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="Level" type="Node" unique_id=1193504177]
+script = ExtResource("1_pe1ox")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=644466657]
 
@@ -126,5 +129,7 @@ layout_mode = 1
 [node name="Blackboard" parent="UILayer/UI" unique_id=810955824 instance=ExtResource("9_sytrn")]
 visible = false
 layout_mode = 1
+
+[node name="Tutorial" parent="UILayer" unique_id=1265096345 instance=ExtResource("10_tf2q7")]
 
 [connection signal="pressed" from="UILayer/UI/Back" to="UILayer/UI" method="_on_back_pressed"]

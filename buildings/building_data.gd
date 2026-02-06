@@ -13,3 +13,4 @@ enum Kind {
 @export var radius: float
 @export var score: float
 @export var effect: float = 1.0
+@export var hints: Array[Hint] = []

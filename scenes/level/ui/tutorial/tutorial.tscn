@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://by431uov5cbcp"]
+
+[ext_resource type="Script" uid="uid://00soekjion70" path="res://scenes/level/ui/tutorial/tutorial.gd" id="1_7ks2y"]
+[ext_resource type="Texture2D" uid="uid://da4lnwcfi0w82" path="res://icons/tap.png" id="2_eopkp"]
+
+[node name="Tutorial" type="Control" unique_id=1265096345]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7ks2y")
+
+[node name="click" type="TextureRect" parent="." unique_id=1741768892]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49913195
+anchor_top = 0.46450618
+anchor_right = 0.5980903
+anchor_bottom = 0.6095679
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_eopkp")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true

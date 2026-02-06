@@ -1,6 +1,7 @@
 extends Control
 class_name BuildingCatalog
 
+@onready var button: Button = $HBoxContainer/VBoxContainer/Button
 @onready var buildingHBox: HBoxContainer = $AvailableBuilding
 
 const buildingCatalog = preload("res://scenes/level/ui/catalog/building_catalog.tscn")
