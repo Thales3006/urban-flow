@@ -1,15 +1,10 @@
 extends Control
 
-const KIND_TO_STRING := {
-	BuildingData.Kind.HOUSE: "moradia",
-	BuildingData.Kind.HOSPITAL: "hospital",
-	BuildingData.Kind.RECYCLING: "reciclagem",
-}
-
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 @onready var label_word := $Card/Word
 @onready var whiteboard := $Card/WhiteBoard
+@onready var image: TextureRect = $Card/Image
 
 var current_catalog: BuildingCatalog = null 
 
@@ -17,7 +12,8 @@ func _ready() -> void:
 	Signals.write_word.connect(_on_appear)
 
 func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
-	label_word.text = KIND_TO_STRING[kind]
+	label_word.text = Building.BUILDING_DATA[kind].word
+	image.texture = Building.BUILDING_DATA[kind].sprite
 	current_catalog = catalog
 	
 	var viewport_size := get_viewport().get_visible_rect().size

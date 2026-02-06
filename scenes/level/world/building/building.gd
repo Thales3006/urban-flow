@@ -5,7 +5,7 @@ const DRAG_Z := 1000
 const NORMAL_Z := 0
 
 const building = preload("res://scenes/level/world/building/building.tscn")
-const BUILDING_DATA := {
+const BUILDING_DATA: Dictionary[BuildingData.Kind, BuildingData] = {
 	BuildingData.Kind.HOUSE: preload("res://buildings/house.tres"),
 	BuildingData.Kind.HOSPITAL: preload("res://buildings/hospital.tres"),
 	BuildingData.Kind.RECYCLING: preload("res://buildings/recycling.tres"),

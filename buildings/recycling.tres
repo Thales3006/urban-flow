@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BuildingData" load_steps=3 format=3 uid="uid://b4kyfl55jsp3x"]
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://b4kyfl55jsp3x"]
 
 [ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="1_dpty2"]
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="1_f32pj"]
 [ext_resource type="Texture2D" uid="uid://r3glgthqlpdk" path="res://buildings/sprites/recicling.png" id="2_f32pj"]
 
 [resource]
 script = ExtResource("1_dpty2")
+word = "reciclagem"
 kind = 2
 sprite = ExtResource("2_f32pj")
 sprite_scale = 0.8

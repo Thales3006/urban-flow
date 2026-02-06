@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BuildingData" load_steps=3 format=3 uid="uid://dmjqkqui4tauu"]
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://dmjqkqui4tauu"]
 
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="1_2ugcv"]
 [ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="1_hdb41"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="2_2ugcv"]
 
 [resource]
 script = ExtResource("1_hdb41")
+word = "moradia"
 sprite = ExtResource("2_2ugcv")
 sprite_scale = 0.8
 score = 50.0

@@ -7,6 +7,7 @@ enum Kind {
 	RECYCLING,
 }
 
+@export var word: String
 @export var kind: Kind
 @export var sprite: Texture2D
 @export var sprite_scale: float

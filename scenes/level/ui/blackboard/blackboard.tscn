@@ -118,7 +118,7 @@ text = "hospital"
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Card" unique_id=84142673]
+[node name="Image" type="TextureRect" parent="Card" unique_id=84142673]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.36800003
