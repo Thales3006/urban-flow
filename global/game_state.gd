@@ -13,8 +13,7 @@ func compute_percentage() -> float:
 func compute_score() -> float:
 	var score: float = 0
 	for building: Building in buildings:
-		if building.current_cell != null:
-			score += building.compute_score()
+		score += building.compute_score()
 	return score
 		
 

@@ -1,6 +1,9 @@
 extends Node2D
 class_name Building
 
+const DRAG_Z := 1000
+const NORMAL_Z := 0
+
 const building = preload("res://scenes/level/world/building/building.tscn")
 const BUILDING_DATA := {
 	BuildingData.Kind.HOUSE: preload("res://buildings/house.tres"),
@@ -14,7 +17,13 @@ enum State {
 	FREE,
 }
 
-var dragging: bool = false
+var dragging: bool = false:
+	set(value):
+		if value:
+			z_index = DRAG_Z
+		else:
+			z_index = NORMAL_Z
+		dragging = value
 var current_cell: Cell = null
 var state: State = State.FREE
 var will_affect = []
@@ -85,6 +94,9 @@ func _input(event: InputEvent) -> void:
 			
 
 func compute_score() -> float:
+	recycling_balloon.visible = false
+	$happy.visible = false
+	
 	if current_cell == null:
 		return 0
 	var affected := {
@@ -98,8 +110,7 @@ func compute_score() -> float:
 	if current_cell.is_trashed and not current_cell.is_recycled():
 		recycling_balloon.visible = true
 		score /= 2
-	else:
-		recycling_balloon.visible = false
+
 		
 			
 	for effect: Building in current_cell.affecting:
