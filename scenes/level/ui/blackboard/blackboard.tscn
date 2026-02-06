@@ -2,9 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_5itcx"]
 [ext_resource type="Script" uid="uid://b1ecr3d6nlbj5" path="res://scenes/level/ui/blackboard/blackboard.gd" id="2_gr313"]
-[ext_resource type="Texture2D" uid="uid://1wh7iku8u006" path="res://icons/play-circle-outline-rounded.svg" id="3_3sc42"]
 [ext_resource type="Script" uid="uid://do7tm8a31sfmb" path="res://scenes/level/ui/blackboard/white_board.gd" id="3_ay4ts"]
 [ext_resource type="FontFile" uid="uid://cp7p0ukgpklmb" path="res://styles/fonts/handwritten_font.ttf" id="3_hw7s2"]
+[ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="6_f06me"]
+[ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="6_rhnf0"]
+[ext_resource type="Texture2D" uid="uid://c13fq6bn61lsn" path="res://icons/restart_icon.png" id="6_y4qxv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1wpr"]
 content_margin_left = 50.0
@@ -60,7 +62,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.38039216)
 
-[node name="Card" type="PanelContainer" parent="." unique_id=1229861082]
+[node name="Card" type="Panel" parent="." unique_id=255471484]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,19 +76,36 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_t1wpr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Card" unique_id=846485810]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="WhiteBoard" type="PanelContainer" parent="Card/VBoxContainer" unique_id=111649268]
-layout_mode = 2
+[node name="WhiteBoard" type="PanelContainer" parent="Card" unique_id=111649268]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.09200001
+anchor_right = 0.952
+anchor_bottom = 0.786
+offset_left = 0.3199997
+offset_top = 0.13599396
+offset_right = -0.32000732
+offset_bottom = 12.988007
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rmkno")
 script = ExtResource("3_ay4ts")
 
-[node name="Word" type="RichTextLabel" parent="Card/VBoxContainer/WhiteBoard" unique_id=1742220775]
-layout_mode = 2
+[node name="Word" type="RichTextLabel" parent="Card" unique_id=1742220775]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_hw7s2")
 theme_override_fonts/bold_font = ExtResource("3_hw7s2")
@@ -99,20 +118,56 @@ text = "hospital"
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Card/VBoxContainer" unique_id=1645113581]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="TextureRect" type="TextureRect" parent="Card" unique_id=84142673]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36800003
+anchor_top = 0.68500006
+anchor_right = 0.652
+anchor_bottom = 1.0
+offset_left = 0.1199646
+offset_top = 25.72998
+offset_right = 0.17999268
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_f06me")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Spacer" type="Control" parent="Card/VBoxContainer/HBoxContainer" unique_id=1938246950]
-layout_mode = 2
+[node name="RepeatButton" type="Button" parent="Card" unique_id=108361317]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -90.0
+offset_right = 120.0
+offset_bottom = -27.0
+grow_vertical = 0
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 9.72
-
-[node name="Button" type="Button" parent="Card/VBoxContainer/HBoxContainer" unique_id=559974488]
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("3_3sc42")
+icon = ExtResource("6_y4qxv")
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="Card/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="ConfirmButton" type="Button" parent="Card" unique_id=559974488]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -83.0
+offset_right = -50.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+icon = ExtResource("6_rhnf0")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Card/RepeatButton" to="." method="_on_repeat_button_pressed"]
+[connection signal="pressed" from="Card/ConfirmButton" to="." method="_on_confirm_button_pressed"]
