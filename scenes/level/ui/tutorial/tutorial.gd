@@ -40,12 +40,20 @@ func show_hint():
 		current_hint = hints[0]
 	else:
 		return
-
 	if current_hint is ClickHint:
-		click.global_position = current_hint.node.global_position + current_hint.node.size * 0.5
+		var node: Node = current_hint.node
+		if node is Control:
+			click.global_position = node.global_position + node.size * 0.5
+		if node is Node2D:
+			click.global_position = node.global_position
 		click.visible = true
 	if current_hint is DragHint:
-		click.global_position = current_hint.end_node.global_position
+		var node: Node = current_hint.end_node
+		if node is Control:
+			click.global_position = node.global_position + node.size * 0.5
+		if node is Node2D:
+			var viewport := level_root.get_viewport()
+			click.global_position = viewport.get_canvas_transform() * node.global_position
 		click.visible = true
 	
 func clear_hint():
