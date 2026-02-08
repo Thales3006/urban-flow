@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c88bdx63kuuua"]
+[gd_scene format=3 uid="uid://c88bdx63kuuua"]
 
 [ext_resource type="Script" uid="uid://drthi7t5k8jmm" path="res://scenes/main_menu/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://cf6xrxiixo3ji" path="res://images/background.png" id="2_wu84c"]
@@ -38,7 +38,7 @@ void fragment() {
 shader = SubResource("Shader_fu7sn")
 shader_parameter/blur_size = 3.0
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1537581856]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,7 @@ grow_vertical = 2
 theme = ExtResource("3_8ln24")
 script = ExtResource("1_bqqt6")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=56700780]
 material = SubResource("ShaderMaterial_nlkkf")
 layout_mode = 1
 anchors_preset = 15
@@ -59,7 +59,7 @@ grow_vertical = 2
 texture = ExtResource("2_wu84c")
 expand_mode = 1
 
-[node name="MainTitle" type="TextureRect" parent="."]
+[node name="MainTitle" type="TextureRect" parent="." unique_id=93675064]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -73,7 +73,7 @@ texture = ExtResource("4_5seab")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1729297834]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -87,21 +87,21 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="Buttons"]
+[node name="PlayButton" type="Button" parent="Buttons" unique_id=953454258]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 icon = ExtResource("4_rtw2f")
 icon_alignment = 1
 expand_icon = true
 
-[node name="SettingsButton" type="Button" parent="Buttons"]
+[node name="SettingsButton" type="Button" parent="Buttons" unique_id=684608519]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 icon = ExtResource("5_oa1go")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ExitButton" type="Button" parent="Buttons"]
+[node name="ExitButton" type="Button" parent="Buttons" unique_id=6133149]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_8ln24")

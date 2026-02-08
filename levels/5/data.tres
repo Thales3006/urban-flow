@@ -2,11 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://ubjyupoydyt7" path="res://levels/5/layout.tscn" id="1_0wqff"]
 [ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="2_1ngyl"]
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="3_1ngyl"]
 
 [resource]
 script = ExtResource("2_1ngyl")
 level = 5
-max_score = 500
+max_score = 350
 layout = ExtResource("1_0wqff")
 available_buildings = Dictionary[int, int]({
 0: 5,

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var grid = $MarginContainer/GridContainer
+@onready var grid = $GridContainer
 
 func _ready():
 	var dir := DirAccess.open(Global.levels_path)
