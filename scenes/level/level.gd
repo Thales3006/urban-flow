@@ -2,11 +2,15 @@ class_name LevelScene
 extends Node
 
 @onready var tutorial: Tutorial = $UILayer/Tutorial
-@onready var catalog: Control = $Background/BackUI/SidePanel/PanelContainer/List
-@onready var grid: Node2D = $WorldLayer/World/Grid
+@onready var catalog: Catalog = $Background/BackUI/Catalog
+@onready var grid: Grid = $WorldLayer/World/Grid
+@onready var blackboard: Blackboard = $UILayer/UI/Blackboard
 
 func _ready() -> void:
-	call_deferred("_on_tutorial")
+	catalog.buildings_ready.connect(_on_buildings_ready)
 
-func _on_tutorial():
+func _on_buildings_ready(buildings: Array[Building]):
+	grid.set_buildings(buildings)
 	tutorial.setup_tutorial(self)
+	
+	

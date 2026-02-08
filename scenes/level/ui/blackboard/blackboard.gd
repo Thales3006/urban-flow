@@ -1,3 +1,4 @@
+class_name Blackboard
 extends Control
 
 @onready var dimmer := $Dimmer
@@ -5,6 +6,8 @@ extends Control
 @onready var label_word := $Card/Word
 @onready var whiteboard := $Card/WhiteBoard
 @onready var image: TextureRect = $Card/Image
+@onready var confirm_button: Button = $Card/ConfirmButton
+@onready var repeat_button: Button = $Card/RepeatButton
 
 var current_catalog: BuildingCatalog = null 
 

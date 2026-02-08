@@ -1,6 +1,9 @@
+class_name Catalog
 extends PanelContainer
 
 @onready var buildingVBox: VBoxContainer = $PanelContainer/List
+
+signal buildings_ready(buildings: Array[Building])
 
 var children: Array[BuildingCatalog] = []
 
@@ -14,6 +17,11 @@ func _ready() -> void:
 
 func set_game_state_buildings():
 	GameState.set_buildings(get_buildings())
+	
+	var buildings: Array[Building] = []
+	for child: BuildingCatalog in children:
+		buildings += child.buildings
+	buildings_ready.emit(buildings)
 	
 func get_buildings() -> Array[Building]:
 	var buildings: Array[Building] = []

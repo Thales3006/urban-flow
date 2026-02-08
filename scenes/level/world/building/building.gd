@@ -9,6 +9,7 @@ const BUILDING_DATA: Dictionary[BuildingData.Kind, BuildingData] = {
 	BuildingData.Kind.HOUSE: preload("res://buildings/house.tres"),
 	BuildingData.Kind.HOSPITAL: preload("res://buildings/hospital.tres"),
 	BuildingData.Kind.RECYCLING: preload("res://buildings/recycling.tres"),
+	BuildingData.Kind.WATER: preload("res://buildings/water.tres"),
 }
 
 enum State {
@@ -38,6 +39,7 @@ var affecting = []
 var area2D: Area2D
 var initialPos: Vector2
 var initialScale: Vector2
+var is_disabled: bool
 
 static func create(kind: BuildingData.Kind, pos: Vector2) -> Building:
 	var new : Building = building.instantiate()
@@ -60,13 +62,24 @@ func _ready() -> void:
 			shape.radius = data.radius * 100
 	$EffectArea/Shape.shape = shape
 	get_viewport().size_changed.connect(_on_window_resized)
+	Signals.disable_others.connect(_on_disable_others)
+	Signals.enable_all.connect(func(): 
+		is_disabled = false 
+		print("Ativa")
+	)
 	
 	call_deferred("_post_ready")
 
 func _post_ready():
 	_on_window_resized()
+	
+func _on_disable_others(nodes: Array[Node]):
+	print("DESATIVA:", not nodes.has(self))
+	is_disabled = not nodes.has(self)
 
 func _input(event: InputEvent) -> void:
+	if is_disabled:
+		return
 	if event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position()
 	if event is InputEventMouseButton:
@@ -80,6 +93,7 @@ func _input(event: InputEvent) -> void:
 			if closest_cell and not closest_cell.is_filled:
 				closest_cell.is_filled = true
 				current_cell = closest_cell
+				current_cell.was_filled.emit()
 				push_affect_all()
 				tween.tween_property(self, "global_position", closest_cell.global_position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
@@ -187,6 +201,8 @@ func set_affect_feedback(cell: Cell):
 			cell.set_positive()
 		BuildingData.Kind.RECYCLING:
 			cell.set_clean()
+		BuildingData.Kind.WATER:
+			cell.set_clean()
 			
 	
 func remove_affect_feedback(cell: Cell):
@@ -212,7 +228,7 @@ func remove_affect_all():
 # =============================
 
 func _on_area_2d_body_entered(body) -> void:
-	if not Global.is_dragging:
+	if not is_disabled or not Global.is_dragging:
 		return
 	var cell = body.get_parent()
 	if cell is Cell:
@@ -226,7 +242,7 @@ func _on_area_2d_body_exited(body) -> void:
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
-	if not Global.is_dragging and  state == State.FREE:
+	if not is_disabled and not Global.is_dragging and  state == State.FREE:
 		get_tree().create_tween().tween_property(sprite, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
@@ -249,7 +265,7 @@ func _on_effect_area_exited(body) -> void:
 
 
 func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if state != State.FREE:
+	if is_disabled or state != State.FREE:
 		return
 	if event is InputEventMouseButton:
 		# Grabbed building ======================

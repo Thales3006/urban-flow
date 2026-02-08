@@ -13,6 +13,7 @@ var affecting = []
 
 @onready var collision_shape: CollisionShape2D = $Content/CollisionShape2D
 
+signal was_filled()
 
 var tile: Vector2i
 var is_filled: bool = false

@@ -1,4 +1,4 @@
-class_name ClickHint
+class_name InvisibleHint
 extends Hint
 
 @export var node_path: String
@@ -6,4 +6,4 @@ extends Hint
 var node: Node
 
 func disable_others():
-	Signals.disable_others.emit([node] as Array[Node])
+	pass

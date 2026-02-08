@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
 [ext_resource type="Script" uid="uid://dy1s7a1rni51h" path="res://scenes/level/level.gd" id="1_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dps43m0ugt0av" path="res://scenes/level/world/grid/grid.tscn" id="2_3dm31"]
-[ext_resource type="Script" uid="uid://bftmflcq7w4cv" path="res://scenes/level/ui/side_panel.gd" id="2_sytrn"]
+[ext_resource type="Script" uid="uid://bftmflcq7w4cv" path="res://scenes/level/ui/catalog.gd" id="2_sytrn"]
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
 [ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui.gd" id="5_wcngd"]
@@ -47,19 +47,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_vpf64")
 
-[node name="SidePanel" type="PanelContainer" parent="Background/BackUI" unique_id=1964726576]
+[node name="Catalog" type="PanelContainer" parent="Background/BackUI" unique_id=1964726576]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("5_vpf64")
 script = ExtResource("2_sytrn")
 
-[node name="PanelContainer" type="PanelContainer" parent="Background/BackUI/SidePanel" unique_id=336384168]
+[node name="PanelContainer" type="PanelContainer" parent="Background/BackUI/Catalog" unique_id=336384168]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
 
-[node name="List" type="VBoxContainer" parent="Background/BackUI/SidePanel/PanelContainer" unique_id=686186045]
+[node name="List" type="VBoxContainer" parent="Background/BackUI/Catalog/PanelContainer" unique_id=686186045]
 layout_mode = 2
 focus_behavior_recursive = 1
 
@@ -131,5 +131,6 @@ visible = false
 layout_mode = 1
 
 [node name="Tutorial" parent="UILayer" unique_id=1265096345 instance=ExtResource("10_tf2q7")]
+visible = false
 
 [connection signal="pressed" from="UILayer/UI/Back" to="UILayer/UI" method="_on_back_pressed"]

@@ -1,3 +1,4 @@
+class_name Grid
 extends Node2D
 
 const CELL_KIND_DROPABLE := "dropable"
@@ -12,8 +13,6 @@ var tile_map: TileMapLayer
 var terrain_map: TileMapLayer
 
 func _ready() -> void:
-	Signals.add_building.connect(_on_add_building)
-	
 	var layout = GameState.level.layout.instantiate()
 	tile_map = layout.get_node("Placement")
 	terrain_map = layout.get_node("Terrain")
@@ -47,12 +46,23 @@ func get_tilemap_world_rect() -> Rect2:
 
 	return Rect2(world_pos, world_size)
 	
-func _on_add_building(building: Building):
-	buildings.add_child(building)
-	building.global_position = building.initialPos
+func set_buildings(new_buildings: Array[Building]):
+	for building: Building in new_buildings:
+		buildings.add_child(building)
+		building.global_position = building.initialPos
 	
-func get_first_empty_cell() -> Cell:
+func get_cell(pos: Vector2i) -> Cell:
 	for child: Cell in cells.get_children():
-		if not child.is_filled:
+		if child.tile == pos:
 			return child
+	return null
+	
+func get_building(kind: BuildingData.Kind, index: int) -> Building:
+	var iter: int = 0
+	for child: Building in buildings.get_children():
+		if child.data.kind == kind:
+			if iter == index:
+				return child
+			else:
+				iter += 1
 	return null
