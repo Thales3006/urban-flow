@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://dqypnyi2ur4xo"]
+
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="1_40j64"]
+[ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="2_c3u2s"]
+[ext_resource type="Texture2D" uid="uid://cj61tgduuvic2" path="res://buildings/sprites/water.png" id="3_40j64"]
+
+[resource]
+script = ExtResource("2_c3u2s")
+word = "saneamento"
+kind = 3
+sprite = ExtResource("3_40j64")
+sprite_scale = 0.8
+radius = 2.0
+score = 50.0
+effect = 1.2
+metadata/_custom_type_script = "uid://rp5o0hd3nc3e"
