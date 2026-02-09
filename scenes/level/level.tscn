@@ -38,36 +38,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.30138263, 0.830506, 0.4931013, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="BackUI" type="HBoxContainer" parent="Background" unique_id=967378589]
-anchors_preset = 15
-anchor_right = 1.0
+[node name="Catalog" type="PanelContainer" parent="Background" unique_id=1964726576]
+anchors_preset = -1
+anchor_right = 0.2621528
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_vpf64")
-
-[node name="Catalog" type="PanelContainer" parent="Background/BackUI" unique_id=1964726576]
-layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("5_vpf64")
 script = ExtResource("2_sytrn")
+metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Background/BackUI/Catalog" unique_id=336384168]
+[node name="PanelContainer" type="PanelContainer" parent="Background/Catalog" unique_id=336384168]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
 
-[node name="List" type="VBoxContainer" parent="Background/BackUI/Catalog/PanelContainer" unique_id=686186045]
+[node name="List" type="VBoxContainer" parent="Background/Catalog/PanelContainer" unique_id=686186045]
 layout_mode = 2
 focus_behavior_recursive = 1
-
-[node name="Spacer" type="Control" parent="Background/BackUI" unique_id=390403809]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.8
-mouse_filter = 2
 
 [node name="WorldLayer" type="CanvasLayer" parent="." unique_id=1254438683]
 follow_viewport_enabled = true
@@ -98,10 +88,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CompletionStatus" parent="UILayer/UI" unique_id=714219907 instance=ExtResource("5_hnne4")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.28645834
-anchor_right = 0.72
-anchor_bottom = 0.17400001
+anchor_left = 0.3628472
+anchor_right = 0.875382
+anchor_bottom = 0.17091359
 offset_right = 0.5599365
 offset_bottom = 0.24799347
 

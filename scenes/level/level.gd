@@ -2,7 +2,7 @@ class_name LevelScene
 extends Node
 
 @onready var tutorial: Tutorial = $UILayer/Tutorial
-@onready var catalog: Catalog = $Background/BackUI/Catalog
+@onready var catalog: Catalog = $Background/Catalog
 @onready var grid: Grid = $WorldLayer/World/Grid
 @onready var blackboard: Blackboard = $UILayer/UI/Blackboard
 
