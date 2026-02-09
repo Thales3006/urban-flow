@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dxq31c3w7dkj5"]
+
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_n8yog"]
+[ext_resource type="Script" uid="uid://dqx2vjnwdrfbw" path="res://scenes/selection/level_button/level_button.gd" id="2_1xwj1"]
+
+[node name="LevelButton" type="Button" unique_id=2109034556]
+custom_minimum_size = Vector2(80, 80)
+anchors_preset = -1
+anchor_right = 0.080729164
+anchor_bottom = 0.14351852
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme = ExtResource("1_n8yog")
+text = "1"
+script = ExtResource("2_1xwj1")
+metadata/_edit_use_anchors_ = true

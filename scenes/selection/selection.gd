@@ -16,11 +16,11 @@ func _ready():
 		if not level_dir.file_exists("data.tres") or not level_dir.file_exists("layout.tscn"):
 			continue
 		
-		var button := Button.new()
+		var button := LevelButton.new()
 		button.text = level_name.get_basename()
 		button.custom_minimum_size = Vector2(80, 80)
-		button.focus_mode = Control.FOCUS_NONE
-		button.connect("pressed", Callable(self, "_on_level_selected").bind(level_path))
+		button.pressed.connect(_on_level_selected.bind(level_path))
+		
 		grid.add_child(button)
 
 func _on_level_selected(level_path: String):

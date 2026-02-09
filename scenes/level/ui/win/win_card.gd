@@ -1,12 +1,15 @@
 extends Control
 
-@onready var stars :CompletionStatus = $Card/VBoxContainer/CompletionStatus
 @onready var win_sound := $AudioStreamPlayer
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 
 func _ready() -> void:
-	stars.set_progress(GameState.compute_percentage())
+	#stars.set_progress(GameState.compute_percentage())
+	
+	#temporary
+	for index in 5:
+		$Card/VBoxContainer/Control/VBoxContainer/StarHBox.set_lit(index)
 
 func _on_restart_button_pressed() -> void:
 	_on_level_selected(Global.levels_path + "/" + str(GameState.level.level))
@@ -52,4 +55,3 @@ func set_won():
 	)
 	
 	visible = true
-	

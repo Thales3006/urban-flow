@@ -1,7 +1,7 @@
 class_name CompletionStatus
 extends PanelContainer
 
-@onready var progress_bar := $HBox/VBoxContainer/ProgressBar
+@onready var progress_bar := $HBox/ProgressBar
 @onready var star_HBox := $VBoxContainer/StarHBox
 
 func _ready() -> void:

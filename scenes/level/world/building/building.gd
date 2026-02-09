@@ -63,10 +63,7 @@ func _ready() -> void:
 	$EffectArea/Shape.shape = shape
 	get_viewport().size_changed.connect(_on_window_resized)
 	Signals.disable_others.connect(_on_disable_others)
-	Signals.enable_all.connect(func(): 
-		is_disabled = false 
-		print("Ativa")
-	)
+	Signals.enable_all.connect(func(): is_disabled = false)
 	
 	call_deferred("_post_ready")
 
@@ -74,7 +71,6 @@ func _post_ready():
 	_on_window_resized()
 	
 func _on_disable_others(nodes: Array[Node]):
-	print("DESATIVA:", not nodes.has(self))
 	is_disabled = not nodes.has(self)
 
 func _input(event: InputEvent) -> void:
