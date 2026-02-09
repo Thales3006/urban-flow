@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://1wh7iku8u006" path="res://icons/play-circle-outline-rounded.svg" id="4_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://bw33kswcgvjcv" path="res://icons/settings.svg" id="5_oa1go"]
 [ext_resource type="Texture2D" uid="uid://i6qi2o2hulgd" path="res://icons/exit-to-app.svg" id="6_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="8_4xg86"]
 
 [sub_resource type="Shader" id="Shader_fu7sn"]
 code = "shader_type canvas_item;
@@ -108,6 +109,21 @@ theme = ExtResource("3_8ln24")
 icon = ExtResource("6_tbmy8")
 icon_alignment = 1
 expand_icon = true
+
+[node name="Beaver" type="TextureRect" parent="." unique_id=996573212]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6171875
+anchor_top = 0.12191358
+anchor_right = 1.1267362
+anchor_bottom = 1.3904321
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_4xg86")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -22,10 +22,9 @@ corner_radius_bottom_left = 20
 
 [node name="CompletionStatus" type="PanelContainer" unique_id=673116882]
 custom_minimum_size = Vector2(500, 0)
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -494.0
+anchor_bottom = 0.3132716
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -34,6 +33,7 @@ size_flags_stretch_ratio = 0.2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b6ec3")
 script = ExtResource("1_2var0")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBox" type="HBoxContainer" parent="." unique_id=1215547385]
 layout_mode = 2

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://wavwohmmsbe7" path="res://icons/next_icon.png" id="5_jvxlc"]
 [ext_resource type="Texture2D" uid="uid://bmm6j217lc40g" path="res://images/progress_colors.png" id="6_ipu4n"]
 [ext_resource type="AudioStream" uid="uid://5b30cxa5xdsa" path="res://sounds/win.mp3" id="8_jvxlc"]
+[ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="13_gibkl"]
 
 [node name="WinCard" type="Control" unique_id=1656096447]
 layout_mode = 3
@@ -195,6 +196,22 @@ expand_icon = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=865750643]
 stream = ExtResource("8_jvxlc")
 volume_db = -16.0
+
+[node name="Beaver" type="TextureRect" parent="." unique_id=1474716685]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6180556
+anchor_top = 0.049382716
+anchor_right = 1.1649306
+anchor_bottom = 1.4737654
+offset_bottom = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_gibkl")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Card/VBoxContainer/MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Card/VBoxContainer/MarginContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

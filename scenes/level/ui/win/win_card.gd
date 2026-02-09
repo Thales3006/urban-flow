@@ -3,6 +3,7 @@ extends Control
 @onready var win_sound := $AudioStreamPlayer
 @onready var dimmer := $Dimmer
 @onready var card := $Card
+@onready var beaver := $Beaver
 
 func _ready() -> void:
 	#stars.set_progress(GameState.compute_percentage())
@@ -52,6 +53,15 @@ func set_won():
 		"modulate:a",
 		0.6,
 		0.4,
+	)
+	
+	var beaver_pos: Vector2 = beaver.position
+	beaver.global_position = viewport_size
+	tween.parallel().tween_property(
+		beaver,
+		"position",
+		beaver_pos,
+		0.8
 	)
 	
 	visible = true
