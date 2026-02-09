@@ -3,5 +3,6 @@
 
 Urban\ Flow*
 *.apk
+*apk.*
 *.exe
 .vscode
