@@ -34,9 +34,11 @@ var affecting = []
 @onready var recycling_balloon: Sprite2D = $RecyclingBalloon
 @onready var grabed_sound := $GrabedSound
 @onready var droped_sound := $DropedSound
+@onready var drag_area: Area2D = $Drag
+@onready var effect_area: Area2D = $EffectArea
 @export var data: BuildingData
 @export var catalog: BuildingCatalog
-var area2D: Area2D
+
 var initialPos: Vector2
 var initialScale: Vector2
 var is_disabled: bool
@@ -51,7 +53,6 @@ func _ready() -> void:
 	if data == null:
 		push_error("Building sem tipo!")
 		return
-	area2D = $Drag
 	sprite.texture = data.sprite
 	sprite.scale *= data.sprite_scale
 	initialScale = sprite.scale
@@ -78,12 +79,18 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position()
+		var closest_cell: Cell = get_closest_overlapping_cell()
+		if closest_cell != null:
+			effect_area.global_position = closest_cell.global_position
+		else:
+			effect_area.global_position = global_position
+		
 	if event is InputEventMouseButton:
 		if not event.pressed and dragging:
 			# Droped =====================================
 			dragging = false
 			Global.is_dragging = false
-		
+			
 			var tween = get_tree().create_tween()
 			var closest_cell: Cell = get_closest_overlapping_cell()
 			if closest_cell and not closest_cell.is_filled:
@@ -98,6 +105,7 @@ func _input(event: InputEvent) -> void:
 			for cell in will_affect:
 				remove_affect_feedback(cell)
 			will_affect.clear()
+			effect_area.position = Vector2.ZERO
 				
 			droped_sound.play()
 			Signals.building_placed.emit()
@@ -146,9 +154,9 @@ func compute_score() -> float:
 # =============================
 
 func get_closest_overlapping_cell():
-	if not area2D:
+	if not drag_area:
 		return null
-	var overlapping_bodies = area2D.get_overlapping_bodies()
+	var overlapping_bodies = drag_area.get_overlapping_bodies()
 	var dropable_cells = []
 	for body in overlapping_bodies:
 		if body.is_in_group('dropable'):

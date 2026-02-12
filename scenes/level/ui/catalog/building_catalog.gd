@@ -12,10 +12,10 @@ var kind: BuildingData.Kind
 
 var buildings: Array[Building] = []
 
-static func create(kind: BuildingData.Kind, n: int) -> BuildingCatalog:
+static func create(new_kind: BuildingData.Kind, n: int) -> BuildingCatalog:
 	var new: BuildingCatalog = buildingCatalog.instantiate()
 	new.amount = n
-	new.kind = kind
+	new.kind = new_kind
 
 	return new
 	

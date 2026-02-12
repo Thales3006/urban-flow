@@ -25,6 +25,10 @@ Global="*res://global/global.gd"
 GameState="*res://global/game_state.gd"
 Signals="*res://global/signals.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [global_group]
 
 dropable=""
