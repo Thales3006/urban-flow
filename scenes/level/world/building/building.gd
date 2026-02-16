@@ -96,7 +96,7 @@ func _input(event: InputEvent) -> void:
 			
 			var tween = get_tree().create_tween()
 			var closest_cell: Cell = get_closest_overlapping_cell()
-			if closest_cell and not closest_cell.is_filled:
+			if closest_cell and not closest_cell.is_filled and not closest_cell.is_disabled:
 				closest_cell.is_filled = true
 				current_cell = closest_cell
 				current_cell.was_filled.emit()
@@ -137,7 +137,7 @@ func compute_score() -> float:
 		needs_recycling = true
 		score /= 2
 		
-	if current_cell.has_hospital() and data.kind != BuildingData.Kind.HOSPITAL:
+	if current_cell.has_hospital() and data.kind == BuildingData.Kind.HOUSE:
 		is_happy = true
 		score *= BUILDING_DATA[BuildingData.Kind.HOSPITAL].effect
 		
@@ -243,6 +243,8 @@ func _on_area_2d_body_entered(body) -> void:
 		return
 	var cell = body.get_parent()
 	if cell is Cell:
+		if cell.is_disabled:
+			return
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1.1,1.1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_body_exited(body) -> void:

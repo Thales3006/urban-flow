@@ -19,12 +19,16 @@ signal was_filled()
 var tile: Vector2i
 var is_filled: bool = false
 var is_trashed: bool = false
+var is_disabled: bool = false
 	
 static func create(pos: Vector2, tile_coord: Vector2i) -> Cell:
 	var new_cell: Cell = cell.instantiate()
 	new_cell.global_position = pos
 	new_cell.tile = tile_coord
 	return new_cell
+	
+func _ready() -> void:
+	Signals.disable_others.connect(_on_disable_others)
 	
 func get_size() -> Vector2:
 	return collision_shape.shape.size
@@ -34,6 +38,9 @@ func is_being_affected_by(kind: BuildingData.Kind) -> bool:
 		if b.data.kind == kind:
 			return true
 	return false
+	
+func _on_disable_others(nodes: Array[Node]):
+	is_disabled = not nodes.has(self)
 
 func is_recycled() -> bool:
 	return is_being_affected_by(BuildingData.Kind.RECYCLING)
