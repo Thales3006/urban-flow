@@ -32,6 +32,9 @@ var affecting = []
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var recycling_balloon: Sprite2D = $RecyclingBalloon
+@onready var happy_emote: Sprite2D = $Happy
+@onready var water_balloon: Sprite2D = $WaterBalloon
+
 @onready var grabed_sound := $GrabedSound
 @onready var droped_sound := $DropedSound
 @onready var drag_area: Area2D = $Drag
@@ -113,40 +116,43 @@ func _input(event: InputEvent) -> void:
 
 func compute_score() -> float:
 	recycling_balloon.visible = false
-	$happy.visible = false
+	water_balloon.visible = false
+	happy_emote.visible = false
 	
 	if current_cell == null:
 		return 0
-	var affected := {
-		BuildingData.Kind.HOUSE: false,
-		BuildingData.Kind.HOSPITAL: false,
-		BuildingData.Kind.RECYCLING: false,
-	}
+
+	var has_water := false
+	var needs_recycling := false
 	var is_happy := false
+	
 	var score := data.score
 	
-	if current_cell.is_trashed and not current_cell.is_recycled():
-		recycling_balloon.visible = true
+	if current_cell.has_water():
+		has_water = true
+	else:
 		score /= 2
-
 		
-			
-	for effect: Building in current_cell.affecting:
-		if effect == self:
-			continue
-			
-		match effect.data.kind:
-			BuildingData.Kind.HOSPITAL:
-				if affected[BuildingData.Kind.HOSPITAL]:
-					continue
-					
-				if data.kind != BuildingData.Kind.HOUSE:
-					continue
-					
-				is_happy = true
-				score *= effect.data.effect
-				affected[BuildingData.Kind.HOSPITAL] = true
-	$happy.visible = is_happy
+	if current_cell.is_trashed and not current_cell.is_recycled():
+		needs_recycling = true
+		score /= 2
+		
+	if current_cell.has_hospital() and data.kind != BuildingData.Kind.HOSPITAL:
+		is_happy = true
+		score *= BUILDING_DATA[BuildingData.Kind.HOSPITAL].effect
+		
+	if not has_water:
+		water_balloon.visible = true
+		return score
+	
+	if needs_recycling:
+		recycling_balloon.visible = true
+		return score
+		
+	if is_happy:
+		happy_emote.visible = true
+		return score
+
 	return score
 	
 # =============================
@@ -198,6 +204,7 @@ func set_fixed():
 
 
 func set_affect_feedback(cell: Cell):
+
 	match data.kind:
 		BuildingData.Kind.HOUSE:
 			pass
@@ -206,7 +213,7 @@ func set_affect_feedback(cell: Cell):
 		BuildingData.Kind.RECYCLING:
 			cell.set_clean()
 		BuildingData.Kind.WATER:
-			cell.set_clean()
+			cell.set_water()
 			
 	
 func remove_affect_feedback(cell: Cell):
@@ -232,7 +239,7 @@ func remove_affect_all():
 # =============================
 
 func _on_area_2d_body_entered(body) -> void:
-	if not is_disabled or not Global.is_dragging:
+	if not Global.is_dragging:
 		return
 	var cell = body.get_parent()
 	if cell is Cell:
@@ -246,20 +253,26 @@ func _on_area_2d_body_exited(body) -> void:
 		get_tree().create_tween().tween_property(cell, "scale", Vector2(1,1), 0.2).set_ease(Tween.EASE_OUT)
 		
 func _on_area_2d_mouse_entered() -> void:
-	if not is_disabled and not Global.is_dragging and  state == State.FREE:
+	if not is_disabled and not Global.is_dragging and state == State.FREE:
 		get_tree().create_tween().tween_property(sprite, "scale", initialScale * 1.05, 0.05).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_exited() -> void:
 		get_tree().create_tween().tween_property(sprite, "scale", initialScale, 0.05).set_ease(Tween.EASE_OUT)
 	
 func _on_effect_area_entered(body) -> void:
-	if not Global.is_dragging:
+	if not Global.is_dragging and state != Building.State.FIXED:
 		return
+		
 	var cell = body.get_parent()
 	
 	if cell is Cell:
-		will_affect.push_back(cell)
-		set_affect_feedback(cell)
+		if state != Building.State.FIXED:
+			will_affect.push_back(cell)
+			set_affect_feedback(cell)
+		else:
+			will_affect.push_back(cell)
+			push_affect_all()
+			will_affect.clear()
 
 func _on_effect_area_exited(body) -> void:
 	var cell = body.get_parent()
@@ -289,9 +302,14 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			Signals.building_placed.emit()
 
 func _on_window_resized():
-	global_position = get_world_catalog_pos() + initialPos
+	if state == Building.State.LOCKED:
+		global_position = get_world_catalog_pos() + initialPos
+		
+func update_cells_in_area():
+	for cell: Cell in get_overlapping_cells():
+		_on_effect_area_entered(cell.body)
 	
 func get_world_catalog_pos() -> Vector2:
 	var viewport := get_viewport()
-	var screen_pos: Vector2 = catalog.buildingHBox.get_global_rect().position
+	var screen_pos: Vector2 = catalog.get_global_rect().position
 	return viewport.get_canvas_transform().affine_inverse() * screen_pos

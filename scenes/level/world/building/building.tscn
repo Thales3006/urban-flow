@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6gc8q1a2dt1l" path="res://scenes/level/world/building/building.gd" id="1_ioggs"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="2_rc8dk"]
 [ext_resource type="Texture2D" uid="uid://btt5qy5lq16ij" path="res://icons/green.png" id="3_ssl55"]
+[ext_resource type="Texture2D" uid="uid://4axiy1fcryeu" path="res://images/needs_water.png" id="4_bmqcp"]
 [ext_resource type="Texture2D" uid="uid://cfpj527oivaj0" path="res://images/trash.png" id="4_nsq2e"]
 [ext_resource type="AudioStream" uid="uid://bfxi44sim1go7" path="res://sounds/pop1.mp3" id="4_pms8i"]
 [ext_resource type="Texture2D" uid="uid://dk53r7fjmfyio" path="res://images/recycling_balloon.png" id="5_gxgpf"]
@@ -33,11 +34,17 @@ shape = SubResource("RectangleShape2D_uvy8r")
 shape = SubResource("RectangleShape2D_j2d06")
 debug_color = Color(0.9154516, 0.37736717, 0.37065628, 0.41960785)
 
-[node name="happy" type="Sprite2D" parent="." unique_id=50785104]
+[node name="Happy" type="Sprite2D" parent="." unique_id=50785104]
 visible = false
 position = Vector2(1, -42.000004)
 scale = Vector2(0.57005495, 0.5425824)
 texture = ExtResource("3_ssl55")
+
+[node name="WaterBalloon" type="Sprite2D" parent="." unique_id=596438252]
+visible = false
+position = Vector2(-0.9999992, -49.5)
+scale = Vector2(0.21505377, 0.19207317)
+texture = ExtResource("4_bmqcp")
 
 [node name="Trash" type="Sprite2D" parent="." unique_id=1343691144]
 visible = false

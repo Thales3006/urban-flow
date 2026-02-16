@@ -3,6 +3,10 @@ extends Node2D
 
 const CELL_KIND_DROPABLE := "dropable"
 const CELL_KIND_TRASHED := "trashed"
+const CELL_KIND_HOUSE := "house"
+const CELL_KIND_HOSPITAL := "hospital"
+const CELL_KIND_RECYCLING := "recycling"
+const CELL_KIND_WATER := "water"
 
 @onready var buildings: Node2D = $Buildings
 @onready var cells: Node2D = $Cells
@@ -36,6 +40,11 @@ func spawn_cells_from_tilemap():
 				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
 				cells.add_child(cell)
 				cell.set_trashed()
+			CELL_KIND_WATER:
+				var building := Building.create(BuildingData.Kind.WATER, tile_map.map_to_local(cell_pos))
+				building.set_fixed()
+				buildings.add_child(building)
+				building.position = tile_map.map_to_local(cell_pos)
 
 func get_tilemap_world_rect() -> Rect2:
 	var used := tile_map.get_used_rect()

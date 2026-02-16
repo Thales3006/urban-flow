@@ -11,7 +11,7 @@ tile_map_data = PackedByteArray("AAD9////AQAAAAAAAAD+////AQACAAAAAAD/////AQACAAA
 tile_set = ExtResource("1_6g4up")
 
 [node name="Placement" type="TileMapLayer" parent="." unique_id=1749670806]
-tile_map_data = PackedByteArray("AAD+/wAAAAABAAAAAAD//wAAAAABAAAAAAAAAAAAAAABAAAAAAD5//3/AAAAAAAAAAD5/wMAAAAAAAAAAAACAAMAAAAAAAAAAAACAP3/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+/wAAAAABAAAAAAD//wAAAAABAAAAAAAAAAAAAAABAAAAAAD5//3/AAAAAAAAAAD5/wMAAAAAAAAAAAACAAMAAAAAAAAAAAACAP3/AAAAAAAAAAAAAP//AAADAAEAAAA=")
 tile_set = ExtResource("2_4a337")
 rendering_quadrant_size = 100
 physics_quadrant_size = 100

@@ -2,7 +2,7 @@ extends Node2D
 class_name Cell
 
 const cell = preload("res://scenes/level/world/cell/cell.tscn")
-var affecting = []
+var affecting: Array[Building] = []
 
 @onready var sprite: Sprite2D = $MainSprite
 @onready var negative: Sprite2D = $NegativeEffect
@@ -11,6 +11,7 @@ var affecting = []
 @onready var positive: Sprite2D = $PositiveEffect
 @onready var trash: Sprite2D = $Trash
 
+@onready var body: StaticBody2D = $Content
 @onready var collision_shape: CollisionShape2D = $Content/CollisionShape2D
 
 signal was_filled()
@@ -27,12 +28,23 @@ static func create(pos: Vector2, tile_coord: Vector2i) -> Cell:
 	
 func get_size() -> Vector2:
 	return collision_shape.shape.size
-
-func is_recycled():
+	
+func is_being_affected_by(kind: BuildingData.Kind) -> bool:
 	for b: Building in affecting:
-		if b.data.kind == BuildingData.Kind.RECYCLING:
+		if b.data.kind == kind:
 			return true
 	return false
+
+func is_recycled() -> bool:
+	return is_being_affected_by(BuildingData.Kind.RECYCLING)
+	
+func has_hospital() -> bool:
+	return is_being_affected_by(BuildingData.Kind.HOSPITAL)
+	
+func has_water() -> bool:
+	return is_being_affected_by(BuildingData.Kind.WATER)
+	
+
 
 func set_no_effect():
 	negative.visible = false
