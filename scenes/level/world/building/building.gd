@@ -65,6 +65,7 @@ func _ready() -> void:
 	if shape is CircleShape2D:
 			shape.radius = data.radius * 100
 	$EffectArea/Shape.shape = shape
+	
 	get_viewport().size_changed.connect(_on_window_resized)
 	Signals.disable_others.connect(_on_disable_others)
 	Signals.enable_all.connect(func(): is_disabled = false)
@@ -304,14 +305,24 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			Signals.building_placed.emit()
 
 func _on_window_resized():
-	if state == Building.State.LOCKED:
-		global_position = get_world_catalog_pos() + initialPos
+	if state == Building.State.LOCKED or (state == Building.State.FREE and current_cell == null):
+		var catalog_rect = catalog.get_global_rect()
 		
-func update_cells_in_area():
-	for cell: Cell in get_overlapping_cells():
-		_on_effect_area_entered(cell.body)
+		var screenPos = catalog_rect.position + catalog_rect.size / 2.0
+		
+		global_position = viewport_to_world(screenPos + initialPos)
+		print(screenPos)
+	
 	
 func get_world_catalog_pos() -> Vector2:
 	var viewport := get_viewport()
 	var screen_pos: Vector2 = catalog.get_global_rect().position
+	return viewport.get_canvas_transform().affine_inverse() * screen_pos
+
+func world_to_viewport(world_pos: Vector2) -> Vector2:
+	var viewport := get_viewport()
+	return viewport.get_canvas_transform() * world_pos
+
+func viewport_to_world(screen_pos: Vector2) -> Vector2:
+	var viewport := get_viewport()
 	return viewport.get_canvas_transform().affine_inverse() * screen_pos

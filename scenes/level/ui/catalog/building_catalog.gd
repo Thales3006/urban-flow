@@ -5,7 +5,7 @@ class_name BuildingCatalog
 @onready var buildingHBox: HBoxContainer = $AvailableBuilding
 
 const buildingCatalog = preload("res://scenes/level/ui/catalog/building_catalog.tscn")
-const distance = 30
+const distance = 40
 
 var amount: int
 var kind: BuildingData.Kind
@@ -30,8 +30,8 @@ func _emit_add_building(index: int):
 	buildings.push_back(building)
 	
 func generate_position(index: int) -> Vector2: 
-	var y := size.y / 2 + sin((index + global_position.y - global_position.x) * 4) * 10
-	var x := distance * index
+	var y := sin((index + global_position.y - global_position.x) * 4) * 10
+	var x := distance * (index -  (amount / 2 + 1))
 	return Vector2(x, y)
 
 func _on_button_pressed() -> void:

@@ -3,18 +3,9 @@ extends Control
 @onready var grid = $GridContainer
 
 func _ready():
-	var dir := DirAccess.open(Global.levels_path)
-	if dir == null:
-		push_error("Levels folder not found!")
-		return
-	for level_name in dir.get_directories():
+	var index: LevelsIndex = load("res://levels/levels_index.tres")
+	for level_name in index.levels:
 		var level_path := Global.levels_path + "/" + level_name
-		var level_dir := DirAccess.open(level_path)
-		if level_dir == null:
-			continue
-		
-		if not level_dir.file_exists("data.tres") or not level_dir.file_exists("layout.tscn"):
-			continue
 		
 		var button := LevelButton.new()
 		button.text = level_name.get_basename()

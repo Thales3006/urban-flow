@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LevelsIndex" format=3 uid="uid://cqtilcerljmy5"]
+
+[ext_resource type="Script" uid="uid://bhvh0ftmewiui" path="res://levels/levels_index.gd" id="1_cc1bg"]
+
+[resource]
+script = ExtResource("1_cc1bg")
+levels = Array[String](["1", "2", "3", "4", "5", "6", "7"])
+metadata/_custom_type_script = "uid://bhvh0ftmewiui"

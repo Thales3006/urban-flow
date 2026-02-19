@@ -121,53 +121,46 @@ horizontal_alignment = 1
 [node name="Image" type="TextureRect" parent="Card" unique_id=84142673]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.36800003
-anchor_top = 0.68500006
-anchor_right = 0.652
-anchor_bottom = 1.0
-offset_left = 0.1199646
-offset_top = 25.72998
-offset_right = 0.17999268
-offset_bottom = -31.0
+anchor_left = 0.36811593
+anchor_top = 0.7324723
+anchor_right = 0.65217394
+anchor_bottom = 0.94280446
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_f06me")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="RepeatButton" type="Button" parent="Card" unique_id=108361317]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -90.0
-offset_right = 120.0
-offset_bottom = -27.0
+anchors_preset = -1
+anchor_left = 0.050241545
+anchor_top = 0.8339483
+anchor_right = 0.11594203
+anchor_bottom = 0.9501845
 grow_vertical = 0
 size_flags_horizontal = 3
 icon = ExtResource("6_y4qxv")
 icon_alignment = 1
 expand_icon = true
+metadata/_edit_use_anchors_ = true
 
 [node name="ConfirmButton" type="Button" parent="Card" unique_id=559974488]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -83.0
-offset_right = -50.0
-offset_bottom = -20.0
+anchors_preset = -1
+anchor_left = 0.8859903
+anchor_top = 0.84686345
+anchor_right = 0.9516908
+anchor_bottom = 0.96309966
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
 icon = ExtResource("6_rhnf0")
 icon_alignment = 1
 expand_icon = true
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Card/RepeatButton" to="." method="_on_repeat_button_pressed"]
 [connection signal="pressed" from="Card/ConfirmButton" to="." method="_on_confirm_button_pressed"]

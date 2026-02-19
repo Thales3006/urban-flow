@@ -35,16 +35,15 @@ color = Color(0, 0, 0, 0.38039216)
 
 [node name="Card" type="PanelContainer" parent="." unique_id=1229861082]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 260.0
-offset_top = 150.0
-offset_right = -266.0
-offset_bottom = -178.0
+anchors_preset = -1
+anchor_left = 0.22569445
+anchor_top = 0.23148148
+anchor_right = 0.7690972
+anchor_bottom = 0.72530866
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_jvxlc")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Card" unique_id=846485810]
 layout_mode = 2

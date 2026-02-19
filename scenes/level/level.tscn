@@ -96,20 +96,17 @@ offset_bottom = 0.24799347
 
 [node name="Back" type="Button" parent="UILayer/UI" unique_id=1768598203]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -86.0
-offset_top = -73.0
-offset_right = -19.0
-offset_bottom = -21.0
+anchors_preset = -1
+anchor_left = 0.9097222
+anchor_top = 0.8626543
+anchor_right = 0.9835069
+anchor_bottom = 0.9675926
 grow_horizontal = 0
 grow_vertical = 0
 icon = ExtResource("7_xv074")
 icon_alignment = 1
 expand_icon = true
+metadata/_edit_use_anchors_ = true
 
 [node name="WinCard" parent="UILayer/UI" unique_id=1656096447 instance=ExtResource("8_xv074")]
 visible = false
