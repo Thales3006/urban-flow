@@ -105,7 +105,7 @@ func _input(event: InputEvent) -> void:
 				tween.tween_property(self, "global_position", closest_cell.global_position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
 				current_cell = null
-				tween.tween_property(self, "global_position", get_world_catalog_pos() + initialPos, 0.5).set_ease(Tween.EASE_OUT)
+				tween.tween_property(self, "global_position", get_building_catalog_pos(), 0.5).set_ease(Tween.EASE_OUT)
 			for cell in will_affect:
 				remove_affect_feedback(cell)
 			will_affect.clear()
@@ -306,11 +306,13 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 
 func _on_window_resized():
 	if state == Building.State.LOCKED or (state == Building.State.FREE and current_cell == null):
-		var catalog_rect = catalog.get_global_rect()
-		
-		var screenPos = catalog_rect.position + catalog_rect.size / 2.0
-		
-		global_position = viewport_to_world(screenPos + initialPos)
+		global_position = get_building_catalog_pos()
+
+func get_building_catalog_pos() -> Vector2:
+	var catalog_rect = catalog.get_global_rect()
+	var screenPos = catalog_rect.position + catalog_rect.size / 2.0
+	
+	return viewport_to_world(screenPos + initialPos)
 
 func get_world_catalog_pos() -> Vector2:
 	var viewport := get_viewport()
