@@ -311,9 +311,7 @@ func _on_window_resized():
 		var screenPos = catalog_rect.position + catalog_rect.size / 2.0
 		
 		global_position = viewport_to_world(screenPos + initialPos)
-		print(screenPos)
-	
-	
+
 func get_world_catalog_pos() -> Vector2:
 	var viewport := get_viewport()
 	var screen_pos: Vector2 = catalog.get_global_rect().position

@@ -68,10 +68,12 @@ func show_hint():
 		
 	if current_hint is DragHint:
 
-		var start_pos := get_node_view_pos(current_hint.initial_node)
-		var end_pos := get_node_view_pos(current_hint.end_node)
+		var start_pos := func() -> Vector2:
+			return get_node_view_pos(current_hint.initial_node)
+		var end_pos := func() -> Vector2:
+			return get_node_view_pos(current_hint.end_node)
 
-		drag.global_position = start_pos
+		drag.global_position = start_pos.call()
 		drag.modulate.a = 0.0
 		drag.visible = true
 
@@ -79,7 +81,7 @@ func show_hint():
 		tween.set_loops()
 
 		tween.tween_callback(func():
-			drag.global_position = start_pos
+			drag.global_position = start_pos.call()
 		)
 		tween.tween_interval(0.8)
 		tween.tween_property(
@@ -91,7 +93,7 @@ func show_hint():
 		tween.tween_property(
 			drag,
 			"global_position",
-			end_pos,
+			end_pos.call(),
 			1.5
 		)
 		tween.tween_interval(0.4)

@@ -86,6 +86,11 @@ theme = ExtResource("5_vpf64")
 script = ExtResource("5_wcngd")
 metadata/_edit_use_anchors_ = true
 
+[node name="CatalogButtons" type="Control" parent="UILayer/UI" unique_id=729163080]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="CompletionStatus" parent="UILayer/UI" unique_id=714219907 instance=ExtResource("5_hnne4")]
 layout_mode = 1
 anchor_left = 0.3628472
