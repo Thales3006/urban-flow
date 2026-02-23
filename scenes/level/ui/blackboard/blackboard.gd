@@ -72,16 +72,26 @@ func _on_confirm_button_pressed() -> void:
 	img = whiteboard.trim_with_padding(img)
 	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
 
+	if prediction == null:
+		bad_connection()
+		return 
 	print(prediction)
 	
 	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
-	var result: float = prediction.get(word)
+	var result = prediction.get(word)
 	
-	if result == null or (result * 100) >= 50:
+	if result == null:
+		bad_connection()
+		return 
+	
+	if (result * 100) >= 50:
 		right_anwser()
 	else:
 		try_again()
 
+func bad_connection():
+	right_anwser()
+	print("Server error")
 
 func right_anwser():
 	current_catalog.unlock_buildings()
