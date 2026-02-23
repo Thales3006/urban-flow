@@ -71,7 +71,6 @@ func _on_confirm_button_pressed() -> void:
 	var img: Image = await whiteboard.to_image()
 	img = whiteboard.trim_with_padding(img)
 	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
-	img.save_png("res://debug.png")
 
 	print(prediction)
 	
