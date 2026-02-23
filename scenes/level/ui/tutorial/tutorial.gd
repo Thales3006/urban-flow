@@ -11,6 +11,7 @@ var tween: Tween = null
 
 func _ready() -> void:
 	Signals.hint_executed.connect(_next_hint)
+	get_tree().root.size_changed.connect(_on_window_resized)
 
 func setup_tutorial(level: LevelScene):
 	level_root = level
@@ -29,7 +30,10 @@ func setup_tutorial(level: LevelScene):
 		if hint is InvisibleHint:
 			hint.node = parse_node(hint.node_path)
 			hint.setup_signal(hint.node)
-	show_hint()
+	
+	if len(hints) >= 1:
+		current_hint = hints[0]
+		show_hint()
 	
 func _next_hint(hint: Hint):
 	if current_hint != hint:
@@ -37,13 +41,19 @@ func _next_hint(hint: Hint):
 	clear_hint()
 	
 	hints.pop_front()
-	show_hint()
-	
-
-func show_hint():
 	if len(hints) >= 1:
 		current_hint = hints[0]
+		show_hint()
 	else:
+		return
+	
+func _on_window_resized():
+	show_hint()
+
+func show_hint():
+	if current_hint == null:
+		click.visible = false
+		drag.visible = false
 		return
 		
 	current_hint.disable_others()
