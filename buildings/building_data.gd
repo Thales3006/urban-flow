@@ -6,6 +6,7 @@ enum Kind {
 	HOSPITAL,
 	RECYCLING,
 	WATER,
+	SCHOOL
 }
 
 @export var word: String

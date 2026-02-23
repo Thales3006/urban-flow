@@ -10,6 +10,7 @@ const BUILDING_DATA: Dictionary[BuildingData.Kind, BuildingData] = {
 	BuildingData.Kind.HOSPITAL: preload("res://buildings/hospital.tres"),
 	BuildingData.Kind.RECYCLING: preload("res://buildings/recycling.tres"),
 	BuildingData.Kind.WATER: preload("res://buildings/water.tres"),
+	BuildingData.Kind.SCHOOL: preload("res://buildings/school.tres"),
 }
 
 enum State {

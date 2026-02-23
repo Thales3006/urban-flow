@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://1c4nipap2788"]
+
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="1_wajlq"]
+[ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="2_mvg2s"]
+[ext_resource type="Texture2D" uid="uid://ejb1b7kn078f" path="res://buildings/sprites/escola.png" id="3_wajlq"]
+
+[resource]
+script = ExtResource("2_mvg2s")
+word = "escola"
+kind = 4
+sprite = ExtResource("3_wajlq")
+sprite_scale = 0.8
+radius = 2.0
+score = 50.0
+metadata/_custom_type_script = "uid://rp5o0hd3nc3e"
