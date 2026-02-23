@@ -143,10 +143,10 @@ func parse_node(node_path: String) -> Node:
 	if query == "house":
 		return level_root.grid.get_building(BuildingData.Kind.HOUSE, tokens[1].to_int())
 	if query == "blackboard_confirm":
-		return level_root.blackboard.confirm_button
+		return level_root.blackboard
 	return null
 	
-func get_first_building_catalog_button() ->Button:
+func get_first_building_catalog_button() -> Button:
 	var catalog: VBoxContainer = level_root.catalog.buildingVBox
 	for building_catalog: BuildingCatalog in catalog.get_children():
 		return building_catalog.button

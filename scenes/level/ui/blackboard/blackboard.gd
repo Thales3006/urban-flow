@@ -8,6 +8,9 @@ extends Control
 @onready var image: TextureRect = $Card/Image
 @onready var confirm_button: Button = $Card/ConfirmButton
 @onready var repeat_button: Button = $Card/RepeatButton
+@onready var cnn_prediction: CnnPrediction = $CnnPrediction
+
+signal correct_word(kind: BuildingData.Kind)
 
 var current_catalog: BuildingCatalog = null 
 
@@ -15,6 +18,8 @@ func _ready() -> void:
 	Signals.write_word.connect(_on_appear)
 
 func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
+	whiteboard.clear()
+	
 	label_word.text = Building.BUILDING_DATA[kind].word
 	image.texture = Building.BUILDING_DATA[kind].sprite
 	current_catalog = catalog
@@ -63,9 +68,30 @@ func _on_disapear():
 	
 
 func _on_confirm_button_pressed() -> void:
-	whiteboard.clear()
+	var img: Image = await whiteboard.to_image()
+	img = whiteboard.trim_with_padding(img)
+	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
+	img.save_png("res://debug.png")
+
+	print(prediction)
+	
+	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
+	var result: float = prediction.get(word)
+	
+	if result == null or (result * 100) >= 50:
+		right_anwser()
+	else:
+		try_again()
+
+
+func right_anwser():
 	current_catalog.unlock_buildings()
 	_on_disapear()
+	correct_word.emit(current_catalog.kind)
+	
+	
+func try_again():
+	whiteboard.clear()
 
 
 func _on_repeat_button_pressed() -> void:

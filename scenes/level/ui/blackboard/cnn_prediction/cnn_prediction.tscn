@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ho8vbesbr17o"]
+
+[ext_resource type="Script" uid="uid://c6iahego5wsd7" path="res://scenes/level/ui/blackboard/cnn_prediction/cnn_prediction.gd" id="1_q1nqc"]
+
+[node name="CnnPrediction" type="Node" unique_id=1726328061]
+script = ExtResource("1_q1nqc")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=21384833]

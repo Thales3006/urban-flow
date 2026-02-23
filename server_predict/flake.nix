@@ -17,6 +17,7 @@
           numpy
           tensorflow
           python-multipart
+          keras
         ]);
       in
       {

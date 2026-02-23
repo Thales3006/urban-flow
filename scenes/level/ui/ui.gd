@@ -24,6 +24,5 @@ func _on_level_won():
 	win_card.set_won()
 	
 func _on_catalog_button(button: Button):
-	print("aaaa")
 	button.reparent(catalog_buttons)
 	

@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="6_f06me"]
 [ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="6_rhnf0"]
 [ext_resource type="Texture2D" uid="uid://c13fq6bn61lsn" path="res://icons/restart_icon.png" id="6_y4qxv"]
+[ext_resource type="PackedScene" uid="uid://ho8vbesbr17o" path="res://scenes/level/ui/blackboard/cnn_prediction/cnn_prediction.tscn" id="8_y4qxv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1wpr"]
 content_margin_left = 50.0
@@ -161,6 +162,8 @@ icon = ExtResource("6_rhnf0")
 icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
+
+[node name="CnnPrediction" parent="." unique_id=1726328061 instance=ExtResource("8_y4qxv")]
 
 [connection signal="pressed" from="Card/RepeatButton" to="." method="_on_repeat_button_pressed"]
 [connection signal="pressed" from="Card/ConfirmButton" to="." method="_on_confirm_button_pressed"]
