@@ -9,6 +9,8 @@ extends Control
 @onready var confirm_button: Button = $Card/ConfirmButton
 @onready var repeat_button: Button = $Card/RepeatButton
 @onready var cnn_prediction: CnnPrediction = $CnnPrediction
+@onready var fail: AudioStreamPlayer = $fail
+@onready var correct: AudioStreamPlayer = $correct
 
 signal correct_word(kind: BuildingData.Kind)
 
@@ -84,7 +86,9 @@ func _on_confirm_button_pressed() -> void:
 		bad_connection()
 		return 
 	
-	if (result * 100) >= 50:
+	if current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 40:
+		right_anwser()
+	elif (result * 100) >= 60:
 		right_anwser()
 	else:
 		try_again()
@@ -95,11 +99,13 @@ func bad_connection():
 
 func right_anwser():
 	current_catalog.unlock_buildings()
+	correct.play()
 	_on_disapear()
 	correct_word.emit(current_catalog.kind)
 	
 	
 func try_again():
+	fail.play()
 	whiteboard.clear()
 
 

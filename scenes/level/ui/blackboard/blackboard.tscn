@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="6_rhnf0"]
 [ext_resource type="Texture2D" uid="uid://c13fq6bn61lsn" path="res://icons/restart_icon.png" id="6_y4qxv"]
 [ext_resource type="PackedScene" uid="uid://ho8vbesbr17o" path="res://scenes/level/ui/blackboard/cnn_prediction/cnn_prediction.tscn" id="8_y4qxv"]
+[ext_resource type="AudioStream" uid="uid://b666jnler0kbj" path="res://sounds/fail.mp3" id="9_ctthw"]
+[ext_resource type="AudioStream" uid="uid://btb5o4c73af4f" path="res://sounds/correct.mp3" id="10_ewh38"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1wpr"]
 content_margin_left = 50.0
@@ -163,7 +165,20 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1677471093]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="CnnPrediction" parent="." unique_id=1726328061 instance=ExtResource("8_y4qxv")]
+
+[node name="fail" type="AudioStreamPlayer" parent="." unique_id=1770998828]
+stream = ExtResource("9_ctthw")
+volume_db = -16.0
+
+[node name="correct" type="AudioStreamPlayer" parent="." unique_id=760145529]
+stream = ExtResource("10_ewh38")
+volume_db = -16.0
 
 [connection signal="pressed" from="Card/RepeatButton" to="." method="_on_repeat_button_pressed"]
 [connection signal="pressed" from="Card/ConfirmButton" to="." method="_on_confirm_button_pressed"]
