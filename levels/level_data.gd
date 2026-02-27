@@ -6,3 +6,4 @@ class_name LevelData
 @export var layout: PackedScene
 @export var available_buildings: Dictionary[BuildingData.Kind, int] = {}
 @export var tutorial_hints: Array[Hint] = []
+@export var houses_educated: int = 0

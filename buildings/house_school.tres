@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://ciymkqaugi8l6"]
+
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="1_65dl2"]
+[ext_resource type="Script" uid="uid://rp5o0hd3nc3e" path="res://buildings/building_data.gd" id="2_qv8gt"]
+[ext_resource type="Texture2D" uid="uid://luv2lf1py8gk" path="res://buildings/sprites/house_school.png" id="3_65dl2"]
+
+[resource]
+script = ExtResource("2_qv8gt")
+word = "moradia"
+sprite = ExtResource("3_65dl2")
+sprite_scale = 0.8
+radius = 3.0
+score = 50.0
+metadata/_custom_type_script = "uid://rp5o0hd3nc3e"

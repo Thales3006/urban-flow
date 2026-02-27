@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://icr1whcx5iv7"
-path="res://.godot/imported/escola.png-8129629b1fd310546026dbcb8d836613.ctex"
+uid="uid://luv2lf1py8gk"
+path="res://.godot/imported/house_school.png-9ccf7e1e832cae9f10ead638c0cdf818.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://buildings/sprites/escola.png"
-dest_files=["res://.godot/imported/escola.png-8129629b1fd310546026dbcb8d836613.ctex"]
+source_file="res://buildings/sprites/house_school.png"
+dest_files=["res://.godot/imported/house_school.png-9ccf7e1e832cae9f10ead638c0cdf818.ctex"]
 
 [params]
 

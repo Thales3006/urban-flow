@@ -1,17 +1,17 @@
-[gd_scene format=4 uid="uid://crmhxuj5sd2s0"]
+[gd_scene format=4 uid="uid://ps2fkjv6c7n5"]
 
-[ext_resource type="TileSet" uid="uid://bm5r1usw2badl" path="res://tilesets/terrain_tileset.tres" id="1_gpjol"]
-[ext_resource type="TileSet" uid="uid://nuh8o5ej2nxh" path="res://tilesets/placement_tileset.tres" id="2_gwij5"]
+[ext_resource type="TileSet" uid="uid://bm5r1usw2badl" path="res://tilesets/terrain_tileset.tres" id="1_ht5cn"]
+[ext_resource type="TileSet" uid="uid://nuh8o5ej2nxh" path="res://tilesets/placement_tileset.tres" id="2_qedn4"]
 
 [node name="Layout" type="Node2D" unique_id=336486537]
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=1501134998]
 position = Vector2(50, 50)
-tile_map_data = PackedByteArray("AAD+/wAAAQABAAAAAAABAP7/AQAAAAAAAFABAP//AQACAAAAAFABAAAAAQAAAAAAADAAAP7/AQAAAAAAAAD///7/AQAAAAAAAFD9//7/AQAAAAAAAAD+//7/AQACAAAAAAD/////AQADAAAAAAAAAP//AQADAAAAAAD9/wAAAQAAAAAAAGD9////AQACAAAAAGD+////AQACAAAAADD//wAAAQACAAAAADAAAAAAAQACAAAAADA=")
-tile_set = ExtResource("1_gpjol")
+tile_map_data = PackedByteArray("AAAAAP//AQACAAAAADAAAP7/AQACAAAAAAD+//7/AQACAAAAAGD///7/AQACAAAAAAD/////AQAAAAAAAGD9//3/AQABAAAAAAD+//3/AQAAAAAAAFD9/wAAAQAAAAAAAGD+/wAAAQAAAAAAADD+////AQACAAAAAFD9////AQAAAAAAAAABAP7/AQAAAAAAAFABAP//AQAAAAAAADD8//3/AQABAAAAAAD7//3/AQAEAAAAADA=")
+tile_set = ExtResource("1_ht5cn")
 
 [node name="Placement" type="TileMapLayer" parent="." unique_id=737792967]
-tile_map_data = PackedByteArray("AAABAAAAAAABAAAAAAABAP//AAABAAAAAAD/////AAABAAAAAAD//wAAAAABAAAAAAD+/wAAAAABAAAAAAD+////AAABAAAAAAAAAAAAAAABAAAAAAACAAEAAAAAAAAAAAACAPz/AAAAAAAAAAD6//z/AAAAAAAAAAD6/wEAAAAAAAAAAAA=")
-tile_set = ExtResource("2_gwij5")
+tile_map_data = PackedByteArray("AAAAAP//AAABAAAAAAACAAAAAAAAAAAAAAACAPv/AAAAAAAAAAAAAP7/AAADAAEAAAD+//3/AAABAAAAAAD+/wAAAAABAAAAAAD9//3/AAABAAAAAAABAP//AAABAAAAAAD8//3/AAADAAEAAAD4/wAAAAAAAAAAAAD4//v/AAAAAAAAAAA=")
+tile_set = ExtResource("2_qedn4")
 rendering_quadrant_size = 100
 physics_quadrant_size = 100
