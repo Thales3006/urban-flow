@@ -5,9 +5,11 @@
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="3_8ln24"]
 [ext_resource type="Texture2D" uid="uid://bpadxortjpskp" path="res://images/main_title.png" id="4_5seab"]
 [ext_resource type="Texture2D" uid="uid://1wh7iku8u006" path="res://icons/play-circle-outline-rounded.svg" id="4_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://bb26n8mixa3gc" path="res://icons/sound_disabled.png" id="4_x2yjq"]
 [ext_resource type="Texture2D" uid="uid://bw33kswcgvjcv" path="res://icons/settings.svg" id="5_oa1go"]
 [ext_resource type="Texture2D" uid="uid://i6qi2o2hulgd" path="res://icons/exit-to-app.svg" id="6_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="8_4xg86"]
+[ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
 
 [sub_resource type="Shader" id="Shader_fu7sn"]
 code = "shader_type canvas_item;
@@ -39,6 +41,78 @@ void fragment() {
 shader = SubResource("Shader_fu7sn")
 shader_parameter/blur_size = 3.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xg86"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.19510806, 0.5995375, 0.79892635, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.5115942, 0.8099233, 0.9031925, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2yjq"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.084391974, 0.3563971, 0.48682523, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.17489463, 0.41445735, 0.47971535, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqpn7"]
+bg_color = Color(0.15052798, 0.52375644, 0.70488536, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.2851603, 0.6069505, 0.69692594, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_size = 10
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thkx5"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.037616804, 0.21972942, 0.30694515, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.09991, 0.26626533, 0.31214252, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
 [node name="MainMenu" type="Control" unique_id=1537581856]
 layout_mode = 3
 anchors_preset = 15
@@ -48,6 +122,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_8ln24")
 script = ExtResource("1_bqqt6")
+icon_on = ExtResource("9_thkx5")
+icon_off = ExtResource("4_x2yjq")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=56700780]
 material = SubResource("ShaderMaterial_nlkkf")
@@ -99,6 +175,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="SettingsButton" type="Button" parent="Buttons" unique_id=684608519]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
@@ -130,5 +207,24 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
+[node name="SoundButton" type="Button" parent="." unique_id=911926682]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058159724
+anchor_top = 0.7993827
+anchor_right = 0.121527776
+anchor_bottom = 0.91358024
+theme_override_styles/normal = SubResource("StyleBoxFlat_4xg86")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x2yjq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lqpn7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_thkx5")
+toggle_mode = true
+icon = ExtResource("9_thkx5")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="SoundButton" to="." method="_on_button_toggled"]

@@ -51,6 +51,9 @@ func has_hospital() -> bool:
 func has_water() -> bool:
 	return is_being_affected_by(BuildingData.Kind.WATER)
 	
+func has_school() -> bool:
+	return is_being_affected_by(BuildingData.Kind.SCHOOL)
+	
 
 
 func set_no_effect():

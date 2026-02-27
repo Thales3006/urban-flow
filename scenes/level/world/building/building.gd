@@ -12,6 +12,7 @@ const BUILDING_DATA: Dictionary[BuildingData.Kind, BuildingData] = {
 	BuildingData.Kind.WATER: preload("res://buildings/water.tres"),
 	BuildingData.Kind.SCHOOL: preload("res://buildings/school.tres"),
 }
+const house_school := preload("res://buildings/house_school.tres")
 
 enum State {
 	LOCKED,
@@ -35,6 +36,7 @@ var affecting = []
 @onready var recycling_balloon: Sprite2D = $RecyclingBalloon
 @onready var happy_emote: Sprite2D = $Happy
 @onready var water_balloon: Sprite2D = $WaterBalloon
+@onready var education_balloon: Sprite2D = $EducationBalloon
 
 @onready var grabed_sound := $GrabedSound
 @onready var droped_sound := $DropedSound
@@ -46,11 +48,16 @@ var affecting = []
 var initialPos: Vector2
 var initialScale: Vector2
 var is_disabled: bool
+var needs_education: bool = false
 
-static func create(kind: BuildingData.Kind, pos: Vector2) -> Building:
+static func create(kind: BuildingData.Kind, pos: Vector2, educated: bool = false) -> Building:
 	var new : Building = building.instantiate()
 	new.initialPos = pos
-	new.data = BUILDING_DATA[kind]
+	if kind == BuildingData.Kind.HOUSE and educated:
+		new.data = house_school
+		new.needs_education = true
+	else:
+		new.data = BUILDING_DATA[kind]
 	return new
 
 func _ready() -> void:
@@ -119,6 +126,7 @@ func _input(event: InputEvent) -> void:
 func compute_score() -> float:
 	recycling_balloon.visible = false
 	water_balloon.visible = false
+	education_balloon.visible = false
 	happy_emote.visible = false
 	
 	if current_cell == null:
@@ -127,6 +135,7 @@ func compute_score() -> float:
 	var has_water := false
 	var needs_recycling := false
 	var is_happy := false
+	var needs_school:= false
 	
 	var score := data.score
 	
@@ -142,6 +151,10 @@ func compute_score() -> float:
 	if current_cell.has_hospital() and data.kind == BuildingData.Kind.HOUSE:
 		is_happy = true
 		score *= BUILDING_DATA[BuildingData.Kind.HOSPITAL].effect
+	
+	if needs_education and not current_cell.has_school():
+		needs_school = true
+		score /= 1.5
 		
 	if not has_water:
 		water_balloon.visible = true
@@ -149,6 +162,10 @@ func compute_score() -> float:
 	
 	if needs_recycling:
 		recycling_balloon.visible = true
+		return score
+		
+	if needs_school:
+		education_balloon.visible = true
 		return score
 		
 	if is_happy:
@@ -216,6 +233,8 @@ func set_affect_feedback(cell: Cell):
 			cell.set_clean()
 		BuildingData.Kind.WATER:
 			cell.set_water()
+		BuildingData.Kind.SCHOOL:
+			cell.set_positive()
 			
 	
 func remove_affect_feedback(cell: Cell):

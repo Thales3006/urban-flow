@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cf6xrxiixo3ji" path="res://images/background.png" id="3_kv5yx"]
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="4_5ef5c"]
 
-[sub_resource type="Shader" id="Shader_fu7sn"]
+[sub_resource type="Shader" id="Shader_5ef5c"]
 code = "shader_type canvas_item;
 
 uniform float blur_size : hint_range(0.0, 8.0) = 9.0;
@@ -32,7 +32,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnidy"]
-shader = SubResource("Shader_fu7sn")
+shader = SubResource("Shader_5ef5c")
 shader_parameter/blur_size = 3.0
 
 [node name="Selection" type="Control" unique_id=1567779928]

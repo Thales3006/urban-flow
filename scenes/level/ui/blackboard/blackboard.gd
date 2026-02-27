@@ -85,10 +85,14 @@ func _on_confirm_button_pressed() -> void:
 	if result == null:
 		bad_connection()
 		return 
-	
-	if current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 40:
+		
+	if (result * 100) >= 60:
 		right_anwser()
-	elif (result * 100) >= 60:
+	elif current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 45:
+		right_anwser()
+	elif current_catalog.kind == BuildingData.Kind.SCHOOL and (result * 100) >= 45:
+		right_anwser()
+	elif current_catalog.kind == BuildingData.Kind.RECYCLING and (result * 100) >= 45:
 		right_anwser()
 	else:
 		try_again()

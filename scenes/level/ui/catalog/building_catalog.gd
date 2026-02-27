@@ -10,22 +10,31 @@ const distance = 40
 
 var amount: int
 var kind: BuildingData.Kind
+var amount_educated: int
 
 var buildings: Array[Building] = []
 
-static func create(new_kind: BuildingData.Kind, n: int) -> BuildingCatalog:
+static func create(new_kind: BuildingData.Kind, n: int, educated: int = 0) -> BuildingCatalog:
+	if new_kind == BuildingData.Kind.HOUSE and educated > n:
+		return null
+	
 	var new: BuildingCatalog = buildingCatalog.instantiate()
 	new.amount = n
 	new.kind = new_kind
-	
+	if new_kind == BuildingData.Kind.HOUSE:
+		new.amount_educated = educated
+	else:
+		new.amount_educated = 0
 	return new
 		
 func _ready() -> void:
-	for index in amount:
-		_emit_add_building(index)
 
-func _emit_add_building(index: int):
-	var building := Building.create(kind, Vector2(50, 0) + generate_position(index))
+	for index in amount:
+		var should_educate: bool = index < amount_educated
+		add_building(index, should_educate)
+
+func add_building(index: int, educated: bool = false):
+	var building := Building.create(kind, Vector2(50, 0) + generate_position(index), educated)
 	building.catalog = self
 	building.set_locked()
 	buildings.push_back(building)

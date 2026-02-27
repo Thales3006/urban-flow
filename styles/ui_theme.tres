@@ -24,6 +24,10 @@ shadow_color = Color(0, 0, 0, 0.23921569)
 shadow_size = 10
 shadow_offset = Vector2(0, 5)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s1ayf"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+
 [resource]
 default_font_size = 30
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -35,4 +39,5 @@ Button/styles/disabled = SubResource("StyleBoxFlat_s1ayf")
 Button/styles/hover = ExtResource("1_60ml0")
 Button/styles/normal = ExtResource("1_y6a5e")
 Button/styles/pressed = ExtResource("3_a0wq8")
+HSlider/styles/slider = SubResource("StyleBoxEmpty_s1ayf")
 PanelContainer/styles/panel = ExtResource("4_s1ayf")

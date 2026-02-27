@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bfxi44sim1go7" path="res://sounds/pop1.mp3" id="4_pms8i"]
 [ext_resource type="Texture2D" uid="uid://dk53r7fjmfyio" path="res://images/recycling_balloon.png" id="5_gxgpf"]
 [ext_resource type="AudioStream" uid="uid://q235he1aue3k" path="res://sounds/pop2.mp3" id="5_nsq2e"]
+[ext_resource type="Texture2D" uid="uid://yr1sp25kbiq4" path="res://images/education_balloon.png" id="7_rk4p3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvy8r"]
 size = Vector2(123, 120.5)
@@ -57,6 +58,12 @@ visible = false
 position = Vector2(-1, -49)
 scale = Vector2(0.24623632, 0.24181604)
 texture = ExtResource("5_gxgpf")
+
+[node name="EducationBalloon" type="Sprite2D" parent="." unique_id=820364365]
+visible = false
+position = Vector2(-0.87500286, -47.999996)
+scale = Vector2(0.1919753, 0.17777778)
+texture = ExtResource("7_rk4p3")
 
 [node name="GrabedSound" type="AudioStreamPlayer" parent="." unique_id=1006194591]
 stream = ExtResource("4_pms8i")
