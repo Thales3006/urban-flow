@@ -145,7 +145,7 @@ func parse_node(node_path: String) -> Node:
 	return null
 	
 func get_first_building_catalog_button() -> Button:
-	var catalog: VBoxContainer = level_root.catalog.buildingVBox
-	for building_catalog: BuildingCatalog in catalog.get_children():
-		return building_catalog.button
+	var catalog_buttons: Control = level_root.catalog_buttons
+	for button: Button in catalog_buttons.get_children():
+		return button
 	return null

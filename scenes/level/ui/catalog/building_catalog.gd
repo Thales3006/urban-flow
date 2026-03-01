@@ -8,6 +8,7 @@ class_name BuildingCatalog
 const buildingCatalog = preload("res://scenes/level/ui/catalog/building_catalog.tscn")
 const distance = 40
 
+var front_button: Button = null
 var amount: int
 var kind: BuildingData.Kind
 var amount_educated: int
@@ -53,3 +54,6 @@ func unlock_buildings():
 		
 	button.disabled = true
 	button.visible = false
+	
+	front_button.disabled = true
+	front_button.visible = false

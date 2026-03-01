@@ -19,7 +19,7 @@ func _ready() -> void:
 func set_game_state_buildings():
 	GameState.set_buildings(get_buildings())
 	for child: BuildingCatalog in children:
-		Signals.create_front_catalog_button.emit(child.button)
+		Signals.create_front_catalog_button.emit(child)
 	
 	var buildings: Array[Building] = []
 	for child: BuildingCatalog in children:

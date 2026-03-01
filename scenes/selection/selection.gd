@@ -9,7 +9,7 @@ func _ready():
 		
 		var button := LevelButton.new()
 		button.text = level_name.get_basename()
-		button.custom_minimum_size = Vector2(80, 80)
+		button.custom_minimum_size = Vector2(100, 100)
 		button.pressed.connect(_on_level_selected.bind(level_path))
 		
 		grid.add_child(button)
