@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b1ecr3d6nlbj5" path="res://scenes/level/ui/blackboard/blackboard.gd" id="2_gr313"]
 [ext_resource type="Script" uid="uid://do7tm8a31sfmb" path="res://scenes/level/ui/blackboard/white_board.gd" id="3_ay4ts"]
 [ext_resource type="FontFile" uid="uid://cp7p0ukgpklmb" path="res://styles/fonts/handwritten_font.ttf" id="3_hw7s2"]
+[ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="6_ewh38"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="6_f06me"]
 [ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="6_rhnf0"]
 [ext_resource type="Texture2D" uid="uid://c13fq6bn61lsn" path="res://icons/restart_icon.png" id="6_y4qxv"]
@@ -136,13 +137,27 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
+[node name="ExitButton" type="Button" parent="Card" unique_id=1032024849]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0647343
+anchor_top = 0.8376384
+anchor_right = 0.1294686
+anchor_bottom = 0.95571953
+grow_vertical = 0
+size_flags_horizontal = 3
+icon = ExtResource("6_ewh38")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
 [node name="RepeatButton" type="Button" parent="Card" unique_id=108361317]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.050241545
-anchor_top = 0.8339483
-anchor_right = 0.11594203
-anchor_bottom = 0.9501845
+anchor_left = 0.15169083
+anchor_top = 0.8376384
+anchor_right = 0.2173913
+anchor_bottom = 0.9538745
 grow_vertical = 0
 size_flags_horizontal = 3
 icon = ExtResource("6_y4qxv")
@@ -180,5 +195,6 @@ volume_db = -16.0
 stream = ExtResource("10_ewh38")
 volume_db = -16.0
 
+[connection signal="pressed" from="Card/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Card/RepeatButton" to="." method="_on_repeat_button_pressed"]
 [connection signal="pressed" from="Card/ConfirmButton" to="." method="_on_confirm_button_pressed"]

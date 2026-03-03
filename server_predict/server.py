@@ -20,7 +20,8 @@ CLASSES = [
     #"Ciclovia",
     #"Metrô",
     #"Aeroporto",
-    "Moradia"
+    "Moradia",
+    "nonsense"
 ]
 
 NUM_CLASSES = len(CLASSES)
