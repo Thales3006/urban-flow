@@ -1,9 +1,12 @@
 class_name Blackboard
 extends Control
 
+const MAX_TRIES : int = 3
+
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 @onready var label_word := $Card/Word
+@onready var hint_word := $Card/WordHint
 @onready var whiteboard := $Card/WhiteBoard
 @onready var image: TextureRect = $Card/Image
 @onready var confirm_button: Button = $Card/ConfirmButton
@@ -14,6 +17,7 @@ extends Control
 
 signal correct_word(kind: BuildingData.Kind)
 
+var tries : int = 0
 var current_catalog: BuildingCatalog = null 
 
 func _ready() -> void:
@@ -21,8 +25,15 @@ func _ready() -> void:
 
 func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 	whiteboard.clear()
+	if GameState.level.level == 1:
+		hint_word.visible = true
+	else:
+		hint_word.visible = false
 	
-	label_word.text = Building.BUILDING_DATA[kind].word
+	var word = Building.BUILDING_DATA[kind].word
+	
+	label_word.text = word
+	hint_word.text = word
 	image.texture = Building.BUILDING_DATA[kind].sprite
 	current_catalog = catalog
 	
@@ -67,7 +78,8 @@ func _on_disapear():
 	
 	await tween.finished
 	visible = false
-	
+	hint_word.visible = false
+	tries = 0
 
 func _on_confirm_button_pressed() -> void:
 	var img: Image = await whiteboard.to_image()
@@ -88,9 +100,9 @@ func _on_confirm_button_pressed() -> void:
 		
 	if (result * 100) >= 60:
 		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 45:
+	elif current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 35:
 		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.SCHOOL and (result * 100) >= 45:
+	elif current_catalog.kind == BuildingData.Kind.SCHOOL and (result * 100) >= 35:
 		right_anwser()
 	elif current_catalog.kind == BuildingData.Kind.RECYCLING and (result * 100) >= 45:
 		right_anwser()
@@ -111,6 +123,9 @@ func right_anwser():
 func try_again():
 	fail.play()
 	whiteboard.clear()
+	tries += 1
+	if tries >= MAX_TRIES:
+		hint_word.visible = true
 
 
 func _on_repeat_button_pressed() -> void:

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cp7p0ukgpklmb"
-path="res://.godot/imported/handwritten_font.ttf-122ae993fff7b5b0cdded28ad0e6c90e.fontdata"
+uid="uid://diessakkygmmd"
+path="res://.godot/imported/handwriten_font.ttf-2bc0646db918daf9dc62a3999ba123ef.fontdata"
 
 [deps]
 
-source_file="res://styles/fonts/handwritten_font.ttf"
-dest_files=["res://.godot/imported/handwritten_font.ttf-122ae993fff7b5b0cdded28ad0e6c90e.fontdata"]
+source_file="res://styles/fonts/handwriten_font.ttf"
+dest_files=["res://.godot/imported/handwriten_font.ttf-2bc0646db918daf9dc62a3999ba123ef.fontdata"]
 
 [params]
 

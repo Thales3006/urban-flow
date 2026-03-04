@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_dpty2")
-word = "reciclagem"
+word = "Reciclagem"
 kind = 2
 sprite = ExtResource("2_f32pj")
 sprite_scale = 0.8

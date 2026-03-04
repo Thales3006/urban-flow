@@ -2,7 +2,7 @@ extends Node
 class_name CnnPrediction
 
 @onready var http: HTTPRequest = $HTTPRequest
-const PREDICTION_ADDRESS = "http://127.0.0.1:8000/predict"
+const PREDICTION_ADDRESS = "http://[2001:1284:f514:aa26:114e:9ae1:8dd4:d45e]:8000/predict"
 	
 func get_prediction(img: Image) -> Dictionary[String, float]:
 	send_image(img)

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_c3u2s")
-word = "saneamento"
+word = "Saneamento"
 kind = 3
 sprite = ExtResource("3_40j64")
 sprite_scale = 0.8

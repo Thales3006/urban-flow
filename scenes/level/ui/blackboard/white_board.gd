@@ -31,7 +31,9 @@ func _gui_input(event):
 
 func _draw():
 	for stroke in strokes:
-		if stroke.size() >= 2:
+		if stroke.size() == 1:
+			draw_circle(stroke[0], brush_width, brush_color, true)
+		elif stroke.size() >= 2:
 			draw_polyline(
 				stroke,
 				brush_color,
