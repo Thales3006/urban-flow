@@ -1,7 +1,7 @@
 class_name Blackboard
 extends Control
 
-const MAX_TRIES : int = 3
+const MAX_TRIES : int = 2
 
 @onready var dimmer := $Dimmer
 @onready var card := $Card
@@ -27,6 +27,12 @@ func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 	whiteboard.clear()
 	if GameState.level.level == 1:
 		hint_word.visible = true
+		hint_word.modulate.a = 0
+		var a := create_tween()
+		a.set_trans(Tween.TRANS_CUBIC)
+		a.set_ease(Tween.EASE_OUT)
+		a.tween_interval(1)
+		a.tween_property(hint_word, "modulate:a", 1.0, 1.5)
 	else:
 		hint_word.visible = false
 	

@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://i6qi2o2hulgd" path="res://icons/exit-to-app.svg" id="6_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="8_4xg86"]
 [ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
+[ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/form/form.tscn" id="11_lqpn7"]
 
 [sub_resource type="Shader" id="Shader_fu7sn"]
 code = "shader_type canvas_item;
@@ -192,21 +193,6 @@ icon = ExtResource("6_tbmy8")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Beaver" type="TextureRect" parent="." unique_id=996573212]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.6171875
-anchor_top = 0.12191358
-anchor_right = 1.1267362
-anchor_bottom = 1.3904321
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("8_4xg86")
-expand_mode = 1
-stretch_mode = 5
-metadata/_edit_use_anchors_ = true
-
 [node name="SoundButton" type="Button" parent="." unique_id=911926682]
 layout_mode = 1
 anchors_preset = -1
@@ -222,6 +208,31 @@ toggle_mode = true
 icon = ExtResource("9_thkx5")
 icon_alignment = 1
 expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="InitialForm" parent="." unique_id=144689884 instance=ExtResource("11_lqpn7")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00086805556
+anchor_top = -0.0030864198
+anchor_right = 1.0034722
+anchor_bottom = 1.0077161
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Beaver" type="TextureRect" parent="." unique_id=996573212]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6171875
+anchor_top = 0.12191358
+anchor_right = 1.1267362
+anchor_bottom = 1.3904321
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_4xg86")
+expand_mode = 1
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]

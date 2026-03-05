@@ -1,8 +1,14 @@
 extends Control
 
+@onready var form: Form = $InitialForm
 @onready var sound_button: Button = $SoundButton
+
 @export var icon_on: Texture2D
 @export var icon_off: Texture2D
+
+
+func _ready() -> void:
+	form._on_appear()
 
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file(Global.level_selector_scene_path)

@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://d3u2fikis4qbm"]
+
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_tnp58"]
+[ext_resource type="Script" uid="uid://gw2p2bhaldc2" path="res://scenes/main_menu/form/form.gd" id="2_5l4ek"]
+[ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="3_e5idl"]
+[ext_resource type="Texture2D" uid="uid://dcmp1g7ggk50b" path="res://icons/male.png" id="3_kofb8"]
+[ext_resource type="ButtonGroup" uid="uid://dcurye2aifdb0" path="res://scenes/main_menu/form/gender.tres" id="3_t624f"]
+[ext_resource type="Texture2D" uid="uid://cng1biv4o1d3f" path="res://icons/female.png" id="4_t624f"]
+[ext_resource type="Texture2D" uid="uid://bpq614r46jick" path="res://icons/birthday.png" id="6_n1622"]
+[ext_resource type="PackedScene" uid="uid://dxcivrmm03kp3" path="res://scenes/main_menu/form/number_wheel/number_wheel.tscn" id="7_fsf5a"]
+
+[node name="Form" type="Control" unique_id=1684473883]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5l4ek")
+metadata/_edit_use_anchors_ = true
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=314267431]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.38039216)
+
+[node name="Panel" type="Panel" parent="." unique_id=144689884]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19010417
+anchor_top = 0.06635802
+anchor_right = 0.828125
+anchor_bottom = 0.91049385
+theme = ExtResource("1_tnp58")
+metadata/_edit_use_anchors_ = true
+
+[node name="GenderContainer" type="Control" parent="Panel" unique_id=87380253]
+layout_mode = 1
+anchor_left = 0.29387754
+anchor_top = 0.21389396
+anchor_right = 0.77268445
+anchor_bottom = 0.5129091
+metadata/_edit_use_anchors_ = true
+
+[node name="MaleButton" type="Button" parent="Panel/GenderContainer" unique_id=1027156221]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08262712
+anchor_top = 0.08205129
+anchor_right = 0.39185748
+anchor_bottom = 0.65641034
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("3_t624f")
+icon = ExtResource("3_kofb8")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="FemaleButton" type="Button" parent="Panel/GenderContainer" unique_id=2111138971]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.61832064
+anchor_top = 0.082051285
+anchor_right = 0.9175077
+anchor_bottom = 0.6410257
+offset_left = -1.5258789e-05
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("3_t624f")
+icon = ExtResource("4_t624f")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Date" type="Panel" parent="Panel" unique_id=947780517]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024489794
+anchor_top = 0.5246801
+anchor_right = 0.98210365
+anchor_bottom = 0.8080439
+offset_bottom = 12.0
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BirthIcon" type="TextureRect" parent="Panel/Date" unique_id=228910111]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027868846
+anchor_top = 0.21064623
+anchor_right = 0.21297948
+anchor_bottom = 0.73417556
+offset_right = -2.9999924
+texture = ExtResource("6_n1622")
+expand_mode = 3
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/Date" unique_id=1806652882]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23016392
+anchor_top = 0.09840331
+anchor_right = 0.8354098
+anchor_bottom = 0.879841
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Date/PanelContainer" unique_id=1558932439]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Day" parent="Panel/Date/PanelContainer/HBoxContainer" unique_id=239181586 instance=ExtResource("7_fsf5a")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+max_value = 31
+
+[node name="Month" parent="Panel/Date/PanelContainer/HBoxContainer" unique_id=119363847 instance=ExtResource("7_fsf5a")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+max_value = 12
+
+[node name="Year" parent="Panel/Date/PanelContainer/HBoxContainer" unique_id=1573393381 instance=ExtResource("7_fsf5a")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+min_value = 1950
+max_value = 2026
+default_value = 2020
+
+[node name="Label" type="RichTextLabel" parent="Panel/Date/PanelContainer" unique_id=1083425211]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "      /     /     "
+
+[node name="ConfirmButton" type="Button" parent="Panel" unique_id=1167362520]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42721084
+anchor_top = 0.86471665
+anchor_right = 0.5657322
+anchor_bottom = 0.97178847
+offset_right = 3.0517578e-05
+icon = ExtResource("3_e5idl")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Panel/ConfirmButton" to="." method="_on_confirm_button_pressed"]

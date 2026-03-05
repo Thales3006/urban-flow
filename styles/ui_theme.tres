@@ -28,6 +28,25 @@ shadow_offset = Vector2(0, 5)
 content_margin_top = 20.0
 content_margin_bottom = 20.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shlvj"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.48878342, 0.7920776, 0.96514577, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.5115942, 0.8099233, 0.9031925, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
 [resource]
 default_font_size = 30
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -40,4 +59,11 @@ Button/styles/hover = ExtResource("1_60ml0")
 Button/styles/normal = ExtResource("1_y6a5e")
 Button/styles/pressed = ExtResource("3_a0wq8")
 HSlider/styles/slider = SubResource("StyleBoxEmpty_s1ayf")
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/constants/caret_width = 0
+LineEdit/constants/minimum_character_width = 0
+LineEdit/font_sizes/font_size = 16
+LineEdit/styles/normal = SubResource("StyleBoxFlat_shlvj")
+Panel/styles/panel = ExtResource("4_s1ayf")
 PanelContainer/styles/panel = ExtResource("4_s1ayf")
+SpinBox/constants/buttons_width = 0

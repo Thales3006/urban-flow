@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dxcivrmm03kp3"]
+
+[ext_resource type="Script" uid="uid://cpd1k37ffwwxu" path="res://scenes/main_menu/form/number_wheel/number_wheel.gd" id="1"]
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_xsnjs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsnjs"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.10009823, 0.40050262, 0.5447284, 1)
+border_color = Color(0.5115942, 0.8099233, 0.9031925, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="NumberWheel" type="Control" unique_id=933090654]
+clip_contents = true
+layout_mode = 3
+anchor_right = 0.1423611
+anchor_bottom = 0.17438272
+mouse_filter = 2
+theme = ExtResource("1_xsnjs")
+script = ExtResource("1")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorMarker" type="PanelContainer" parent="." unique_id=14834106]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12804878
+anchor_top = 0.30973452
+anchor_right = 0.94512194
+anchor_bottom = 0.7522124
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_xsnjs")
+metadata/_edit_use_anchors_ = true
+
+[node name="Items" type="Control" parent="." unique_id=1446785749]
+layout_mode = 1
+anchor_left = 0.18902439
+anchor_top = 0.20353982
+anchor_right = 0.88414633
+anchor_bottom = 0.4690265
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
