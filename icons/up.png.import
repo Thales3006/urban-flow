@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsryek5y5gx2n"
-path="res://.godot/imported/birthday.png-ed28af66fdafbd8fc2ce3254f1b4ada1.ctex"
+uid="uid://crfk56o7v766l"
+path="res://.godot/imported/up.png-3279e73ea2ddb08aee214bd27ed28a94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/birthday.png"
-dest_files=["res://.godot/imported/birthday.png-ed28af66fdafbd8fc2ce3254f1b4ada1.ctex"]
+source_file="res://icons/up.png"
+dest_files=["res://.godot/imported/up.png-3279e73ea2ddb08aee214bd27ed28a94.ctex"]
 
 [params]
 
