@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c8w4hnupq7hik"]
+
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_bh0q3"]
+[ext_resource type="Script" uid="uid://734sy2m3unu8" path="res://scenes/level/ui/final_win/final_win_card.gd" id="2_7wb5c"]
+[ext_resource type="StyleBox" uid="uid://40dkrct2il8t" path="res://styles/button/button_normal.tres" id="3_50xbn"]
+[ext_resource type="AudioStream" uid="uid://5b30cxa5xdsa" path="res://sounds/win.mp3" id="12_jua7n"]
+[ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="13_iu4xb"]
+
+[node name="FinalWinCard" type="Control" unique_id=1656096447]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bh0q3")
+script = ExtResource("2_7wb5c")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1174898213]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.38039216)
+
+[node name="Card" type="PanelContainer" parent="." unique_id=1229861082]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22569445
+anchor_top = 0.23148148
+anchor_right = 0.7690972
+anchor_bottom = 0.72530866
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_50xbn")
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=865750643]
+stream = ExtResource("12_jua7n")
+volume_db = -16.0
+
+[node name="Beaver" type="TextureRect" parent="." unique_id=1474716685]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5876736
+anchor_top = -0.0046296297
+anchor_right = 1.1345487
+anchor_bottom = 1.419753
+offset_bottom = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_iu4xb")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true

@@ -25,6 +25,7 @@ static func create(pos: Vector2, tile_coord: Vector2i) -> Cell:
 	var new_cell: Cell = cell.instantiate()
 	new_cell.global_position = pos
 	new_cell.tile = tile_coord
+	new_cell.name = "Cell({x}, {y})".format({"x": tile_coord.x, "y": tile_coord.y})
 	return new_cell
 	
 func _ready() -> void:

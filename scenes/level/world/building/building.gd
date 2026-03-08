@@ -50,9 +50,13 @@ var initialScale: Vector2
 var is_disabled: bool
 var needs_education: bool = false
 
+static var count: int = 0
+
 static func create(kind: BuildingData.Kind, pos: Vector2, educated: bool = false) -> Building:
 	var new : Building = building.instantiate()
 	new.initialPos = pos
+	var type_name = BuildingData.Kind.keys()[kind]
+	new.name = "{name}_{count}".format({"name": type_name, "count": count})
 	if kind == BuildingData.Kind.HOUSE and educated:
 		new.data = house_school
 		new.needs_education = true
@@ -118,6 +122,17 @@ func _input(event: InputEvent) -> void:
 				remove_affect_feedback(cell)
 			will_affect.clear()
 			effect_area.position = Vector2.ZERO
+			
+			PlayerInfo.add_drag(
+				get_tree().current_scene,
+				0,
+				_grab_time,
+				Time.get_ticks_msec() / 1000.0 - _grab_time,
+				_grab_pos,
+				event.position,
+				self,
+				closest_cell
+			)
 				
 			droped_sound.play()
 			Signals.building_placed.emit()
@@ -304,7 +319,13 @@ func _on_effect_area_exited(body) -> void:
 		remove_affect_feedback(cell)
 
 
+var _grab_time: float
+var _grab_pos: Vector2
+
 func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and not Global.is_dragging:
+		_grab_time = Time.get_ticks_msec() / 1000.0
+		_grab_pos = event.position
 	if is_disabled or state != State.FREE:
 		return
 	if event is InputEventMouseButton:

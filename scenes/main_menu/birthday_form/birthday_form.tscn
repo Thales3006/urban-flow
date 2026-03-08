@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://d3u2fikis4qbm"]
+
+[ext_resource type="Script" uid="uid://gw2p2bhaldc2" path="res://scenes/main_menu/birthday_form/birthday_form.gd" id="1_r8cn6"]
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="2_iivy4"]
+[ext_resource type="Texture2D" uid="uid://bpq614r46jick" path="res://icons/birthday.png" id="5_vclh8"]
+[ext_resource type="PackedScene" uid="uid://dxcivrmm03kp3" path="res://scenes/main_menu/birthday_form/number_wheel/number_wheel.tscn" id="6_0xedf"]
+[ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="7_t3n4m"]
+
+[node name="BirthdayForm" type="Control" unique_id=1684473883]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8cn6")
+metadata/_edit_use_anchors_ = true
+
+[node name="FormPanel" type="Panel" parent="." unique_id=144689884]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24739583
+anchor_top = 0.21450618
+anchor_right = 0.7795139
+anchor_bottom = 0.74382716
+theme = ExtResource("2_iivy4")
+metadata/_edit_use_anchors_ = true
+
+[node name="BirthIcon" type="TextureRect" parent="FormPanel" unique_id=228910111]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41598696
+anchor_top = 0.055393565
+anchor_right = 0.5505519
+anchor_bottom = 0.29588446
+offset_bottom = -6.1035156e-05
+texture = ExtResource("5_vclh8")
+expand_mode = 3
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Numbers" type="HBoxContainer" parent="FormPanel" unique_id=1558932439]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 136.0
+offset_right = 507.0558
+offset_bottom = 248.00002
+theme_override_constants/separation = 20
+
+[node name="Day" parent="FormPanel/Numbers" unique_id=239181586 instance=ExtResource("6_0xedf")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+max_value = 31
+
+[node name="Month" parent="FormPanel/Numbers" unique_id=119363847 instance=ExtResource("6_0xedf")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+max_value = 12
+
+[node name="Year" parent="FormPanel/Numbers" unique_id=1573393381 instance=ExtResource("6_0xedf")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+min_value = 1950
+max_value = 2026
+default_value = 2020
+
+[node name="DateBars" type="RichTextLabel" parent="FormPanel" unique_id=1083425211]
+layout_mode = 0
+anchor_left = 0.16150081
+anchor_top = 0.39650145
+anchor_right = 0.82717097
+anchor_bottom = 0.72303206
+offset_right = -3.0517578e-05
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "      /     /     "
+metadata/_edit_use_anchors_ = true
+
+[node name="ConfirmButton" type="Button" parent="FormPanel" unique_id=1167362520]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39151713
+anchor_top = 0.7962382
+anchor_right = 0.587471
+anchor_bottom = 0.9655189
+offset_right = 3.0517578e-05
+icon = ExtResource("7_t3n4m")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="FormPanel/ConfirmButton" to="." method="_on_confirm_button_pressed"]

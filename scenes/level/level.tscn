@@ -30,7 +30,7 @@ script = ExtResource("1_pe1ox")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=644466657]
 
-[node name="ColorRect" type="ColorRect" parent="Background" unique_id=312516689]
+[node name="LevelBackground" type="ColorRect" parent="Background" unique_id=312516689]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -50,12 +50,12 @@ theme = ExtResource("5_vpf64")
 script = ExtResource("2_sytrn")
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Background/Catalog" unique_id=336384168]
+[node name="BuildingsPanel" type="PanelContainer" parent="Background/Catalog" unique_id=336384168]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
 
-[node name="List" type="VBoxContainer" parent="Background/Catalog/PanelContainer" unique_id=686186045]
+[node name="BuildingsList" type="VBoxContainer" parent="Background/Catalog/BuildingsPanel" unique_id=686186045]
 layout_mode = 2
 focus_behavior_recursive = 1
 
@@ -102,7 +102,7 @@ anchor_bottom = 0.17091359
 offset_right = 0.5599365
 offset_bottom = 0.24799347
 
-[node name="Back" type="Button" parent="UILayer/UI" unique_id=1768598203]
+[node name="BackButton" type="Button" parent="UILayer/UI" unique_id=1768598203]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9097222
@@ -127,4 +127,4 @@ layout_mode = 1
 [node name="Tutorial" parent="UILayer" unique_id=1265096345 instance=ExtResource("10_tf2q7")]
 visible = false
 
-[connection signal="pressed" from="UILayer/UI/Back" to="UILayer/UI" method="_on_back_pressed"]
+[connection signal="pressed" from="UILayer/UI/BackButton" to="UILayer/UI" method="_on_back_pressed"]

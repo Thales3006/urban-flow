@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://i6qi2o2hulgd" path="res://icons/exit-to-app.svg" id="6_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="8_4xg86"]
 [ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
-[ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/form/form.tscn" id="11_lqpn7"]
+[ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/birthday_form/birthday_form.tscn" id="11_lqpn7"]
+[ext_resource type="PackedScene" uid="uid://vmjgcfgpg8tx" path="res://scenes/main_menu/gender_form/gender_form.tscn" id="12_qel0l"]
 
 [sub_resource type="Shader" id="Shader_fu7sn"]
 code = "shader_type canvas_item;
@@ -126,7 +127,7 @@ script = ExtResource("1_bqqt6")
 icon_on = ExtResource("9_thkx5")
 icon_off = ExtResource("4_x2yjq")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=56700780]
+[node name="BackGround" type="TextureRect" parent="." unique_id=56700780]
 material = SubResource("ShaderMaterial_nlkkf")
 layout_mode = 1
 anchors_preset = 15
@@ -210,23 +211,13 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="InitialForm" parent="." unique_id=144689884 instance=ExtResource("11_lqpn7")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.00086805556
-anchor_top = -0.0030864198
-anchor_right = 1.0034722
-anchor_bottom = 1.0077161
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Beaver" type="TextureRect" parent="." unique_id=996573212]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.6171875
-anchor_top = 0.12191358
-anchor_right = 1.1267362
-anchor_bottom = 1.3904321
+anchor_left = 0.6397569
+anchor_top = 0.12345679
+anchor_right = 1.1493056
+anchor_bottom = 1.3919753
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -234,6 +225,23 @@ texture = ExtResource("8_4xg86")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1476288339]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.50980395)
+metadata/_edit_use_anchors_ = true
+
+[node name="BirthdayForm" parent="." unique_id=1684473883 instance=ExtResource("11_lqpn7")]
+visible = false
+layout_mode = 1
+
+[node name="GenderForm" parent="." unique_id=77771531 instance=ExtResource("12_qel0l")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]

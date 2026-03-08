@@ -100,6 +100,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rmkno")
 script = ExtResource("3_ay4ts")
 
 [node name="WordHint" type="RichTextLabel" parent="Card" unique_id=38904973]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

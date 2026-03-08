@@ -25,6 +25,7 @@ func _ready():
 	_build_items()
 	_center_on_value(value)
 	set_process(true)
+	_snap()
 
 func _build_items():
 	for c in items.get_children():
@@ -38,6 +39,7 @@ func _build_items():
 		lbl.custom_minimum_size = Vector2(size.x, item_height)
 		lbl.size = Vector2(size.x, item_height)
 		lbl.anchors_preset = Control.PRESET_FULL_RECT  # fill available width
+		lbl.name = "Numbel_Wheel"
 		items.add_child(lbl)
 		labels.append(lbl)
 	_update_labels()
@@ -52,6 +54,7 @@ func _update_labels():
 		var relative := i - center + snapped_steps
 		var v := _wrap_value(value + relative)
 		labels[i].text = str(v)
+		labels[i].name = "NumberWheelLabel({label})".format({"label" : str(v)})
 
 		var pos_y := (
 			i * item_height

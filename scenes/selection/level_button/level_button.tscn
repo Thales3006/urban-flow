@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_n8yog"]
 [ext_resource type="Script" uid="uid://dqx2vjnwdrfbw" path="res://scenes/selection/level_button/level_button.gd" id="2_1xwj1"]
+[ext_resource type="Texture2D" uid="uid://dvwkk1e5xljbo" path="res://icons/cadeado.png" id="3_k63q4"]
 
 [node name="LevelButton" type="Button" unique_id=2109034556]
 custom_minimum_size = Vector2(80, 80)
@@ -14,4 +15,19 @@ focus_mode = 0
 theme = ExtResource("1_n8yog")
 text = "1"
 script = ExtResource("2_1xwj1")
+metadata/_edit_use_anchors_ = true
+
+[node name="Lock" type="TextureRect" parent="." unique_id=445957121]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.021505376
+anchor_top = -0.010752688
+anchor_right = 1.0752689
+anchor_bottom = 1.0537634
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k63q4")
+expand_mode = 1
+stretch_mode = 4
 metadata/_edit_use_anchors_ = true

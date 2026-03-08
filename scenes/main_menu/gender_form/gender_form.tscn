@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://vmjgcfgpg8tx"]
+
+[ext_resource type="Script" uid="uid://ddwosdls8apsu" path="res://scenes/main_menu/gender_form/gender_form.gd" id="1_ioyn0"]
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="2_htyb4"]
+[ext_resource type="ButtonGroup" uid="uid://d0h8t3nbku2if" path="res://scenes/main_menu/gender_form/gender.tres" id="3_i02p1"]
+[ext_resource type="Texture2D" uid="uid://dcmp1g7ggk50b" path="res://icons/male.png" id="4_hvu66"]
+[ext_resource type="Texture2D" uid="uid://cng1biv4o1d3f" path="res://icons/female.png" id="5_gjsje"]
+
+[node name="GenderForm" type="Control" unique_id=1684473883]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ioyn0")
+metadata/_edit_use_anchors_ = true
+
+[node name="FormPanel" type="Panel" parent="." unique_id=144689884]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1736111
+anchor_top = 0.20679012
+anchor_right = 0.8116319
+anchor_bottom = 0.69598764
+theme = ExtResource("2_htyb4")
+metadata/_edit_use_anchors_ = true
+
+[node name="GenderContainer" type="Control" parent="FormPanel" unique_id=87380253]
+layout_mode = 1
+anchor_left = 0.19319728
+anchor_top = 0.615142
+anchor_right = 0.8176871
+anchor_bottom = 0.9842271
+metadata/_edit_use_anchors_ = true
+
+[node name="MaleButton" type="Button" parent="FormPanel/GenderContainer" unique_id=1027156221]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08262712
+anchor_top = 0.0820513
+anchor_right = 0.39185748
+anchor_bottom = 0.87179494
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("3_i02p1")
+icon = ExtResource("4_hvu66")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="FemaleButton" type="Button" parent="FormPanel/GenderContainer" unique_id=2111138971]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6183206
+anchor_top = 0.082051285
+anchor_right = 0.9175077
+anchor_bottom = 0.87179494
+offset_left = -1.5258789e-05
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("3_i02p1")
+icon = ExtResource("5_gjsje")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="FormPanel/GenderContainer/MaleButton" to="." method="_on_male_button_pressed"]
+[connection signal="pressed" from="FormPanel/GenderContainer/FemaleButton" to="." method="_on_female_button_pressed"]

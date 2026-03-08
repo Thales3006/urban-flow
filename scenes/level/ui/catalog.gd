@@ -1,7 +1,7 @@
 class_name Catalog
 extends PanelContainer
 
-@onready var buildingVBox: VBoxContainer = $PanelContainer/List
+@onready var buildingVBox: VBoxContainer = $BuildingsPanel/BuildingsList
 
 signal buildings_ready(buildings: Array[Building])
 

@@ -22,6 +22,7 @@ func _on_building_placed():
 func _on_level_won():
 	await get_tree().create_timer(0.5).timeout
 	win_card.set_won()
+	Global.levels_unlocked = GameState.level.level + 1 
 	
 func _on_catalog_button(catalog: BuildingCatalog):
 	catalog.front_button = catalog.button.duplicate()

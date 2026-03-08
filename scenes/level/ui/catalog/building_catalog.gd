@@ -1,7 +1,7 @@
 extends Control
 class_name BuildingCatalog
 
-@onready var button: Button = $HBoxContainer/VBoxContainer/Button
+@onready var button: Button = $HBoxContainer/VBoxContainer/CatalogButton
 @onready var buildingHBox: HBoxContainer = $AvailableBuilding
 @onready var card: PanelContainer = $"."
 
