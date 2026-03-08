@@ -37,6 +37,8 @@ func _on_disapear():
 
 func _on_male_button_pressed() -> void:
 	genderChoosen.emit(PlayerInfo.Gender.Male)
+	AudioManager.play_click()
 
 func _on_female_button_pressed() -> void:
 	genderChoosen.emit(PlayerInfo.Gender.Male)
+	AudioManager.play_click()

@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://c8w4hnupq7hik"]
+
+[ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_wmgsx"]
+[ext_resource type="Script" uid="uid://734sy2m3unu8" path="res://scenes/level/ui/final_win/final_win_card.gd" id="2_ukryr"]
+[ext_resource type="StyleBox" uid="uid://40dkrct2il8t" path="res://styles/button/button_normal.tres" id="3_h357s"]
+[ext_resource type="Texture2D" uid="uid://cxsji6benwi5s" path="res://icons/confetti.png" id="4_mkg4h"]
+[ext_resource type="Texture2D" uid="uid://b7pd5p2d34wsj" path="res://images/trophy.png" id="5_06dvm"]
+[ext_resource type="Texture2D" uid="uid://bvum5fo2haoc6" path="res://icons/home.png" id="6_2ikhy"]
+[ext_resource type="AudioStream" uid="uid://cjaaa512nww4w" path="res://sounds/victory.mp3" id="7_mkg4h"]
+[ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="13_dxh3l"]
+
+[node name="FinalWinCard" type="Control" unique_id=1656096447]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wmgsx")
+script = ExtResource("2_ukryr")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1174898213]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.38039216)
+
+[node name="Card" type="Panel" parent="." unique_id=1559322321]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2248264
+anchor_top = 0.19135803
+anchor_right = 0.7682292
+anchor_bottom = 0.8117284
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_h357s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Confetti2" type="TextureRect" parent="Card" unique_id=829121464]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5756312
+anchor_top = -0.11176885
+anchor_right = 1.0073313
+anchor_bottom = 0.3793639
+offset_left = 69.65491
+offset_top = 72.93106
+offset_right = 69.65491
+offset_bottom = 72.93106
+rotation = 0.7417649
+texture = ExtResource("4_mkg4h")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Confetti" type="TextureRect" parent="Card" unique_id=959304787]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.07348242
+anchor_top = 0.5497513
+anchor_right = 0.44273263
+anchor_bottom = 1.0948488
+rotation = -0.82030475
+texture = ExtResource("4_mkg4h")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Trophy" type="TextureRect" parent="Card" unique_id=1899829022]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30469012
+anchor_top = 0.25348136
+anchor_right = 0.68370605
+anchor_bottom = 0.641138
+offset_left = 0.2639923
+offset_top = 0.1004982
+texture = ExtResource("5_06dvm")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" type="Button" parent="Card" unique_id=1349168048]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42492014
+anchor_top = 0.709375
+anchor_right = 0.5623004
+anchor_bottom = 0.94375
+offset_right = -3.0517578e-05
+icon = ExtResource("6_2ikhy")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=865750643]
+stream = ExtResource("7_mkg4h")
+volume_db = -16.0
+
+[node name="Beaver" type="TextureRect" parent="." unique_id=1474716685]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6180556
+anchor_top = 0.049382716
+anchor_right = 1.1649306
+anchor_bottom = 1.4737654
+offset_bottom = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_dxh3l")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Card/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

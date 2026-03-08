@@ -1,6 +1,7 @@
 extends Control
 
 @onready var win_card := $WinCard
+@onready var final_win_card := $FinalWinCard
 @onready var completion_status: CompletionStatus = $CompletionStatus
 @onready var catalog_buttons : Control = $CatalogButtons
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 func _on_back_pressed() -> void:
 	GameState.clear()
 	get_tree().change_scene_to_file(Global.level_selector_scene_path)
+	AudioManager.play_click()
 
 func _on_building_placed():
 	Signals.progress_state_changed.emit(GameState.compute_percentage())
@@ -21,8 +23,13 @@ func _on_building_placed():
 
 func _on_level_won():
 	await get_tree().create_timer(0.5).timeout
-	win_card.set_won()
-	Global.levels_unlocked = GameState.level.level + 1 
+	
+	var index: LevelsIndex = load("res://levels/levels_index.tres")
+	if len(index.levels) <= GameState.level.level:
+		final_win_card.set_won()
+	else:
+		win_card.set_won()
+		Global.levels_unlocked = GameState.level.level + 1 
 	
 func _on_catalog_button(catalog: BuildingCatalog):
 	catalog.front_button = catalog.button.duplicate()

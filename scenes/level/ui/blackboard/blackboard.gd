@@ -136,7 +136,9 @@ func try_again():
 
 func _on_repeat_button_pressed() -> void:
 	whiteboard.clear()
+	AudioManager.play_click()
 
 
 func _on_exit_button_pressed() -> void:
 	_on_disapear()
+	AudioManager.play_click()

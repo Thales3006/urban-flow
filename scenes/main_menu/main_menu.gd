@@ -56,18 +56,22 @@ func _on_birthdate_decided(birthdate: PlayerInfo.Date):
 	await tween.finished
 	dimmer.visible = false
 func _on_play_button_pressed() -> void:
+	AudioManager.play_click()
 	get_tree().change_scene_to_file(Global.level_selector_scene_path)
 
 
 func _on_exit_button_pressed() -> void:
+	AudioManager.play_click()
 	get_tree().get_root().close_requested.emit()
 
 
 func _on_settings_button_pressed() -> void:
+	AudioManager.play_click()
 	get_tree().change_scene_to_file(Global.level_settings_scene_path)
 
 
 func _on_button_toggled(toggled_on: bool) -> void:
+	AudioManager.play_click()
 	AudioServer.set_bus_mute(Global.master_bus, toggled_on)
 	if not toggled_on:
 		sound_button.icon = icon_on

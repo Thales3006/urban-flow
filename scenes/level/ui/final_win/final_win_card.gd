@@ -1,39 +1,15 @@
 extends Control
+class_name FinalWinCard
 
 @onready var win_sound := $AudioStreamPlayer
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 @onready var beaver := $Beaver
 
-func _ready() -> void:
-	#stars.set_progress(GameState.compute_percentage())
-	
-	#temporary
-	for index in 5:
-		$Card/VBoxContainer/Control/VBoxContainer/StarHBox.set_lit(index)
-
-func _on_restart_button_pressed() -> void:
-	AudioManager.play_click()
-	_on_level_selected(Global.levels_path + "/" + str(GameState.level.level))
-
-
-func _on_menu_button_pressed() -> void:
+func _on_main_menu_button_pressed() -> void:
 	GameState.clear()
 	AudioManager.play_click()
-	get_tree().change_scene_to_file(Global.level_selector_scene_path)
-
-
-func _on_next_button_pressed() -> void:
-	AudioManager.play_click()
-	_on_level_selected(Global.levels_path + "/" + str(GameState.level.level + 1))
-	
-func _on_level_selected(level_path: String):
-	GameState.clear()
-	GameState.level = load(level_path + "/data.tres") as LevelData
-	if not GameState.level:
-		push_error("Failed to load level: " + level_path)
-		return
-	get_tree().change_scene_to_file(Global.level_scene_path)
+	get_tree().change_scene_to_file(Global.main_menu_scene_path)
 
 func set_won():
 	win_sound.play()

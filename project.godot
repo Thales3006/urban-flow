@@ -25,6 +25,7 @@ Global="*res://global/global.gd"
 GameState="*res://global/game_state.gd"
 Signals="*res://global/signals.gd"
 PlayerInfo="*uid://cxujuyc4ijlw7"
+AudioManager="*uid://dbnyq5hivlbvh"
 
 [debug]
 

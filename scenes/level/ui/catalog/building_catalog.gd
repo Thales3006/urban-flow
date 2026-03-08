@@ -47,6 +47,7 @@ func generate_position(index: int) -> Vector2:
 
 func _on_button_pressed() -> void:
 	Signals.write_word.emit(kind, self)
+	AudioManager.play_click()
 	
 func unlock_buildings():
 	for building: Building in buildings:

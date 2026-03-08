@@ -47,6 +47,8 @@ func set_value(v: int):
 
 func _on_button_up_pressed() -> void:
 	set_value(value + 1)
+	AudioManager.play_click()
 
 func _on_button_down_pressed() -> void:
 	set_value(value - 1)
+	AudioManager.play_click()

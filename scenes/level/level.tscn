@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
 [ext_resource type="PackedScene" uid="uid://p4tx68w38bha" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
 [ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/blackboard/blackboard.tscn" id="9_sytrn"]
+[ext_resource type="PackedScene" uid="uid://c8w4hnupq7hik" path="res://scenes/level/ui/final_win/final_win_card.tscn" id="10_m0bv2"]
 [ext_resource type="PackedScene" uid="uid://by431uov5cbcp" path="res://scenes/level/ui/tutorial/tutorial.tscn" id="10_tf2q7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv074"]
@@ -117,6 +118,10 @@ expand_icon = true
 metadata/_edit_use_anchors_ = true
 
 [node name="WinCard" parent="UILayer/UI" unique_id=1656096447 instance=ExtResource("8_xv074")]
+visible = false
+layout_mode = 1
+
+[node name="FinalWinCard" parent="UILayer/UI" unique_id=178194488 instance=ExtResource("10_m0bv2")]
 visible = false
 layout_mode = 1
 

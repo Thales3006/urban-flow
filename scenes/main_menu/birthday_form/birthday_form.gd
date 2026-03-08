@@ -26,6 +26,7 @@ func _on_date_changed(_value: int):
 	
 	
 func _on_confirm_button_pressed() -> void:
+	AudioManager.play_click()
 	birthdateChoosen.emit(date)
 	
 func _on_appear():
