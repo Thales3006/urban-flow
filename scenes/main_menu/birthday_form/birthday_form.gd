@@ -22,9 +22,6 @@ func _on_date_changed(_value: int):
 	date.month = month.value
 	date.year = year.value
 	
-	print(date.day, "/", date.month, "/",date.year)
-	
-	
 func _on_confirm_button_pressed() -> void:
 	AudioManager.play_click()
 	birthdateChoosen.emit(date)
