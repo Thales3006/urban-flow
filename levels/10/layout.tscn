@@ -1,0 +1,17 @@
+[gd_scene format=4 uid="uid://tlv2fj5boypb"]
+
+[ext_resource type="TileSet" uid="uid://bm5r1usw2badl" path="res://tilesets/terrain_tileset.tres" id="1_kwjbe"]
+[ext_resource type="TileSet" uid="uid://nuh8o5ej2nxh" path="res://tilesets/placement_tileset.tres" id="2_hc888"]
+
+[node name="Layout" type="Node2D" unique_id=336486537]
+
+[node name="Terrain" type="TileMapLayer" parent="." unique_id=1501134998]
+position = Vector2(50, 50)
+tile_map_data = PackedByteArray("AAD+//7/AQACAAAAAAD///7/AQACAAAAADAAAP//AQACAAAAAGAAAP7/AQAAAAAAAFAAAAAAAQAEAAAAAFABAP//AQAEAAAAAAD+////AQACAAAAAFD+/wAAAQAEAAAAAFD8////AQAEAAAAADD9//3/AQACAAAAAFD8//3/AQABAAAAAAD9//z/AQAAAAAAAAD+//z/AQABAAAAAAD///z/AQAEAAAAAAD7//3/AQAEAAAAADD///3/AQAEAAAAAGD9//7/AQAAAAAAAGD9////AQABAAAAAAA=")
+tile_set = ExtResource("1_kwjbe")
+
+[node name="Placement" type="TileMapLayer" parent="." unique_id=737792967]
+tile_map_data = PackedByteArray("AAD+/wAAAAABAAAAAAABAAAAAAABAAAAAAD9//3/AAABAAEAAAD+//3/AAABAAAAAAD8//3/AAABAAAAAAD+//z/AAABAAAAAAAAAP7/AAACAAAAAAD9////AAACAAAAAAD///z/AAABAAAAAAD+//7/AAACAAAAAAD/////AAABAAEAAAABAPr/AAAAAAAAAAD5/wAAAAAAAAAAAAD5//r/AAAAAAAAAAA=")
+tile_set = ExtResource("2_hc888")
+rendering_quadrant_size = 100
+physics_quadrant_size = 100

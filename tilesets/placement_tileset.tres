@@ -19,6 +19,8 @@ texture_region_size = Vector2i(100, 100)
 2:1/0/custom_data_0 = "recycling"
 3:1/0 = 0
 3:1/0/custom_data_0 = "water"
+3:0/0 = 0
+3:0/0/custom_data_0 = "school"
 
 [resource]
 tile_size = Vector2i(100, 100)

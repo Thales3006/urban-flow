@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cpfehfx65oi6s"]
+
+[ext_resource type="PackedScene" uid="uid://tlv2fj5boypb" path="res://levels/10/layout.tscn" id="1_qxj78"]
+[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="2_jh27o"]
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="3_xxe3q"]
+
+[resource]
+script = ExtResource("2_jh27o")
+level = 10
+max_score = 330
+layout = ExtResource("1_qxj78")
+available_buildings = Dictionary[int, int]({
+0: 4,
+2: 1,
+3: 1
+})
+metadata/_custom_type_script = "uid://b2di8yjhlf3sq"
