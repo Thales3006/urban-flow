@@ -5,12 +5,17 @@
 [ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="3_q11v5"]
 [ext_resource type="Script" uid="uid://bd08trl858v7d" path="res://scenes/level/ui/tutorial/hint/click_hint.gd" id="4_7bf1o"]
 [ext_resource type="Script" uid="uid://hnd3fepjkqcq" path="res://scenes/level/ui/tutorial/hint/drag_hint.gd" id="5_7bf1o"]
+[ext_resource type="Script" uid="uid://cck0l7f20fdy1" path="res://scenes/level/ui/tutorial/hint/draw_hint.gd" id="5_ajxfn"]
 [ext_resource type="Script" uid="uid://d2xtm6guytso5" path="res://scenes/level/ui/tutorial/hint/invisible_hint.gd" id="5_cvjji"]
 
 [sub_resource type="Resource" id="Resource_7bf1o"]
 script = ExtResource("4_7bf1o")
 node_path = "catalog_button f"
 metadata/_custom_type_script = "uid://bd08trl858v7d"
+
+[sub_resource type="Resource" id="Resource_evmyb"]
+script = ExtResource("5_ajxfn")
+metadata/_custom_type_script = "uid://cck0l7f20fdy1"
 
 [sub_resource type="Resource" id="Resource_ajxfn"]
 script = ExtResource("5_cvjji")
@@ -43,4 +48,4 @@ layout = ExtResource("2_hbh86")
 available_buildings = Dictionary[int, int]({
 0: 3
 })
-tutorial_hints = Array[ExtResource("3_q11v5")]([SubResource("Resource_7bf1o"), SubResource("Resource_ajxfn"), SubResource("Resource_cvjji"), SubResource("Resource_n8lp0"), SubResource("Resource_5qpke")])
+tutorial_hints = Array[ExtResource("3_q11v5")]([SubResource("Resource_7bf1o"), SubResource("Resource_evmyb"), SubResource("Resource_ajxfn"), SubResource("Resource_cvjji"), SubResource("Resource_n8lp0"), SubResource("Resource_5qpke")])
