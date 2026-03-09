@@ -3,6 +3,7 @@ extends Control
 
 @onready var click: TextureRect = $click
 @onready var drag: TextureRect = $drag
+@onready var draw_icon: TextureRect = $draw
 
 var level_root: LevelScene
 var hints: Array[Hint] = []
@@ -29,6 +30,9 @@ func setup_tutorial(level: LevelScene):
 			hint.setup_signal(hint.end_node)
 		if hint is InvisibleHint:
 			hint.node = parse_node(hint.node_path)
+			hint.setup_signal(hint.node)
+		if hint is DrawHint:
+			hint.node = level_root.blackboard.whiteboard
 			hint.setup_signal(hint.node)
 	
 	if len(hints) >= 1:
@@ -111,6 +115,44 @@ func show_hint():
 			0.0,
 			0.25
 		)
+		
+	if current_hint is DrawHint:
+		var whiteboard: PanelContainer = current_hint.node as PanelContainer
+		
+		await get_tree().create_timer(1.5).timeout
+		var wb_pos := whiteboard.global_position
+		var wb_size := whiteboard.size
+
+		const AMPLITUDE := 40.0
+		const DURATION := 2.0
+		const STEPS := 60
+		const frequency := 3
+		const COVERAGE := 0.6  
+		const VERTICAL_OFFSET := 20.0
+		draw_icon.visible = true
+		draw_icon.modulate.a = 0.0
+		tween = create_tween()
+		tween.set_loops()
+		# Fade in inicial
+		tween.tween_property(draw_icon, "modulate:a", 1.0, 0.25)
+		# Anima manualmente via método
+		var full_width := wb_size.x - draw_icon.size.x
+		var margin := full_width * (1.0 - COVERAGE) * 0.5
+		var start_x := wb_pos.x + margin
+		var end_x := wb_pos.x + full_width - margin
+		var center_y := wb_pos.y + wb_size.y * 0.5 - draw_icon.size.y * 0.5 + VERTICAL_OFFSET
+		draw_icon.global_position = Vector2(start_x, center_y)
+		for i in range(STEPS + 1):
+			var t := float(i) / float(STEPS)
+			var x := start_x + t * (end_x - start_x)
+			var y := center_y + sin(t * TAU * frequency) * AMPLITUDE
+			tween.tween_property(draw_icon, "global_position", Vector2(x, y), DURATION / STEPS)
+		tween.tween_property(draw_icon, "modulate:a", 0.0, 0.25)
+		tween.tween_callback(func():
+			draw_icon.global_position = Vector2(start_x, center_y)
+		)
+		tween.tween_interval(0.4)
+
 
 
 func get_node_view_pos(node: Node) -> Vector2:
@@ -125,6 +167,7 @@ func clear_hint():
 	current_hint = null
 	click.visible = false
 	drag.visible = false
+	draw_icon.visible = false
 	Signals.enable_all.emit()
 	
 	

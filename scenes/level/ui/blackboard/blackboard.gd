@@ -11,17 +11,36 @@ const MAX_TRIES : int = 2
 @onready var image: TextureRect = $Card/Image
 @onready var confirm_button: Button = $Card/ConfirmButton
 @onready var repeat_button: Button = $Card/RepeatButton
+@onready var exit_button: Button = $Card/ExitButton
 @onready var cnn_prediction: CnnPrediction = $CnnPrediction
 @onready var fail: AudioStreamPlayer = $fail
 @onready var correct: AudioStreamPlayer = $correct
 
 signal correct_word(kind: BuildingData.Kind)
 
+var forced_draw: bool = false
+
 var tries : int = 0
 var current_catalog: BuildingCatalog = null 
 
 func _ready() -> void:
 	Signals.write_word.connect(_on_appear)
+	Signals.disable_others.connect(_on_disable_others)
+	Signals.enable_all.connect(func(): 
+		forced_draw = false
+		repeat_button.disabled = false
+		confirm_button.disabled = false
+		exit_button.disabled = false
+	)
+	
+func _on_disable_others(nodes: Array[Node]):
+	if nodes.has(whiteboard):
+		forced_draw = true
+		repeat_button.disabled = true
+		confirm_button.disabled = true
+		exit_button.disabled = true
+	else:
+		forced_draw = false
 
 func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 	whiteboard.clear()
@@ -88,6 +107,9 @@ func _on_disapear():
 	tries = 0
 
 func _on_confirm_button_pressed() -> void:
+	if forced_draw:
+		return
+		
 	var img: Image = await whiteboard.to_image()
 	img = whiteboard.trim_with_padding(img)
 	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
@@ -135,10 +157,14 @@ func try_again():
 
 
 func _on_repeat_button_pressed() -> void:
+	if forced_draw:
+		return
 	whiteboard.clear()
 	AudioManager.play_click()
 
 
 func _on_exit_button_pressed() -> void:
+	if forced_draw:
+		return
 	_on_disapear()
 	AudioManager.play_click()
