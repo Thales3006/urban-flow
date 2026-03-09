@@ -2,7 +2,7 @@ extends Control
 
 @onready var win_card := $WinCard
 @onready var final_win_card := $FinalWinCard
-@onready var completion_status: CompletionStatus = $CompletionStatus
+@onready var completion_status: CompletionStatus = $"../../Background/CompletionStatus"
 @onready var catalog_buttons : Control = $CatalogButtons
 
 func _ready() -> void:

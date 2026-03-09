@@ -60,6 +60,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
 layout_mode = 2
 focus_behavior_recursive = 1
 
+[node name="CompletionStatus" parent="Background" unique_id=714219907 instance=ExtResource("5_hnne4")]
+anchor_left = 0.3628472
+anchor_right = 0.875382
+anchor_bottom = 0.17091359
+offset_right = 0.5599365
+offset_bottom = 0.24799347
+
 [node name="WorldLayer" type="CanvasLayer" parent="." unique_id=1254438683]
 follow_viewport_enabled = true
 
@@ -94,14 +101,6 @@ anchor_top = -0.19753087
 anchor_right = -0.067708336
 anchor_bottom = -0.1388889
 metadata/_edit_use_anchors_ = true
-
-[node name="CompletionStatus" parent="UILayer/UI" unique_id=714219907 instance=ExtResource("5_hnne4")]
-layout_mode = 1
-anchor_left = 0.3628472
-anchor_right = 0.875382
-anchor_bottom = 0.17091359
-offset_right = 0.5599365
-offset_bottom = 0.24799347
 
 [node name="BackButton" type="Button" parent="UILayer/UI" unique_id=1768598203]
 layout_mode = 1

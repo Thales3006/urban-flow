@@ -11,6 +11,11 @@ enum Gender {
 	None
 }
 
+class Writing:
+	var image: Image
+	var prediction: float
+	var kind: BuildingData.Kind
+
 @abstract class Interaction:
 	var root_scene: String
 	var level: int
@@ -31,6 +36,7 @@ var absolute_start_time: float
 var gender: Gender = Gender.None
 var birthdate: Date = Date.new()
 var interactions: Array[Interaction] = []
+var writings: Array[Writing] = []
 
 var _drag_start_pos: Vector2
 var _drag_start_time: float
@@ -198,6 +204,13 @@ func add_drag(root: Node, lvl: int, t: float, dur: float, start: Vector2, end: V
 	else:
 		drag.drop = ""
 	interactions.append(drag)
+	
+func add_writing(img: Image, pred: float, k: BuildingData.Kind) -> void:
+	var w := Writing.new()
+	w.image = img
+	w.prediction = pred
+	w.kind = k
+	writings.append(w)
 
 func to_json() -> Dictionary:
 	var current_time := Time.get_ticks_msec() / 1000.0
@@ -217,6 +230,15 @@ func to_json() -> Dictionary:
 		"scenes": scenes,
 		"interactions": []
 	}
+	data["writings"] = []
+	for w in writings:
+		var png_bytes: PackedByteArray = w.image.save_png_to_buffer()
+		var b64: String = Marshalls.raw_to_base64(png_bytes)
+		data["writings"].append({
+			"image": b64,
+			"prediction": w.prediction,
+			"kind": BuildingData.Kind.keys()[w.kind]
+		})
 
 	for interaction in interactions:
 		var root_scene_name: String = ""

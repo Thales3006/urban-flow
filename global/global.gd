@@ -8,10 +8,12 @@ const level_scene_path: String = "res://scenes/level/level.tscn"
 const level_settings_scene_path: String = "res://scenes/settings/settings.tscn"
 @onready var master_bus := AudioServer.get_bus_index("Master")
 
+const levels_locked: bool = false
+
 var is_dragging: bool = false
 var levels_unlocked: int = 1
 var first_time: bool = true
-var levels_locked: bool = true
+
 
 var volume_level: float = 50.0:
 	set(value):

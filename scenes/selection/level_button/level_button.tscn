@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 theme = ExtResource("1_n8yog")
+theme_override_font_sizes/font_size = 50
 text = "1"
 script = ExtResource("2_1xwj1")
 metadata/_edit_use_anchors_ = true

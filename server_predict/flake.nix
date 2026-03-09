@@ -18,6 +18,7 @@
           tensorflow
           python-multipart
           keras
+          pillow
         ]);
       in
       {

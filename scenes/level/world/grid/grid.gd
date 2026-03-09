@@ -7,6 +7,7 @@ const CELL_KIND_HOUSE := "house"
 const CELL_KIND_HOSPITAL := "hospital"
 const CELL_KIND_RECYCLING := "recycling"
 const CELL_KIND_WATER := "water"
+const CELL_KIND_SCHOOL := "school"
 
 @onready var buildings: Node2D = $Buildings
 @onready var cells: Node2D = $Cells
@@ -45,6 +46,33 @@ func spawn_cells_from_tilemap():
 				building.set_fixed()
 				buildings.add_child(building)
 				building.position = tile_map.map_to_local(cell_pos)
+			CELL_KIND_HOUSE:
+				var building := Building.create(BuildingData.Kind.HOUSE, tile_map.map_to_local(cell_pos))
+				building.set_fixed()
+				buildings.add_child(building)
+				building.position = tile_map.map_to_local(cell_pos)
+			CELL_KIND_HOSPITAL:
+				var building := Building.create(BuildingData.Kind.HOSPITAL, tile_map.map_to_local(cell_pos))
+				building.set_fixed()
+				buildings.add_child(building)
+				building.position = tile_map.map_to_local(cell_pos)
+			CELL_KIND_RECYCLING:
+				var building := Building.create(BuildingData.Kind.RECYCLING, tile_map.map_to_local(cell_pos))
+				building.set_fixed()
+				buildings.add_child(building)
+				building.position = tile_map.map_to_local(cell_pos)
+			CELL_KIND_SCHOOL:
+				var building := Building.create(BuildingData.Kind.SCHOOL, tile_map.map_to_local(cell_pos))
+				building.set_fixed()
+				buildings.add_child(building)
+				building.position = tile_map.map_to_local(cell_pos)
+				
+func set_cell(building: Building, cell: Cell):
+	cell.is_filled = true
+	building.current_cell = cell
+	building.current_cell.was_filled.emit()
+	building.push_affect_all()
+	cell.visible = true
 
 func get_tilemap_world_rect() -> Rect2:
 	var used := tile_map.get_used_rect()

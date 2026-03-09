@@ -126,11 +126,17 @@ func _on_confirm_button_pressed() -> void:
 		bad_connection()
 		return 
 		
-	if (result * 100) >= 60:
+	PlayerInfo.add_writing(img, result, current_catalog.kind)
+		
+	if (result * 100) >= 70:
 		right_anwser()
 	elif current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 35:
 		right_anwser()
 	elif current_catalog.kind == BuildingData.Kind.SCHOOL and (result * 100) >= 35:
+		right_anwser()
+	elif current_catalog.kind == BuildingData.Kind.HOSPITAL and (result * 100) >= 50:
+		right_anwser()
+	elif current_catalog.kind == BuildingData.Kind.HOUSE and (result * 100) >= 70:
 		right_anwser()
 	elif current_catalog.kind == BuildingData.Kind.RECYCLING and (result * 100) >= 45:
 		right_anwser()
