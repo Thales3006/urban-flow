@@ -30,6 +30,8 @@
             echo "uvicorn server:app --reload"
           '';
         };
+
+        packages.default = pythonEnv;
       }
     );
 }
