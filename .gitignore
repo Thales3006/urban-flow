@@ -4,8 +4,14 @@
 Urban\ Flow*
 *.apk
 *apk.*
+*.ipa
 *.exe
 player_data*
 
+/libgodot.*
+MoltenVK*
+
+
+*.xcprivacy
 .vscode
 __pycache__
