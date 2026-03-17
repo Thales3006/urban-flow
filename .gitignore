@@ -5,6 +5,7 @@ Urban\ Flow*
 *.apk
 *apk.*
 *.exe
+player_data*
 
 .vscode
 __pycache__

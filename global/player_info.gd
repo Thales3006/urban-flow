@@ -64,20 +64,110 @@ var ignored_node_names: Array[String] = [
 		"WordHint",
 	]
 	
+var session_id: String = ""
+	
 func _ready() -> void:
-	absolute_start_time = Time.get_ticks_msec() / 1000.0
+	absolute_start_time = Time.get_unix_time_from_system()
 	get_tree().set_auto_accept_quit(false)
 	get_tree().get_root().close_requested.connect(_on_close)
 	get_tree().node_added.connect(_on_node_added)
 	track_scene(String(get_tree().current_scene.name))
-
+	session_id = _generate_uuid()
+	
+func _generate_uuid() -> String:
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	return "%08x-%04x-%04x-%04x-%012x" % [
+		rng.randi(),
+		rng.randi() % 0xFFFF,
+		rng.randi() % 0xFFFF,
+		rng.randi() % 0xFFFF,
+		rng.randi() % 0xFFFFFFFFFFFF
+	]
+	
 func _on_node_added(node: Node) -> void:
 	if node.get_parent() == get_tree().get_root() and node != self:
 		track_scene(String(node.name))
 
 func _on_close() -> void:
 	append_to_json()
+	await send_unsynced_to_server(Global.server_url + "/player_data")
 	get_tree().quit()
+
+# ======================
+# SEND INFO
+
+func send_unsynced_to_server(url) -> void:
+	var path := "user://player_info.json"
+
+	if not FileAccess.file_exists(path):
+		return
+
+	var read_file := FileAccess.open(path, FileAccess.READ)
+	if read_file == null:
+		push_error("PlayerInfo: falha ao abrir arquivo para leitura")
+		return
+	var json_string := read_file.get_as_text()
+	read_file.close()
+
+	var sessions = JSON.parse_string(json_string)
+	if not sessions is Array:
+		push_error("PlayerInfo: formato inválido no arquivo local")
+		return
+
+	var unsynced := []
+	for session in sessions:
+		if session is Dictionary and not session.get("synced", false):
+			unsynced.append(session)
+
+	if unsynced.is_empty():
+		print("PlayerInfo: nada novo para enviar.")
+		return
+
+	# Envia para o servidor
+	var http := HTTPRequest.new()
+	http.timeout = 10.0
+	add_child(http)
+
+	var headers := ["Content-Type: application/json"]
+	var payload := JSON.stringify(unsynced)
+	var err := http.request(url, headers, HTTPClient.METHOD_POST, payload)
+
+	if err != OK:
+		push_error("PlayerInfo: falha ao iniciar requisição: %s" % err)
+		http.queue_free()
+		return
+
+	var response = await http.request_completed
+	var status_code: int = response[1]
+
+	if status_code == 200:
+		print("PlayerInfo: %d sessão(ões) enviada(s) com sucesso." % unsynced.size())
+		_mark_as_synced(sessions, unsynced, path)
+	else:
+		push_error("PlayerInfo: servidor retornou status %d" % status_code)
+
+	http.queue_free()
+
+func _mark_as_synced(all_sessions: Array, synced_sessions: Array, path: String) -> void:
+	# Usa absolute_start_time como chave única de identificação
+	var synced_times := {}
+	for s in synced_sessions:
+		synced_times[s["absolute_start_time"]] = true
+
+	for session in all_sessions:
+		if session is Dictionary and synced_times.has(session.get("absolute_start_time")):
+			session["synced"] = true
+
+	var write_file := FileAccess.open(path, FileAccess.WRITE)
+	if write_file == null:
+		push_error("PlayerInfo: falha ao salvar arquivo após sync")
+		return
+	write_file.store_string(JSON.stringify(all_sessions, "\t"))
+	write_file.close()
+
+# ============================================
+# GET DATA
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -213,12 +303,13 @@ func add_writing(img: Image, pred: float, k: BuildingData.Kind) -> void:
 	writings.append(w)
 
 func to_json() -> Dictionary:
-	var current_time := Time.get_ticks_msec() / 1000.0
+	var current_time := Time.get_unix_time_from_system()
 	
 	if _current_scene_name != "":
 		track_scene("end")
 	
 	var data := {
+		"session_id": session_id,
 		"absolute_start_time": absolute_start_time,
 		"total_duration": current_time - absolute_start_time,
 		"gender": Gender.keys()[gender],

@@ -6,6 +6,13 @@ import tensorflow as tf
 import base64
 from PIL import Image
 import io
+from pydantic import BaseModel
+from typing import Any
+import json
+from pathlib import Path
+from fastapi import Request
+
+DATA_FILE = Path("player_data.json")
 
 CLASSES = [
     "Reciclagem",
@@ -41,8 +48,6 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 @app.post("/predict")
 async def predict(data: dict):
-
-    # Decodifica base64
     image_bytes = base64.b64decode(data["image"])
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
@@ -64,3 +69,37 @@ async def predict(data: dict):
     }
 
     return {"result": result}
+
+def load_sessions() -> list:
+    if not DATA_FILE.exists():
+        return []
+    try:
+        return json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+
+def save_sessions(sessions: list) -> None:
+    DATA_FILE.write_text(
+        json.dumps(sessions, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
+
+@app.post("/player_data")
+async def receive_player_data(request: Request):
+    data = await request.json()
+    
+    if not isinstance(data, list):
+        data = [data]
+    
+    existing = load_sessions()
+    existing_ids = {s["session_id"] for s in existing if "session_id" in s}
+
+    added = 0
+    for session in data:
+        if session.get("session_id") not in existing_ids:
+            existing.append(session)
+            added += 1
+
+    save_sessions(existing)
+
+    return {"status": "ok", "added": added, "total_sessions": len(existing)}

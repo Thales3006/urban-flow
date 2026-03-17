@@ -1,5 +1,6 @@
 extends Node
 
+const server_url = "http://urban.thales3006.dev.br:8000"
 const resource_path: String = "res://"
 const levels_path: String = "res://levels/"
 const main_menu_scene_path: String = "res://scenes/main_menu/main_menu.tscn"
@@ -8,7 +9,7 @@ const level_scene_path: String = "res://scenes/level/level.tscn"
 const level_settings_scene_path: String = "res://scenes/settings/settings.tscn"
 @onready var master_bus := AudioServer.get_bus_index("Master")
 
-const levels_locked: bool = true
+const levels_locked: bool = false
 
 var is_dragging: bool = false
 var levels_unlocked: int = 1
