@@ -1,6 +1,6 @@
 workflows:
   godot-ios:
-    name: Godot iOS (Export Project)
+    name: Godot iOS Build
     max_build_duration: 60
 
     environment:
@@ -8,21 +8,31 @@ workflows:
         GODOT_VERSION: "4.2.1"
 
     scripts:
-      - name: Download Godot (macOS)
+      # 🔧 1. Limpar cache (resolve UID errors)
+      - name: Clean Godot cache
+        script: |
+          rm -rf .godot
+          rm -rf .import
+
+      # 📥 2. Baixar Godot (macOS)
+      - name: Download Godot
         script: |
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_macos.universal.zip
-          unzip Godot_v${GODOT_VERSION}-stable_macos.universal.zip
-
-      - name: Download export templates
-        script: |
-          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          mkdir -p ~/Library/Application\ Support/Godot/export_templates/${GODOT_VERSION}.stable
-          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz -d ~/Library/Application\ Support/Godot/export_templates/${GODOT_VERSION}.stable
-
-      - name: Make Godot executable
-        script: |
+          unzip -o Godot_v${GODOT_VERSION}-stable_macos.universal.zip
           chmod +x Godot.app/Contents/MacOS/Godot
 
+      # 📦 3. Instalar templates (FIX REAL)
+      - name: Install export templates
+        script: |
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -o Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          
+          mkdir -p ~/Library/Application\ Support/Godot/export_templates/${GODOT_VERSION}.stable
+          
+          # copia somente o necessário (IMPORTANTE)
+          cp templates/ios.zip ~/Library/Application\ Support/Godot/export_templates/${GODOT_VERSION}.stable/
+
+      # 🛠️ 4. Exportar projeto iOS
       - name: Export iOS project
         script: |
           mkdir -p build/ios
