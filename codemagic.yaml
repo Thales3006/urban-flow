@@ -1,0 +1,33 @@
+workflows:
+  godot-ios:
+    name: Godot iOS (Export Project)
+    max_build_duration: 60
+
+    environment:
+      vars:
+        GODOT_VERSION: "4.6"
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          apt-get update
+          apt-get install -y wget unzip
+
+      - name: Download Godot
+        script: |
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+
+      - name: Download export templates
+        script: |
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz -d ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Export iOS project
+        script: |
+          mkdir -p build/ios
+          ./Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --path . --export-release "iOS" build/ios
+
+    artifacts:
+      - build/ios/**
