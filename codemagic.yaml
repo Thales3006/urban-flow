@@ -5,17 +5,17 @@ workflows:
 
     environment:
       vars:
-        GODOT_VERSION: "4.6"
+        GODOT_VERSION: "4.2.1"
 
     scripts:
-      - name: Download Godot
+      - name: Download Godot (GitHub)
         script: |
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
           unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 
-      - name: Download export templates
+      - name: Download export templates (GitHub)
         script: |
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz -d ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
 
