@@ -8,11 +8,6 @@ workflows:
         GODOT_VERSION: "4.6"
 
     scripts:
-      - name: Install dependencies
-        script: |
-          apt-get update
-          apt-get install -y wget unzip
-
       - name: Download Godot
         script: |
           wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
