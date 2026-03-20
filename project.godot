@@ -18,6 +18,8 @@ config/name="Urban Flow"
 run/main_scene="uid://c88bdx63kuuua"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=30
+boot_splash/bg_color=Color(0.3168058, 0.80150944, 0.71924466, 1)
+boot_splash/image="uid://cf6xrxiixo3ji"
 config/icon="res://icons/icon.svg"
 
 [autoload]
