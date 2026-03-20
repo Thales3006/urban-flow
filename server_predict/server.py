@@ -1,4 +1,4 @@
-# uvicorn server:app --reload --host :: --port 8000
+# uvicorn server:app --reload --host :: --port 8141
 
 from fastapi import FastAPI
 import numpy as np
