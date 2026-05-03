@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://35jocoxsbr2e"]
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dveqmklpcwndl"]
 
-[ext_resource type="PackedScene" uid="uid://brjyeueya4fo0" path="res://levels/12/layout.tscn" id="1_m1pk1"]
-[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="2_ol7ad"]
-[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="3_cbxvv"]
+[ext_resource type="PackedScene" uid="uid://cf7a1d8ja2btu" path="res://levels/12/layout.tscn" id="1_wqkln"]
+[ext_resource type="Script" uid="uid://b2di8yjhlf3sq" path="res://levels/level_data.gd" id="2_6uspg"]
+[ext_resource type="Script" uid="uid://bmlo0uogn0toq" path="res://scenes/level/ui/tutorial/hint/hint.gd" id="3_4fiig"]
 
 [resource]
-script = ExtResource("2_ol7ad")
+script = ExtResource("2_6uspg")
 level = 12
 max_score = 400
-layout = ExtResource("1_m1pk1")
+layout = ExtResource("1_wqkln")
 available_buildings = Dictionary[int, int]({
-0: 5,
+0: 6,
 2: 1,
 3: 1
 })
-houses_educated = 3
+houses_educated = 4
 metadata/_custom_type_script = "uid://b2di8yjhlf3sq"

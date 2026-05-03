@@ -12,36 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
 [ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/birthday_form/birthday_form.tscn" id="11_lqpn7"]
 [ext_resource type="PackedScene" uid="uid://vmjgcfgpg8tx" path="res://scenes/main_menu/gender_form/gender_form.tscn" id="12_qel0l"]
-
-[sub_resource type="Shader" id="Shader_fu7sn"]
-code = "shader_type canvas_item;
-
-uniform float blur_size : hint_range(0.0, 8.0) = 9.0;
-
-void fragment() {
-    // Convert integer texture size to vec2(float)
-    vec2 tex_size = vec2(textureSize(TEXTURE, 0));
-    vec2 pixel = 1.0 / tex_size;
-
-    vec4 col = vec4(0.0);
-    float total = 0.0;
-
-    // Sample in a 9-tap blur pattern
-    for (float x = -4.0; x <= 4.0; x++) {
-        for (float y = -4.0; y <= 4.0; y++) {
-            float weight = exp(-(x*x + y*y) / (2.0 * blur_size * blur_size));
-            col += texture(TEXTURE, UV + vec2(x, y) * pixel) * weight;
-            total += weight;
-        }
-    }
-
-    col /= total;   // normalize
-    COLOR = col;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlkkf"]
-shader = SubResource("Shader_fu7sn")
-shader_parameter/blur_size = 3.0
+[ext_resource type="Texture2D" uid="uid://b1xvffu843h4i" path="res://icons/UTFPR_logo.svg" id="13_rrgl4"]
+[ext_resource type="Texture2D" uid="uid://dco21ifwvu46i" path="res://icons/lesic.png" id="14_dn3lk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xg86"]
 content_margin_left = 10.0
@@ -128,7 +100,6 @@ icon_on = ExtResource("9_thkx5")
 icon_off = ExtResource("4_x2yjq")
 
 [node name="BackGround" type="TextureRect" parent="." unique_id=56700780]
-material = SubResource("ShaderMaterial_nlkkf")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,6 +213,34 @@ layout_mode = 1
 [node name="GenderForm" parent="." unique_id=77771531 instance=ExtResource("12_qel0l")]
 visible = false
 layout_mode = 1
+
+[node name="lesic" type="TextureRect" parent="." unique_id=1408233879]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009548611
+anchor_top = 0.016975308
+anchor_right = 0.1892361
+anchor_bottom = 0.14814815
+offset_left = 1.9765625
+offset_top = 1.4429026
+offset_right = 1.9765625
+offset_bottom = 1.4429016
+texture = ExtResource("13_rrgl4")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="utfpr" type="TextureRect" parent="." unique_id=723563946]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8203125
+anchor_top = 0.0046296283
+anchor_right = 0.9982639
+anchor_bottom = 0.19598766
+texture = ExtResource("14_dn3lk")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]

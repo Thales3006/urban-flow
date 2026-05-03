@@ -114,7 +114,8 @@ func _on_confirm_button_pressed() -> void:
 	img = whiteboard.trim_with_padding(img)
 	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
 
-	if prediction == null:
+	if prediction.is_empty():
+		PlayerInfo.add_writing(img, { "server_error": 0.0 }, current_catalog.kind)
 		bad_connection()
 		return 
 	print(prediction)
@@ -123,10 +124,11 @@ func _on_confirm_button_pressed() -> void:
 	var result = prediction.get(word)
 	
 	if result == null:
+		PlayerInfo.add_writing(img, { "server_error": 0.0 }, current_catalog.kind)
 		bad_connection()
 		return 
 		
-	PlayerInfo.add_writing(img, result, current_catalog.kind)
+	PlayerInfo.add_writing(img, prediction, current_catalog.kind)
 		
 	if (result * 100) >= 70:
 		right_anwser()

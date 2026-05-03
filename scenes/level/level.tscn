@@ -105,10 +105,10 @@ metadata/_edit_use_anchors_ = true
 [node name="BackButton" type="Button" parent="UILayer/UI" unique_id=1768598203]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.9097222
-anchor_top = 0.8626543
-anchor_right = 0.9835069
-anchor_bottom = 0.9675926
+anchor_left = 0.014756944
+anchor_top = 0.8888889
+anchor_right = 0.08680555
+anchor_bottom = 0.9814815
 grow_horizontal = 0
 grow_vertical = 0
 icon = ExtResource("7_xv074")

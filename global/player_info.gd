@@ -13,7 +13,7 @@ enum Gender {
 
 class Writing:
 	var image: Image
-	var prediction: float
+	var prediction: Dictionary[String, float]
 	var kind: BuildingData.Kind
 
 @abstract class Interaction:
@@ -69,11 +69,47 @@ var session_id: String = ""
 func _ready() -> void:
 	absolute_start_time = Time.get_unix_time_from_system()
 	get_tree().set_auto_accept_quit(false)
-	get_tree().get_root().close_requested.connect(_on_close)
 	get_tree().node_added.connect(_on_node_added)
 	track_scene(String(get_tree().current_scene.name))
 	session_id = _generate_uuid()
-	
+	# Envia dados pendentes de sessões anteriores (app morto pelo Android)
+	sync_server()
+
+var _save_timer: float = 0.0
+var _sync_timer: float = 0.0
+const SAVE_INTERVAL: float = 15.0
+const SYNC_INTERVAL: float = 30.0
+
+func _process(delta: float) -> void:
+	# Periodic Save
+	_save_timer += delta
+	if _save_timer >= SAVE_INTERVAL:
+		_save_timer = 0.0
+		save_to_json()
+
+	# Periodic Sync
+	_sync_timer += delta
+	if _sync_timer >= SYNC_INTERVAL:
+		_sync_timer = 0.0
+		sync_server_no_await()
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST:
+			track_scene(_current_scene_name)
+			save_to_json()
+			await sync_server()
+			get_tree().quit()
+		NOTIFICATION_APPLICATION_RESUMED:
+			save_to_json()
+			sync_server()
+
+func sync_server_no_await():
+	await send_unsynced_to_server(Global.server_url + "/player_data")
+
+func sync_server():
+	await send_unsynced_to_server(Global.server_url + "/player_data")
+
 func _generate_uuid() -> String:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -87,12 +123,12 @@ func _generate_uuid() -> String:
 	
 func _on_node_added(node: Node) -> void:
 	if node.get_parent() == get_tree().get_root() and node != self:
-		track_scene(String(node.name))
-
-func _on_close() -> void:
-	append_to_json()
-	await send_unsynced_to_server(Global.server_url + "/player_data")
-	get_tree().quit()
+		if GameState.level != null:
+			track_scene(String(node.name) + "_" + str(GameState.level.level))
+		else:
+			track_scene(String(node.name))
+		save_to_json()
+		sync_server()
 
 # ======================
 # SEND INFO
@@ -150,7 +186,6 @@ func send_unsynced_to_server(url) -> void:
 	http.queue_free()
 
 func _mark_as_synced(all_sessions: Array, synced_sessions: Array, path: String) -> void:
-	# Usa absolute_start_time como chave única de identificação
 	var synced_times := {}
 	for s in synced_sessions:
 		synced_times[s["absolute_start_time"]] = true
@@ -214,14 +249,12 @@ func _is_ignored(node: Node) -> bool:
 	return false
 	
 func _get_node_at(pos: Vector2) -> Node:
-	# 1. Control nodes (UI)
 	var controls := []
 	_collect_controls(get_viewport(), pos, controls)
 	for i in range(controls.size() - 1, -1, -1):
 		if not _is_ignored(controls[i]):
 			return controls[i]
 
-	# 2. World 2D
 	var space := get_viewport().find_world_2d().direct_space_state
 	var query := PhysicsPointQueryParameters2D.new()
 	query.position = get_viewport().get_canvas_transform().affine_inverse() * pos
@@ -239,10 +272,8 @@ func _get_node_at(pos: Vector2) -> Node:
 func _get_meaningful_parent(node: Node) -> Node:
 	var current := node
 	while current != null:
-		# para ao chegar na raiz da cena
 		if current == get_tree().current_scene:
 			break
-		# sobe se for um CollisionShape ou nó puramente técnico
 		if current is CollisionShape2D or current is CollisionPolygon2D:
 			current = current.get_parent()
 			continue
@@ -260,15 +291,21 @@ func _collect_controls(node: Node, pos: Vector2, hits: Array) -> void:
 		_collect_controls(child, pos, hits)
 
 func track_scene(scene_name: String) -> void:
-	# fecha a cena anterior
-	if _current_scene_name != "":
-		scenes.append({
-			"scene": _current_scene_name,
-			"duration": Time.get_ticks_msec() / 1000.0 - _current_scene_start,
-			"time": _current_scene_start,
-		})
+	var now := Time.get_ticks_msec() / 1000.0
+
+	if scenes.size() > 0 and scenes[-1]["scene"] == scene_name:
+		scenes[-1]["duration"] = now - scenes[-1]["time"]
+		_current_scene_name = scene_name
+		_current_scene_start = now
+		return
+
+	scenes.append({
+		"scene": scene_name,
+		"duration": 0.0,
+		"time": now,
+	})
 	_current_scene_name = scene_name
-	_current_scene_start = Time.get_ticks_msec() / 1000.0
+	_current_scene_start = now
 
 func add_click(root: Node, lvl: int, t: float, dur: float, pos: Vector2, clicked_node: Node) -> void:
 	var click := Click.new()
@@ -295,7 +332,7 @@ func add_drag(root: Node, lvl: int, t: float, dur: float, start: Vector2, end: V
 		drag.drop = ""
 	interactions.append(drag)
 	
-func add_writing(img: Image, pred: float, k: BuildingData.Kind) -> void:
+func add_writing(img: Image, pred: Dictionary[String, float], k: BuildingData.Kind) -> void:
 	var w := Writing.new()
 	w.image = img
 	w.prediction = pred
@@ -304,9 +341,6 @@ func add_writing(img: Image, pred: float, k: BuildingData.Kind) -> void:
 
 func to_json() -> Dictionary:
 	var current_time := Time.get_unix_time_from_system()
-	
-	if _current_scene_name != "":
-		track_scene("end")
 	
 	var data := {
 		"session_id": session_id,
@@ -368,7 +402,7 @@ func to_json() -> Dictionary:
 
 	return data
 
-func append_to_json(path: String = "user://player_info.json") -> void:
+func save_to_json(path: String = "user://player_info.json") -> void:
 	var existing_data: Array = []
 
 	if FileAccess.file_exists(path):
@@ -388,7 +422,16 @@ func append_to_json(path: String = "user://player_info.json") -> void:
 			push_error("PlayerInfo: invalid JSON format in file: %s" % path)
 			return
 
-	existing_data.append(to_json())
+	# Upsert por session_id
+	var current_data := to_json()
+	var found := false
+	for i in range(existing_data.size()):
+		if existing_data[i] is Dictionary and existing_data[i].get("session_id") == session_id:
+			existing_data[i] = current_data  # substitui
+			found = true
+			break
+	if not found:
+		existing_data.append(current_data)
 
 	var write_file := FileAccess.open(path, FileAccess.WRITE)
 	if write_file == null:

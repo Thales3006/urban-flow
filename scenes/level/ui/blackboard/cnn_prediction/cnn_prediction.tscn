@@ -6,4 +6,4 @@
 script = ExtResource("1_q1nqc")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=21384833]
-timeout = 1.0
+timeout = 5.0

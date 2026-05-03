@@ -87,19 +87,24 @@ def save_sessions(sessions: list) -> None:
 @app.post("/player_data")
 async def receive_player_data(request: Request):
     data = await request.json()
-    
     if not isinstance(data, list):
         data = [data]
-    
+
     existing = load_sessions()
-    existing_ids = {s["session_id"] for s in existing if "session_id" in s}
+    # Índice por session_id para upsert
+    index = {s["session_id"]: i for i, s in enumerate(existing) if "session_id" in s}
 
     added = 0
+    updated = 0
     for session in data:
-        if session.get("session_id") not in existing_ids:
+        sid = session.get("session_id")
+        if sid in index:
+            existing[index[sid]] = session
+            updated += 1
+        else:
             existing.append(session)
+            index[sid] = len(existing) - 1
             added += 1
 
     save_sessions(existing)
-
-    return {"status": "ok", "added": added, "total_sessions": len(existing)}
+    return {"status": "ok", "added": added, "updated": updated, "total_sessions": len(existing)}
