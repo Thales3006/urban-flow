@@ -1,0 +1,26 @@
+[configuration]
+
+entry_symbol = "tflite_gdext_library_init"
+compatibility_minimum = 4.2
+
+[libraries]
+
+linux.debug.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.linux.template_release.x86_64.so"
+android.debug.arm64 = "res://addons/tflite_gdext/libtflite_gdext.android.template_debug.arm64.so"
+android.release.arm64 = "res://addons/tflite_gdext/libtflite_gdext.android.template_release.arm64.so"
+
+[dependencies]
+
+linux.debug.x86_64 = {
+  "res://addons/tflite_gdext/libtensorflowlite_c.so" : ""
+}
+linux.release.x86_64 = {
+  "res://addons/tflite_gdext/libtensorflowlite_c.so" : ""
+}
+android.debug.arm64 = {
+  "res://addons/tflite_gdext/libtensorflowlite_c.android.so" : ""
+}
+android.release.arm64 = {
+  "res://addons/tflite_gdext/libtensorflowlite_c.android.so" : ""
+}

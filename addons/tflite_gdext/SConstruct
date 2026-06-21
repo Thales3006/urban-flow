@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+import os
+
+env = SConscript("godot-cpp/SConstruct")
+
+tflite_src = os.environ.get("TFLITE_SRC_DIR", "")
+tflite_include_dirs = os.environ.get("TFLITE_INCLUDE_DIRS", "").split(os.pathsep)
+tflite_lib_dir = os.environ.get("TFLITE_LIB_DIR", "")
+
+env.Append(CPPPATH=["src/", tflite_src] + [d for d in tflite_include_dirs if d])
+env.Append(LIBPATH=[tflite_lib_dir])
+env.Append(LIBS=["tensorflowlite_c"])
+env.Append(RPATH=[tflite_lib_dir])
+
+sources = Glob("src/*.cpp")
+
+library = env.SharedLibrary(
+    "bin/libtflite_gdext{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+    source=sources,
+)
+
+Default(library)
