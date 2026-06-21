@@ -1,5 +1,5 @@
 {
-  description = "FastAPI + NumPy + TensorFlow Lite server";
+  description = "Urban Flow dev environment: Godot editor + prediction server";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -23,12 +23,15 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          buildInputs = [ pythonEnv ];
+          buildInputs = [
+            pythonEnv
+            pkgs.godot_4
+          ];
 
           shellHook = ''
-            echo "Environment ready."
-            echo "Run:"
-            echo "uvicorn server:app --reload"
+            echo "Urban Flow dev environment ready."
+            echo "Godot editor: godot --editor . (run from the repo root)"
+            echo "Prediction server: cd server_predict && uvicorn server:app --reload"
           '';
         };
 
