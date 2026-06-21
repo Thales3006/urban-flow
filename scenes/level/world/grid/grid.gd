@@ -9,6 +9,14 @@ const CELL_KIND_RECYCLING := "recycling"
 const CELL_KIND_WATER := "water"
 const CELL_KIND_SCHOOL := "school"
 
+const FIXED_BUILDING_KINDS := {
+	CELL_KIND_WATER: BuildingData.Kind.WATER,
+	CELL_KIND_HOUSE: BuildingData.Kind.HOUSE,
+	CELL_KIND_HOSPITAL: BuildingData.Kind.HOSPITAL,
+	CELL_KIND_RECYCLING: BuildingData.Kind.RECYCLING,
+	CELL_KIND_SCHOOL: BuildingData.Kind.SCHOOL,
+}
+
 @onready var buildings: Node2D = $Buildings
 @onready var cells: Node2D = $Cells
 
@@ -41,32 +49,16 @@ func spawn_cells_from_tilemap():
 				var cell := Cell.create(tile_map.map_to_local(cell_pos), cell_pos)
 				cells.add_child(cell)
 				cell.set_trashed()
-			CELL_KIND_WATER:
-				var building := Building.create(BuildingData.Kind.WATER, tile_map.map_to_local(cell_pos))
-				building.set_fixed()
-				buildings.add_child(building)
-				building.position = tile_map.map_to_local(cell_pos)
-			CELL_KIND_HOUSE:
-				var building := Building.create(BuildingData.Kind.HOUSE, tile_map.map_to_local(cell_pos))
-				building.set_fixed()
-				buildings.add_child(building)
-				building.position = tile_map.map_to_local(cell_pos)
-			CELL_KIND_HOSPITAL:
-				var building := Building.create(BuildingData.Kind.HOSPITAL, tile_map.map_to_local(cell_pos))
-				building.set_fixed()
-				buildings.add_child(building)
-				building.position = tile_map.map_to_local(cell_pos)
-			CELL_KIND_RECYCLING:
-				var building := Building.create(BuildingData.Kind.RECYCLING, tile_map.map_to_local(cell_pos))
-				building.set_fixed()
-				buildings.add_child(building)
-				building.position = tile_map.map_to_local(cell_pos)
-			CELL_KIND_SCHOOL:
-				var building := Building.create(BuildingData.Kind.SCHOOL, tile_map.map_to_local(cell_pos))
-				building.set_fixed()
-				buildings.add_child(building)
-				building.position = tile_map.map_to_local(cell_pos)
-				
+			_:
+				if FIXED_BUILDING_KINDS.has(kind):
+					spawn_fixed_building(FIXED_BUILDING_KINDS[kind], tile_map.map_to_local(cell_pos))
+
+func spawn_fixed_building(kind: BuildingData.Kind, world_pos: Vector2) -> void:
+	var building := Building.create(kind, world_pos)
+	building.set_fixed()
+	buildings.add_child(building)
+	building.position = world_pos
+
 func set_cell(building: Building, cell: Cell):
 	cell.is_filled = true
 	building.current_cell = cell

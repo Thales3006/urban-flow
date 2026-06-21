@@ -174,18 +174,22 @@ func clear_hint():
 func parse_node(node_path: String) -> Node:
 	var tokens := node_path.split(" ")
 	var query := tokens[0]
-	
+
+	var result: Node = null
 	if query == "cell":
-		return level_root.grid.get_cell(
+		result = level_root.grid.get_cell(
 			Vector2i(tokens[1].to_int(), tokens[2].to_int())
 		)
-	if query == "catalog_button" and tokens[1] == "f":
-		return get_first_building_catalog_button()
-	if query == "house":
-		return level_root.grid.get_building(BuildingData.Kind.HOUSE, tokens[1].to_int())
-	if query == "blackboard_confirm":
-		return level_root.blackboard
-	return null
+	elif query == "catalog_button" and tokens[1] == "f":
+		result = get_first_building_catalog_button()
+	elif query == "house":
+		result = level_root.grid.get_building(BuildingData.Kind.HOUSE, tokens[1].to_int())
+	elif query == "blackboard_confirm":
+		result = level_root.blackboard
+
+	if result == null:
+		push_warning("Tutorial: could not resolve hint node path '%s'" % node_path)
+	return result
 	
 func get_first_building_catalog_button() -> Button:
 	var catalog_buttons: Control = level_root.catalog_buttons

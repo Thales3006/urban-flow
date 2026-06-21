@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name WhiteBoard
 
 @export var brush_color: Color = Color.BLACK
 @export var brush_width: float = 4.0
@@ -29,17 +30,15 @@ func _gui_input(event):
 			current_stroke.append(event.position)
 			queue_redraw()
 
-func _draw():
-	for stroke in strokes:
+static func draw_strokes_on(node: CanvasItem, target_strokes: Array[PackedVector2Array], color: Color, width: float) -> void:
+	for stroke in target_strokes:
 		if stroke.size() == 1:
-			draw_circle(stroke[0], brush_width, brush_color, true)
+			node.draw_circle(stroke[0], width, color, true)
 		elif stroke.size() >= 2:
-			draw_polyline(
-				stroke,
-				brush_color,
-				brush_width,
-				true
-			)
+			node.draw_polyline(stroke, color, width, true)
+
+func _draw():
+	draw_strokes_on(self, strokes, brush_color, brush_width)
 
 func clear():
 	strokes.clear()
@@ -47,41 +46,38 @@ func clear():
 
 func has_drawing() -> bool:
 	return not strokes.is_empty()
-	
+
 func to_image() -> Image:
-	var img := Image.create(size.x as int, size.y as int, false, Image.FORMAT_RGBA8)
-	
-	# Fundo branco (ou transparente se preferir)
-	img.fill(Color.WHITE)
-	
-	# Desenhar cada stroke manualmente
-	for stroke in strokes:
-		for i in range(stroke.size() - 1):
-			_draw_line_on_image(
-				img,
-				stroke[i],
-				stroke[i + 1],
-				brush_color,
-				int(brush_width)
-			)
-	
+	var render_size := Vector2i(maxi(int(size.x), 1), maxi(int(size.y), 1))
+
+	var sub_viewport := SubViewport.new()
+	sub_viewport.size = render_size
+	sub_viewport.transparent_bg = false
+	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+	var background := ColorRect.new()
+	background.color = Color.WHITE
+	background.size = render_size
+	sub_viewport.add_child(background)
+
+	var canvas := StrokeCanvas.new()
+	canvas.strokes = strokes
+	canvas.brush_color = brush_color
+	canvas.brush_width = brush_width
+	canvas.size = render_size
+	sub_viewport.add_child(canvas)
+
+	add_child(sub_viewport)
+	# SubViewport needs a couple of frames in the tree before its
+	# render target texture is actually populated.
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var img := sub_viewport.get_texture().get_image()
+	img.convert(Image.FORMAT_RGBA8)
+
+	sub_viewport.queue_free()
 	return img
-	
-func _draw_line_on_image(img: Image, from: Vector2, to: Vector2, color: Color, width: int):
-	var distance := from.distance_to(to)
-	var steps := int(distance)
-	
-	for i in range(steps):
-		var t := float(i) / float(steps)
-		var pos := from.lerp(to, t)
-		
-		for x in range(-width, width):
-			for y in range(-width, width):
-				var px := int(pos.x) + x
-				var py := int(pos.y) + y
-				
-				if px >= 0 and px < img.get_width() and py >= 0 and py < img.get_height():
-					img.set_pixel(px, py, color)
 
 func trim_white_borders(img: Image) -> Image:
 	var width = img.get_width()

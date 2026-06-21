@@ -12,4 +12,5 @@ sprite = ExtResource("3_40j64")
 sprite_scale = 0.8
 radius = 2.0
 score = 50.0
+confidence_threshold = 0.35
 metadata/_custom_type_script = "uid://rp5o0hd3nc3e"

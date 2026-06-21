@@ -2,27 +2,16 @@ extends HBoxContainer
 
 
 func set_lit(index: int):
-	match index:
-		0:
-			$Star1.set_lit()
-		1:
-			$Star2.set_lit()
-		2:
-			$Star3.set_lit()
-		3:
-			$Star4.set_lit()
-		4:
-			$Star5.set_lit()
+	set_star(index, true)
 
 func set_dimmed(index: int):
-	match index:
-		0:
-			$Star1.set_dimmed()
-		1:
-			$Star2.set_dimmed()
-		2:
-			$Star3.set_dimmed()
-		3:
-			$Star4.set_dimmed()
-		4:
-			$Star5.set_dimmed()
+	set_star(index, false)
+
+func set_star(index: int, lit: bool):
+	var stars := [$Star1, $Star2, $Star3, $Star4, $Star5]
+	if index < 0 or index >= stars.size():
+		return
+	if lit:
+		stars[index].set_lit()
+	else:
+		stars[index].set_dimmed()

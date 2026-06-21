@@ -17,3 +17,5 @@ enum Kind {
 @export var score: float
 @export var effect: float = 1.0
 @export var hints: Array[Hint] = []
+## Minimum CNN confidence (0-1) on the handwriting check to unlock this building.
+@export var confidence_threshold: float = 0.7

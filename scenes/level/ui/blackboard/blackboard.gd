@@ -128,18 +128,9 @@ func _on_confirm_button_pressed() -> void:
 		return 
 		
 	PlayerInfo.add_writing(img, prediction, current_catalog.kind)
-		
-	if (result * 100) >= 70:
-		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.WATER and (result * 100) >= 35:
-		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.SCHOOL and (result * 100) >= 35:
-		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.HOSPITAL and (result * 100) >= 50:
-		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.HOUSE and (result * 100) >= 70:
-		right_anwser()
-	elif current_catalog.kind == BuildingData.Kind.RECYCLING and (result * 100) >= 45:
+
+	var threshold: float = Building.BUILDING_DATA[current_catalog.kind].confidence_threshold
+	if result >= threshold:
 		right_anwser()
 	else:
 		try_again()
