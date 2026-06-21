@@ -395,8 +395,8 @@ func add_drag(root: Node, lvl: int, t: float, dur: float, start: Vector2, end: V
 		"start_y": start.y,
 		"end_x": end.x,
 		"end_y": end.y,
-		"drag": drag_node.name if drag_node != null else "",
-		"drop_target": drop_node.name if drop_node != null else "",
+		"drag": String(drag_node.name) if drag_node != null else "",
+		"drop_target": String(drop_node.name) if drop_node != null else "",
 	})
 
 func add_writing(img: Image, pred: Dictionary[String, float], k: BuildingData.Kind) -> void:
