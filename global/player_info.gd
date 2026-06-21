@@ -234,39 +234,47 @@ func finalize_session() -> void:
 # INPUT TRACKING
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var e := event as InputEventMouseButton
-		var viewport_rect := get_viewport().get_visible_rect()
-		if not viewport_rect.has_point(e.position):
-			return
+	if not (event is InputEventMouseButton):
+		return
+	var e := event as InputEventMouseButton
+	if e.button_index != MOUSE_BUTTON_LEFT:
+		return
+
+	var viewport_rect := get_viewport().get_visible_rect()
+	if not viewport_rect.has_point(e.position):
+		return
+
+	# Drawing a word on the whiteboard fires a press/release per stroke --
+	# tracking each of those as a generic UI "drag interaction" is both
+	# meaningless telemetry and, on weaker hardware, a visible hitch (it
+	# was doing a full scene-tree walk per stroke). Skip it entirely.
+	if _is_over_whiteboard(e.position):
+		return
 
 	var current_scene := get_tree().current_scene
 	var lvl := 0
 	if GameState.level != null and GameState.level.level != null:
 		lvl = GameState.level.level
 
-	if event is InputEventMouseButton:
-		var e := event as InputEventMouseButton
-		if e.button_index == MOUSE_BUTTON_LEFT:
-			if e.pressed:
-				_drag_start_pos = e.position
-				_drag_start_time = Time.get_ticks_msec() / 1000.0
-				_drag_node = _get_node_at(e.position)
-			else:
-				var release_time := Time.get_ticks_msec() / 1000.0
-				var duration := release_time - _drag_start_time
-				var moved := e.position.distance_to(_drag_start_pos)
+	if e.pressed:
+		_drag_start_pos = e.position
+		_drag_start_time = Time.get_ticks_msec() / 1000.0
+		_drag_node = _get_node_at(e.position)
+	else:
+		var release_time := Time.get_ticks_msec() / 1000.0
+		var duration := release_time - _drag_start_time
+		var moved := e.position.distance_to(_drag_start_pos)
 
-				if moved < 10.0:
-					var clicked := _get_node_at(e.position)
-					if _is_ignored(clicked):
-						return
-					add_click(current_scene, lvl, _drag_start_time, duration, e.position, clicked)
-				else:
-					var drop := _get_node_at(e.position)
-					if _is_ignored(_drag_node) and _is_ignored(drop):
-						return
-					add_drag(current_scene, lvl, _drag_start_time, duration, _drag_start_pos, e.position, _drag_node, drop)
+		if moved < 10.0:
+			var clicked := _get_node_at(e.position)
+			if _is_ignored(clicked):
+				return
+			add_click(current_scene, lvl, _drag_start_time, duration, e.position, clicked)
+		else:
+			var drop := _get_node_at(e.position)
+			if _is_ignored(_drag_node) and _is_ignored(drop):
+				return
+			add_drag(current_scene, lvl, _drag_start_time, duration, _drag_start_pos, e.position, _drag_node, drop)
 
 func _is_ignored(node: Node) -> bool:
 	if node == null:
@@ -276,6 +284,25 @@ func _is_ignored(node: Node) -> bool:
 	if node is CanvasItem and not (node as CanvasItem).is_visible_in_tree():
 		return true
 	return false
+
+# Cached instead of looked up fresh every click -- find_child() is a
+# recursive search too, but this way it only runs once per scene (cache
+# invalidates when the node's gone, e.g. on scene change) instead of once
+# per click. Deliberately NOT based on gui_get_hovered_control(): hover
+# state is a mouse concept that doesn't reliably exist for touch input
+# (a tap has no preceding motion to establish hover), so that approach
+# would silently stop detecting anything on a real Android device.
+var _cached_whiteboard: WhiteBoard = null
+
+func _is_over_whiteboard(pos: Vector2) -> bool:
+	if _cached_whiteboard == null or not is_instance_valid(_cached_whiteboard):
+		var current_scene := get_tree().current_scene
+		if current_scene == null:
+			return false
+		_cached_whiteboard = current_scene.find_child("WhiteBoard", true, false) as WhiteBoard
+	if _cached_whiteboard == null or not _cached_whiteboard.is_visible_in_tree():
+		return false
+	return _cached_whiteboard.get_global_rect().has_point(pos)
 
 func _get_node_at(pos: Vector2) -> Node:
 	var controls := []
@@ -298,6 +325,14 @@ func _get_node_at(pos: Vector2) -> Node:
 
 	return null
 
+func _collect_controls(node: Node, pos: Vector2, hits: Array) -> void:
+	for child in node.get_children():
+		if child is Control:
+			var c := child as Control
+			if c.visible and c.get_global_rect().has_point(pos):
+				hits.append(c)
+		_collect_controls(child, pos, hits)
+
 func _get_meaningful_parent(node: Node) -> Node:
 	var current := node
 	while current != null:
@@ -310,14 +345,6 @@ func _get_meaningful_parent(node: Node) -> Node:
 			return current
 		current = current.get_parent()
 	return node
-
-func _collect_controls(node: Node, pos: Vector2, hits: Array) -> void:
-	for child in node.get_children():
-		if child is Control:
-			var c := child as Control
-			if c.visible and c.get_global_rect().has_point(pos):
-				hits.append(c)
-		_collect_controls(child, pos, hits)
 
 # ============================================
 # RECORDING
