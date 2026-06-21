@@ -62,8 +62,7 @@ func _on_play_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	AudioManager.play_click()
-	PlayerInfo.save_to_json()
-	await PlayerInfo.sync_server()
+	PlayerInfo.finalize_session()
 	get_tree().quit()
 
 
