@@ -48,7 +48,7 @@ content_margin_bottom = 0.0
 
 [sub_resource type="FontVariation" id="FontVariation_hintbold"]
 base_font = ExtResource("4_ewh38")
-variation_embolden = 1.2
+variation_embolden = 0.6
 
 [node name="Blackboard" type="Control" unique_id=1656096447]
 layout_mode = 3

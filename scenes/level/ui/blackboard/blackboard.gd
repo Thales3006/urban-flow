@@ -3,6 +3,10 @@ extends Control
 
 const MAX_TRIES : int = 2
 
+const HINT_FONT_MIN_SIZE := 24
+const HINT_FONT_MAX_SIZE := 260
+const HINT_FONT_FIT_MARGIN := 0.85 # leave some breathing room from the whiteboard's edges
+
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 @onready var label_word := $Card/Word
@@ -56,9 +60,10 @@ func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 		hint_word.visible = false
 	
 	var word = Building.BUILDING_DATA[kind].word
-	
+
 	label_word.text = word
 	hint_word.text = word
+	_fit_hint_word_to_whiteboard(word)
 	image.texture = Building.BUILDING_DATA[kind].sprite
 	current_catalog = catalog
 	
@@ -82,6 +87,25 @@ func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 		0.4,
 	)
 	visible = true
+
+# Sizes hint_word's font as large as possible while still fitting within
+# the whiteboard's actual on-screen bounds (with a small margin), instead
+# of relying on a fixed font size that's wrong for short/long words and
+# doesn't adapt to the whiteboard's real size across devices.
+func _fit_hint_word_to_whiteboard(word: String) -> void:
+	var target_size: Vector2 = whiteboard.size * HINT_FONT_FIT_MARGIN
+	var font: Font = hint_word.get_theme_font("normal_font")
+	if font == null or target_size.x <= 0 or target_size.y <= 0:
+		return
+
+	var best_size := HINT_FONT_MIN_SIZE
+	for size in range(HINT_FONT_MAX_SIZE, HINT_FONT_MIN_SIZE - 1, -2):
+		var text_size := font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, size)
+		if text_size.x <= target_size.x and text_size.y <= target_size.y:
+			best_size = size
+			break
+
+	hint_word.add_theme_font_size_override("normal_font_size", best_size)
 
 func _on_disapear():
 	var viewport_size := get_viewport().get_visible_rect().size
