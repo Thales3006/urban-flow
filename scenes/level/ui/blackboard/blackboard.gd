@@ -117,9 +117,8 @@ func _on_confirm_button_pressed() -> void:
 	if prediction.is_empty():
 		PlayerInfo.add_writing(img, { "server_error": 0.0 }, current_catalog.kind)
 		bad_connection()
-		return 
-	print(prediction)
-	
+		return
+
 	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
 	var result = prediction.get(word)
 	
@@ -146,8 +145,8 @@ func _on_confirm_button_pressed() -> void:
 		try_again()
 
 func bad_connection():
+	push_warning("Blackboard: prediction request failed, auto-accepting answer")
 	right_anwser()
-	print("Server error")
 
 func right_anwser():
 	current_catalog.unlock_buildings()

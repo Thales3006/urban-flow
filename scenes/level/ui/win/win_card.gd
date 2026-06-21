@@ -4,13 +4,15 @@ extends Control
 @onready var dimmer := $Dimmer
 @onready var card := $Card
 @onready var beaver := $Beaver
+@onready var star_hbox := $Card/VBoxContainer/Control/VBoxContainer/StarHBox
 
 func _ready() -> void:
-	#stars.set_progress(GameState.compute_percentage())
-	
-	#temporary
+	var star_level := GameState.compute_percentage() / 25 as int
 	for index in 5:
-		$Card/VBoxContainer/Control/VBoxContainer/StarHBox.set_lit(index)
+		if index <= star_level:
+			star_hbox.set_lit(index)
+		else:
+			star_hbox.set_dimmed(index)
 
 func _on_restart_button_pressed() -> void:
 	AudioManager.play_click()

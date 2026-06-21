@@ -146,7 +146,6 @@ func compute_score() -> float:
 	
 	if current_cell == null:
 		return 0
-	print(data.kind)
 
 	var has_water := false
 	var needs_recycling := false

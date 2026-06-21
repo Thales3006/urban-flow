@@ -3,7 +3,11 @@ class_name CnnPrediction
 
 @onready var http: HTTPRequest = $HTTPRequest
 const PREDICTION_ADDRESS = Global.server_url + "/predict"
-	
+const REQUEST_TIMEOUT_SECONDS := 10.0
+
+func _ready() -> void:
+	http.timeout = REQUEST_TIMEOUT_SECONDS
+
 func get_prediction(img: Image) -> Dictionary[String, float]:
 	send_image(img)
 

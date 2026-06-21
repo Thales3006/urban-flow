@@ -40,5 +40,5 @@ func _on_male_button_pressed() -> void:
 	AudioManager.play_click()
 
 func _on_female_button_pressed() -> void:
-	genderChoosen.emit(PlayerInfo.Gender.Male)
+	genderChoosen.emit(PlayerInfo.Gender.Female)
 	AudioManager.play_click()
