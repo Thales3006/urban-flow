@@ -19,7 +19,15 @@ var volume_level: float = 50.0:
 	set(value):
 		volume_level = clamp(value, 0, 100)
 		var linear := volume_level / 100.0
-		
+
 		AudioServer.set_bus_mute(master_bus, linear == 0)
 		if linear > 0:
 			AudioServer.set_bus_volume_db(master_bus, linear_to_db(linear))
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F11:
+		var window := get_window()
+		if window.mode == Window.MODE_WINDOWED:
+			window.mode = Window.MODE_FULLSCREEN
+		else:
+			window.mode = Window.MODE_WINDOWED

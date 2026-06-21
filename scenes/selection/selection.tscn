@@ -37,7 +37,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 40
-columns = 6
+columns = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="backButton" type="Button" parent="." unique_id=1492512967]

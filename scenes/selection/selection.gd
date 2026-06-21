@@ -11,7 +11,8 @@ func _ready():
 		
 		var button: LevelButton = LEVEL_BUTTON_SCENE.instantiate()
 		button.text = level_name.get_basename()
-		button.custom_minimum_size = Vector2(150, 150)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		button.name = "LeveButton_{level}".format({ "level" : level_name.get_basename()})
 		button.pressed.connect(_on_level_selected.bind(button, level_path))
 		grid.add_child(button)

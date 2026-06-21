@@ -46,6 +46,10 @@ shadow_offset = Vector2(0, 5)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw7s2"]
 content_margin_bottom = 0.0
 
+[sub_resource type="FontVariation" id="FontVariation_hintbold"]
+base_font = ExtResource("4_ewh38")
+variation_embolden = 1.2
+
 [node name="Blackboard" type="Control" unique_id=1656096447]
 layout_mode = 3
 anchors_preset = 15
@@ -113,11 +117,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 0.29411766)
-theme_override_fonts/normal_font = ExtResource("4_ewh38")
-theme_override_fonts/bold_font = ExtResource("4_ewh38")
-theme_override_fonts/bold_italics_font = ExtResource("4_ewh38")
-theme_override_fonts/italics_font = ExtResource("4_ewh38")
-theme_override_fonts/mono_font = ExtResource("4_ewh38")
+theme_override_fonts/normal_font = SubResource("FontVariation_hintbold")
+theme_override_fonts/bold_font = SubResource("FontVariation_hintbold")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_hintbold")
+theme_override_fonts/italics_font = SubResource("FontVariation_hintbold")
+theme_override_fonts/mono_font = SubResource("FontVariation_hintbold")
 theme_override_font_sizes/normal_font_size = 180
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hw7s2")
 bbcode_enabled = true
