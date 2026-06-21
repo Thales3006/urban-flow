@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 	_sync_timer += delta
 	if _sync_timer >= SYNC_INTERVAL:
 		_sync_timer = 0.0
-		sync_server_no_await()
+		sync_server()
 
 func _notification(what: int) -> void:
 	match what:
@@ -103,9 +103,6 @@ func _notification(what: int) -> void:
 		NOTIFICATION_APPLICATION_RESUMED:
 			save_to_json()
 			sync_server()
-
-func sync_server_no_await():
-	await send_unsynced_to_server(Global.server_url + "/player_data")
 
 func sync_server():
 	await send_unsynced_to_server(Global.server_url + "/player_data")
