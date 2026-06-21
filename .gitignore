@@ -4,6 +4,7 @@
 Urban\ Flow*
 *.apk
 *apk.*
+*.idsig
 *.ipa
 *.exe
 player_data*
