@@ -1,6 +1,5 @@
 extends Node
 
-const server_url = "https://urban.thales3006.dev.br"
 const resource_path: String = "res://"
 const levels_path: String = "res://levels/"
 const main_menu_scene_path: String = "res://scenes/main_menu/main_menu.tscn"

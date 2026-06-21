@@ -17,9 +17,7 @@ MoltenVK*
 .vscode
 __pycache__
 
-server_predict/*.tflite
-server_predict/test.png
-server_predict/test.png.import
+model/*.tflite
 
 addons/tflite_gdext/*.so
 addons/tflite_gdext/godot-cpp/

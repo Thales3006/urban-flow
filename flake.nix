@@ -1,5 +1,5 @@
 {
-  description = "Urban Flow dev environment: Godot editor + prediction server";
+  description = "Urban Flow dev environment: Godot editor + Android SDK/NDK";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -33,26 +33,21 @@
           cmakeVersions = [ "3.22.1" ];
         };
 
-        pythonEnv = pkgs.python3.withPackages (
-          ps: with ps; [
-            fastapi
-            uvicorn
-            numpy
-            tensorflow
-            python-multipart
-            keras
-            pillow
-          ]
-        );
+        # Stable, never-changes-path symlinks pointing at the current
+        # Nix store paths for the Android SDK and JDK. Nix store paths are
+        # content-hashed and change on every rebuild, but Godot's Editor
+        # Settings (Export > Android > SDK/Java Path) only accept a literal
+        # path -- no env var expansion, no auto-detection. Point Editor
+        # Settings at these symlinks ONCE; the shellHook below re-targets
+        # them to whatever the current derivation is every time you enter
+        # this shell, so the GUI config never goes stale.
+        toolchainLinkDir = "$HOME/.cache/urban-flow-toolchain";
       in
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pythonEnv
             pkgs.godot_4
-
             pkgs.jdk17
-
             android.androidsdk
           ];
 
@@ -63,22 +58,20 @@
           JAVA_HOME = "${pkgs.jdk17}";
 
           shellHook = ''
+            mkdir -p "${toolchainLinkDir}"
+            ln -sfn "$ANDROID_SDK_ROOT" "${toolchainLinkDir}/android-sdk"
+            ln -sfn "$JAVA_HOME" "${toolchainLinkDir}/jdk"
+
             echo "Urban Flow dev environment ready."
             echo "Godot editor: godot --editor . (run from the repo root)"
-            echo "Prediction server: cd server_predict && uvicorn server:app --reload"
-
-            SETTINGS="$HOME/.config/godot/editor_settings-4.tres"
-            if [ -f "$SETTINGS" ]; then
-              sed -i "s|export/android/android_sdk_path = \".*\"|export/android/android_sdk_path = \"$ANDROID_SDK_ROOT\"|" "$SETTINGS"
-              sed -i "s|export/android/java_sdk_path = \".*\"|export/android/java_sdk_path = \"$JAVA_HOME\"|" "$SETTINGS"
-              echo "✓ Godot Android settings atualizados."
-            else
-              echo "Editor settings não encontrado. Abra o Godot uma vez primeiro, depois re-entre no shell."
-            fi
+            echo ""
+            echo "One-time Godot setup: Editor Settings > Export > Android, set:"
+            echo "  Android SDK Path: ${toolchainLinkDir}/android-sdk"
+            echo "  Java SDK Path:    ${toolchainLinkDir}/jdk"
+            echo "(these are stable symlinks kept up to date by this shellHook, so they"
+            echo " survive Nix store path changes -- set them once, never touch again)"
           '';
         };
-
-        packages.default = pythonEnv;
       }
     );
 }

@@ -72,40 +72,24 @@ func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 	track_scene(String(get_tree().current_scene.name))
 	session_id = _generate_uuid()
-	# Envia dados pendentes de sessões anteriores (app morto pelo Android)
-	sync_server()
 
 var _save_timer: float = 0.0
-var _sync_timer: float = 0.0
 const SAVE_INTERVAL: float = 15.0
-const SYNC_INTERVAL: float = 30.0
 
 func _process(delta: float) -> void:
-	# Periodic Save
 	_save_timer += delta
 	if _save_timer >= SAVE_INTERVAL:
 		_save_timer = 0.0
 		save_to_json()
-
-	# Periodic Sync
-	_sync_timer += delta
-	if _sync_timer >= SYNC_INTERVAL:
-		_sync_timer = 0.0
-		sync_server()
 
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST:
 			track_scene(_current_scene_name)
 			save_to_json()
-			await sync_server()
 			get_tree().quit()
 		NOTIFICATION_APPLICATION_RESUMED:
 			save_to_json()
-			sync_server()
-
-func sync_server():
-	await send_unsynced_to_server(Global.server_url + "/player_data")
 
 func _generate_uuid() -> String:
 	var rng := RandomNumberGenerator.new()
@@ -125,78 +109,6 @@ func _on_node_added(node: Node) -> void:
 		else:
 			track_scene(String(node.name))
 		save_to_json()
-		sync_server()
-
-# ======================
-# SEND INFO
-
-func send_unsynced_to_server(url) -> void:
-	var path := "user://player_info.json"
-
-	if not FileAccess.file_exists(path):
-		return
-
-	var read_file := FileAccess.open(path, FileAccess.READ)
-	if read_file == null:
-		push_error("PlayerInfo: falha ao abrir arquivo para leitura")
-		return
-	var json_string := read_file.get_as_text()
-	read_file.close()
-
-	var sessions = JSON.parse_string(json_string)
-	if not sessions is Array:
-		push_error("PlayerInfo: formato inválido no arquivo local")
-		return
-
-	var unsynced := []
-	for session in sessions:
-		if session is Dictionary and not session.get("synced", false):
-			unsynced.append(session)
-
-	if unsynced.is_empty():
-		print("PlayerInfo: nada novo para enviar.")
-		return
-
-	# Envia para o servidor
-	var http := HTTPRequest.new()
-	http.timeout = 5.0
-	add_child(http)
-
-	var headers := ["Content-Type: application/json"]
-	var payload := JSON.stringify(unsynced)
-	var err := http.request(url, headers, HTTPClient.METHOD_POST, payload)
-
-	if err != OK:
-		push_error("PlayerInfo: falha ao iniciar requisição: %s" % err)
-		http.queue_free()
-		return
-
-	var response = await http.request_completed
-	var status_code: int = response[1]
-
-	if status_code == 200:
-		print("PlayerInfo: %d sessão(ões) enviada(s) com sucesso." % unsynced.size())
-		_mark_as_synced(sessions, unsynced, path)
-	else:
-		push_error("PlayerInfo: servidor retornou status %d" % status_code)
-
-	http.queue_free()
-
-func _mark_as_synced(all_sessions: Array, synced_sessions: Array, path: String) -> void:
-	var synced_times := {}
-	for s in synced_sessions:
-		synced_times[s["absolute_start_time"]] = true
-
-	for session in all_sessions:
-		if session is Dictionary and synced_times.has(session.get("absolute_start_time")):
-			session["synced"] = true
-
-	var write_file := FileAccess.open(path, FileAccess.WRITE)
-	if write_file == null:
-		push_error("PlayerInfo: falha ao salvar arquivo após sync")
-		return
-	write_file.store_string(JSON.stringify(all_sessions, "\t"))
-	write_file.close()
 
 # ============================================
 # GET DATA

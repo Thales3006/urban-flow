@@ -115,17 +115,17 @@ func _on_confirm_button_pressed() -> void:
 	var prediction: Dictionary[String, float] = await cnn_prediction.get_prediction(img)
 
 	if prediction.is_empty():
-		PlayerInfo.add_writing(img, { "server_error": 0.0 }, current_catalog.kind)
-		bad_connection()
+		PlayerInfo.add_writing(img, { "prediction_error": 0.0 }, current_catalog.kind)
+		prediction_failed()
 		return
 
 	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
 	var result = prediction.get(word)
 	
 	if result == null:
-		PlayerInfo.add_writing(img, { "server_error": 0.0 }, current_catalog.kind)
-		bad_connection()
-		return 
+		PlayerInfo.add_writing(img, { "prediction_error": 0.0 }, current_catalog.kind)
+		prediction_failed()
+		return
 		
 	PlayerInfo.add_writing(img, prediction, current_catalog.kind)
 
@@ -135,8 +135,8 @@ func _on_confirm_button_pressed() -> void:
 	else:
 		try_again()
 
-func bad_connection():
-	push_warning("Blackboard: prediction request failed, auto-accepting answer")
+func prediction_failed():
+	push_warning("Blackboard: prediction failed, auto-accepting answer")
 	right_anwser()
 
 func right_anwser():

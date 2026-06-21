@@ -4,6 +4,3 @@
 
 [node name="CnnPrediction" type="Node" unique_id=1726328061]
 script = ExtResource("1_q1nqc")
-
-[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=21384833]
-timeout = 3.0
