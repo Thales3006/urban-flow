@@ -16,3 +16,7 @@ MoltenVK*
 *.xcprivacy
 .vscode
 __pycache__
+
+server_predict/*.tflite
+server_predict/test.png
+server_predict/test.png.import
