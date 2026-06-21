@@ -162,7 +162,7 @@ func send_unsynced_to_server(url) -> void:
 
 	# Envia para o servidor
 	var http := HTTPRequest.new()
-	http.timeout = 10.0
+	http.timeout = 5.0
 	add_child(http)
 
 	var headers := ["Content-Type: application/json"]
