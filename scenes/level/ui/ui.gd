@@ -23,7 +23,12 @@ func _on_building_placed():
 
 func _on_level_won():
 	await get_tree().create_timer(0.5).timeout
-	
+	# Unlike create_tween(), this timer isn't bound to this node's lifetime --
+	# if the level scene was freed (e.g. player navigated back) while this
+	# was pending, bail out instead of touching a freed node.
+	if not is_inside_tree():
+		return
+
 	var index: LevelsIndex = load("res://levels/levels_index.tres")
 	if len(index.levels) <= GameState.level.level:
 		final_win_card.set_won()

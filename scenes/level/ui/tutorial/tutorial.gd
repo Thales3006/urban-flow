@@ -118,8 +118,13 @@ func show_hint():
 		
 	if current_hint is DrawHint:
 		var whiteboard: PanelContainer = current_hint.node as PanelContainer
-		
+
 		await get_tree().create_timer(1.5).timeout
+		# Unlike create_tween(), this timer isn't bound to this node's
+		# lifetime -- if the level was exited while this was pending,
+		# resuming here would touch a freed node. Bail out instead.
+		if not is_inside_tree():
+			return
 		var wb_pos := whiteboard.global_position
 		var wb_size := whiteboard.size
 

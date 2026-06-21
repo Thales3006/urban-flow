@@ -17,7 +17,13 @@ func _ready() -> void:
 		dimmer.modulate.a = 0.0
 		dimmer.visible = true
 		await get_tree().create_timer(0.5).timeout
-		
+		# get_tree().create_timer() isn't bound to this node's lifetime like
+		# create_tween() is -- if the scene changed (e.g. the player tapped
+		# something that navigates away) while this was pending, resuming
+		# here would touch a freed node. Bail out instead.
+		if not is_inside_tree():
+			return
+
 		var tween := create_tween()
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.set_ease(Tween.EASE_OUT)
