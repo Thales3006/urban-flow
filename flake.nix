@@ -33,20 +33,13 @@
           cmakeVersions = [ "3.22.1" ];
         };
 
-        # Stable, never-changes-path symlinks pointing at the current
-        # Nix store paths for the Android SDK and JDK. Nix store paths are
-        # content-hashed and change on every rebuild, but Godot's Editor
-        # Settings (Export > Android > SDK/Java Path) only accept a literal
-        # path -- no env var expansion, no auto-detection. Point Editor
-        # Settings at these symlinks ONCE; the shellHook below re-targets
-        # them to whatever the current derivation is every time you enter
-        # this shell, so the GUI config never goes stale.
         toolchainLinkDir = "$HOME/.cache/urban-flow-toolchain";
       in
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.godot_4
+            pkgs.godot_4-export-templates-bin
             pkgs.jdk17
             android.androidsdk
           ];
@@ -61,6 +54,14 @@
             mkdir -p "${toolchainLinkDir}"
             ln -sfn "$ANDROID_SDK_ROOT" "${toolchainLinkDir}/android-sdk"
             ln -sfn "$JAVA_HOME" "${toolchainLinkDir}/jdk"
+
+            # Godot looks up export templates at a hardcoded path under
+            # ~/.local/share/godot (no env var override, same deal as the
+            # Editor Settings SDK/JDK paths above) -- keep it pointed at
+            # the Nix-provided package matching this exact Godot version.
+            mkdir -p "$HOME/.local/share/godot/export_templates"
+            ln -sfn "${pkgs.godot_4-export-templates-bin}/share/godot/export_templates/4.5.1.stable" \
+              "$HOME/.local/share/godot/export_templates/4.5.1.stable"
 
             echo "Urban Flow dev environment ready."
             echo "Godot editor: godot --editor . (run from the repo root)"
