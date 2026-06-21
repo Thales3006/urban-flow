@@ -31,3 +31,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			window.mode = Window.MODE_FULLSCREEN
 		else:
 			window.mode = Window.MODE_WINDOWED
+
+# Most phones fall between 16:9 (~1.778) and 20:9 (~2.222) in landscape.
+# Within that range, expand to fill the screen with no letterboxing --
+# outside it (e.g. a desktop monitor, an unusually square/tall device),
+# fall back to letterboxing so the UI never distorts or clips.
+const MIN_PHONE_ASPECT := 16.0 / 9.0
+const MAX_PHONE_ASPECT := 20.0 / 9.0
+
+func _ready() -> void:
+	get_window().size_changed.connect(_update_stretch_aspect)
+	_update_stretch_aspect()
+
+func _update_stretch_aspect() -> void:
+	var window := get_window()
+	if window.size.y <= 0:
+		return
+	var aspect := float(window.size.x) / float(window.size.y)
+	if aspect >= MIN_PHONE_ASPECT and aspect <= MAX_PHONE_ASPECT:
+		window.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+	else:
+		window.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
