@@ -1,6 +1,10 @@
 extends Node2D
 class_name Building
 
+# =============================
+# Data / constants
+# =============================
+
 const DRAG_Z := 1000
 const NORMAL_Z := 0
 
@@ -20,6 +24,10 @@ enum State {
 	FREE,
 }
 
+# =============================
+# State
+# =============================
+
 var dragging: bool = false:
 	set(value):
 		if value:
@@ -31,6 +39,10 @@ var current_cell: Cell = null
 var state: State = State.FREE
 var will_affect = []
 var affecting = []
+
+# =============================
+# Node references
+# =============================
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var recycling_balloon: Sprite2D = $RecyclingBalloon
@@ -49,6 +61,10 @@ var initialPos: Vector2
 var initialScale: Vector2
 var is_disabled: bool
 var needs_education: bool = false
+
+# =============================
+# Lifecycle / creation
+# =============================
 
 static var count: int = 0
 
@@ -89,6 +105,10 @@ func _post_ready():
 	
 func _on_disable_others(nodes: Array[Node]):
 	is_disabled = not nodes.has(self)
+
+# =============================
+# Input — drag / drop
+# =============================
 
 func _input(event: InputEvent) -> void:
 	if is_disabled:
@@ -136,7 +156,11 @@ func _input(event: InputEvent) -> void:
 				
 			droped_sound.play()
 			Signals.building_placed.emit()
-			
+
+
+# =============================
+# Scoring
+# =============================
 
 func compute_score() -> float:
 	recycling_balloon.visible = false
@@ -222,7 +246,9 @@ func get_overlapping_cells() -> Array[Cell]:
 			cells.push_back(cell)
 	return cells
 
-# VISUAL FEEDBACK =========================
+# =============================
+# Visual state
+# =============================
 
 func set_free():
 	state = State.FREE
@@ -236,6 +262,9 @@ func set_fixed():
 	state = State.FIXED
 	$Sprite2D.modulate = Color(1, 1, 1, 1)
 
+# =============================
+# Effect propagation (cell radius effects)
+# =============================
 
 func set_affect_feedback(cell: Cell):
 
@@ -319,6 +348,10 @@ func _on_effect_area_exited(body) -> void:
 		remove_affect_feedback(cell)
 
 
+# =============================
+# Drag input (Area2D input_event signal)
+# =============================
+
 var _grab_time: float
 var _grab_pos: Vector2
 
@@ -345,6 +378,10 @@ func _on_drag_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			grabed_sound.play()
 			Signals.building_placed.emit()
 
+# =============================
+# Positioning / viewport math
+# =============================
+
 func _on_window_resized():
 	if state == Building.State.LOCKED or (state == Building.State.FREE and current_cell == null):
 		global_position = get_building_catalog_pos()
@@ -352,17 +389,8 @@ func _on_window_resized():
 func get_building_catalog_pos() -> Vector2:
 	var catalog_rect = catalog.get_global_rect()
 	var screenPos = catalog_rect.position + catalog_rect.size / 2.0
-	
+
 	return viewport_to_world(screenPos + initialPos)
-
-func get_world_catalog_pos() -> Vector2:
-	var viewport := get_viewport()
-	var screen_pos: Vector2 = catalog.get_global_rect().position
-	return viewport.get_canvas_transform().affine_inverse() * screen_pos
-
-func world_to_viewport(world_pos: Vector2) -> Vector2:
-	var viewport := get_viewport()
-	return viewport.get_canvas_transform() * world_pos
 
 func viewport_to_world(screen_pos: Vector2) -> Vector2:
 	var viewport := get_viewport()
