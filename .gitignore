@@ -20,6 +20,7 @@ __pycache__
 model/*.tflite
 
 addons/tflite_gdext/*.so
+addons/tflite_gdext/android/*.so
 addons/tflite_gdext/godot-cpp/
 
 addons/godot-sqlite/bin/*.so

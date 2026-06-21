@@ -28,10 +28,28 @@ committed to git (see `.gitignore`) — same reasoning as `model.tflite`: they'r
 large rebuildable binaries, not source. Copy the build output here (alongside
 `tflite_gdext.gdextension`) before running the game with this extension enabled.
 
+**Important — Android dependency filename**: `libtflite_gdext.android.*.so` is
+linked against a library whose embedded NEEDED name is `libtensorflowlite_c.so`
+(set at link time from whatever the file was named in the build dir, regardless
+of what you rename it to afterwards). Android's dynamic linker resolves NEEDED
+libraries by exact filename in the flat `lib/<abi>/` directory it bundles them
+into — so the Android build of `libtensorflowlite_c` must be deployed here as
+exactly `android/libtensorflowlite_c.so` (the `android/` subfolder only exists
+to avoid colliding with the Linux x86_64 copy of the same name one level up;
+Android's APK packaging flattens subdirectories away, so only the filename
+matters). Naming it anything else (e.g. `libtensorflowlite_c.android.so`, which
+was the original mistake here) makes the extension silently fail to load on
+Android with no crash — `ClassDB.class_exists("TFLitePredictor")` just returns
+false at runtime, caught via `adb logcat` showing nothing more specific than
+the extension's classes never registering.
+
 ## Status (2026-06-21)
 
 Verified working end-to-end on Linux desktop inside a real headless Godot run
 (loads `model.tflite`, predicts on a known test image, matches the Python
 server's output). Cross-compiles cleanly for Android arm64 with correct ELF
-architecture and linkage. **Not yet verified to run correctly on an actual
-Android device** — that needs real hardware.
+architecture and linkage, and the dependency-filename bug above is fixed and
+verified via a real headless `--export-debug` re-export (confirmed
+`libtensorflowlite_c.so` lands correctly in the APK's `lib/arm64-v8a/`).
+**Not yet confirmed working on an actual Android device** — that needs real
+hardware.
