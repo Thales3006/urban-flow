@@ -1,10 +1,5 @@
 extends Node
 
-class Date:
-	var day: int = 0
-	var month: int = 0
-	var year: int = 0
-
 enum Gender {
 	Male,
 	Female,
@@ -16,7 +11,7 @@ var gender: Gender = Gender.None:
 		gender = value
 		_update_profile_fields()
 
-var birthdate: Date = Date.new():
+var birthdate: PlayerDate = PlayerDate.new():
 	set(value):
 		birthdate = value
 		_update_profile_fields()

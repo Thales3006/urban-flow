@@ -6,9 +6,9 @@ class_name BirthdayForm
 @onready var month := $FormPanel/Numbers/Month
 @onready var year := $FormPanel/Numbers/Year
 
-var date : PlayerInfo.Date = PlayerInfo.Date.new()
+var date : PlayerDate = PlayerDate.new()
 
-signal birthdateChoosen(birthdate: PlayerInfo.Date)
+signal birthdateChoosen(birthdate: PlayerDate)
 
 func _ready() -> void:
 	day.value_changed.connect(_on_date_changed)

@@ -40,7 +40,7 @@ func _on_gender_decided(gender: PlayerInfo.Gender):
 	PlayerInfo.gender = gender
 	birthday_form._on_appear()
 
-func _on_birthdate_decided(birthdate: PlayerInfo.Date):
+func _on_birthdate_decided(birthdate: PlayerDate):
 	birthday_form._on_disapear()
 	PlayerInfo.birthdate = birthdate
 	
