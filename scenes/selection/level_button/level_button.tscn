@@ -30,5 +30,5 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_k63q4")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true

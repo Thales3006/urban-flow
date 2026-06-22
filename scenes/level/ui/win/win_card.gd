@@ -7,12 +7,9 @@ extends Control
 @onready var star_hbox := $Card/VBoxContainer/Control/VBoxContainer/StarHBox
 
 func _ready() -> void:
-	var star_level := GameState.compute_percentage() / 25 as int
+	# var star_level := GameState.compute_percentage() / 25 as int
 	for index in 5:
-		if index <= star_level:
-			star_hbox.set_lit(index)
-		else:
-			star_hbox.set_dimmed(index)
+		star_hbox.set_lit(index)
 
 func _on_restart_button_pressed() -> void:
 	AudioManager.play_click()

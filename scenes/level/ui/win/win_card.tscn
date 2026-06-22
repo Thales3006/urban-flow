@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://p4tx68w38bha"]
+[gd_scene load_steps=15 format=3 uid="uid://p4tx68w38bha"]
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_4ta5k"]
 [ext_resource type="Script" uid="uid://dm4f4iesu8r3l" path="res://scenes/level/ui/win/win_card.gd" id="2_t1wpr"]
@@ -12,9 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://wavwohmmsbe7" path="res://icons/next_icon.png" id="5_jvxlc"]
 [ext_resource type="Texture2D" uid="uid://bmm6j217lc40g" path="res://images/progress_colors.png" id="6_ipu4n"]
 [ext_resource type="AudioStream" uid="uid://5b30cxa5xdsa" path="res://sounds/win.mp3" id="8_jvxlc"]
+[ext_resource type="Texture2D" uid="uid://c4q281mutpxag" path="res://images/star_lit.png" id="9_ipu4n"]
 [ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="13_gibkl"]
 
-[node name="WinCard" type="Control" unique_id=1656096447]
+[node name="WinCard" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +25,7 @@ grow_vertical = 2
 theme = ExtResource("1_4ta5k")
 script = ExtResource("2_t1wpr")
 
-[node name="Dimmer" type="ColorRect" parent="." unique_id=1174898213]
+[node name="Dimmer" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.38039216)
 
-[node name="Card" type="PanelContainer" parent="." unique_id=1229861082]
+[node name="Card" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.22569445
@@ -45,26 +46,26 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_jvxlc")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Card" unique_id=846485810]
+[node name="VBoxContainer" type="VBoxContainer" parent="Card"]
 layout_mode = 2
 
-[node name="Control" type="AspectRatioContainer" parent="Card/VBoxContainer" unique_id=1653512130]
+[node name="Control" type="AspectRatioContainer" parent="Card/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.7
 ratio = 7.572
 
-[node name="HBox" type="HBoxContainer" parent="Card/VBoxContainer/Control" unique_id=1461573462]
+[node name="HBox" type="HBoxContainer" parent="Card/VBoxContainer/Control"]
 layout_mode = 2
 
-[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/HBox" unique_id=188858600]
+[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="ProgressBar" type="TextureProgressBar" parent="Card/VBoxContainer/Control/HBox" unique_id=1751276143]
+[node name="ProgressBar" type="TextureProgressBar" parent="Card/VBoxContainer/Control/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -76,25 +77,25 @@ texture_under = ExtResource("4_nu5c7")
 texture_over = ExtResource("5_gibkl")
 texture_progress = ExtResource("6_ipu4n")
 
-[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/HBox" unique_id=1915303658]
+[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Card/VBoxContainer/Control" unique_id=1540436267]
+[node name="VBoxContainer" type="VBoxContainer" parent="Card/VBoxContainer/Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer" unique_id=402993447]
+[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="StarHBox" type="HBoxContainer" parent="Card/VBoxContainer/Control/VBoxContainer" unique_id=133688303]
+[node name="StarHBox" type="HBoxContainer" parent="Card/VBoxContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 14.57
@@ -102,63 +103,68 @@ mouse_filter = 2
 alignment = 1
 script = ExtResource("4_7v8pi")
 
-[node name="Star1" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=1328691853 instance=ExtResource("5_638mr")]
+[node name="Star1" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" instance=ExtResource("5_638mr")]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_ipu4n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=1727603036]
+[node name="Spacer1" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star2" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=1450447965 instance=ExtResource("5_638mr")]
+[node name="Star2" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" instance=ExtResource("5_638mr")]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_ipu4n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=81285823]
+[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star3" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=880900976 instance=ExtResource("5_638mr")]
+[node name="Star3" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" instance=ExtResource("5_638mr")]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_ipu4n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer3" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=977719946]
+[node name="Spacer3" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star4" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=1104634761 instance=ExtResource("5_638mr")]
+[node name="Star4" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" instance=ExtResource("5_638mr")]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_ipu4n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer4" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=415705876]
+[node name="Spacer4" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star5" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" unique_id=1438564537 instance=ExtResource("5_638mr")]
+[node name="Star5" parent="Card/VBoxContainer/Control/VBoxContainer/StarHBox" instance=ExtResource("5_638mr")]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("9_ipu4n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer" unique_id=1202575723]
+[node name="Spacer2" type="Control" parent="Card/VBoxContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Card/VBoxContainer" unique_id=458683221]
+[node name="MarginContainer" type="MarginContainer" parent="Card/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 100
@@ -166,37 +172,37 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Card/VBoxContainer/MarginContainer" unique_id=1592173580]
+[node name="HBoxContainer" type="HBoxContainer" parent="Card/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="RestartButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1168870719]
+[node name="RestartButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("3_egysd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MenuButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=337988012]
+[node name="MenuButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("4_t1wpr")
 icon_alignment = 1
 expand_icon = true
 
-[node name="NextButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer" unique_id=789755522]
+[node name="NextButton" type="Button" parent="Card/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("5_jvxlc")
 icon_alignment = 1
 expand_icon = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=865750643]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_jvxlc")
 volume_db = -16.0
 
-[node name="Beaver" type="TextureRect" parent="." unique_id=1474716685]
+[node name="Beaver" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.6180556

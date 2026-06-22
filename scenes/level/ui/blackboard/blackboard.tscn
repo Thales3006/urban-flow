@@ -1,16 +1,19 @@
-[gd_scene format=3 uid="uid://dv8xo103bpvdp"]
+[gd_scene load_steps=19 format=3 uid="uid://dv8xo103bpvdp"]
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_5itcx"]
 [ext_resource type="Script" uid="uid://b1ecr3d6nlbj5" path="res://scenes/level/ui/blackboard/blackboard.gd" id="2_gr313"]
 [ext_resource type="Script" uid="uid://do7tm8a31sfmb" path="res://scenes/level/ui/blackboard/white_board.gd" id="3_ay4ts"]
 [ext_resource type="FontFile" uid="uid://diessakkygmmd" path="res://styles/fonts/handwriten_font.ttf" id="4_ewh38"]
-[ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="6_ewh38"]
 [ext_resource type="Texture2D" uid="uid://bisx0yd82uynm" path="res://buildings/sprites/house.png" id="6_f06me"]
 [ext_resource type="Texture2D" uid="uid://bp3034kmxvtdy" path="res://icons/check.png" id="6_rhnf0"]
 [ext_resource type="Texture2D" uid="uid://c13fq6bn61lsn" path="res://icons/restart_icon.png" id="6_y4qxv"]
+[ext_resource type="Texture2D" uid="uid://ckybx6raohpp1" path="res://icons/correct.svg" id="7_icm8x"]
+[ext_resource type="Texture2D" uid="uid://twxyaj4jgkop" path="res://icons/question.svg" id="8_p0wdh"]
 [ext_resource type="PackedScene" uid="uid://ho8vbesbr17o" path="res://scenes/level/ui/blackboard/cnn_prediction/cnn_prediction.tscn" id="8_y4qxv"]
 [ext_resource type="AudioStream" uid="uid://b666jnler0kbj" path="res://sounds/fail.mp3" id="9_ctthw"]
+[ext_resource type="Texture2D" uid="uid://d1j4y54jtbc2t" path="res://icons/close-white.svg" id="9_icm8x"]
 [ext_resource type="AudioStream" uid="uid://btb5o4c73af4f" path="res://sounds/correct.mp3" id="10_ewh38"]
+[ext_resource type="Texture2D" uid="uid://bth0fujfi5p41" path="res://images/castor.png" id="12_8whsd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1wpr"]
 content_margin_left = 50.0
@@ -43,14 +46,14 @@ shadow_color = Color(0, 0, 0, 0.23921569)
 shadow_size = 10
 shadow_offset = Vector2(0, 5)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw7s2"]
-content_margin_bottom = 0.0
-
 [sub_resource type="FontVariation" id="FontVariation_hintbold"]
 base_font = ExtResource("4_ewh38")
 variation_embolden = 0.6
 
-[node name="Blackboard" type="Control" unique_id=1656096447]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw7s2"]
+content_margin_bottom = 0.0
+
+[node name="Blackboard" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +64,7 @@ mouse_filter = 1
 theme = ExtResource("1_5itcx")
 script = ExtResource("2_gr313")
 
-[node name="Dimmer" type="ColorRect" parent="." unique_id=1174898213]
+[node name="Dimmer" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.38039216)
 
-[node name="Card" type="Panel" parent="." unique_id=255471484]
+[node name="Card" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +87,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_t1wpr")
 
-[node name="WhiteBoard" type="PanelContainer" parent="Card" unique_id=111649268]
+[node name="WhiteBoard" type="PanelContainer" parent="Card"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -103,8 +106,7 @@ size_flags_stretch_ratio = 5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rmkno")
 script = ExtResource("3_ay4ts")
 
-[node name="WordHint" type="RichTextLabel" parent="Card" unique_id=38904973]
-visible = false
+[node name="WordHint" type="RichTextLabel" parent="Card"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +118,7 @@ offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 0.29411766)
+theme_override_colors/default_color = Color(0, 0, 0, 0.22058824)
 theme_override_fonts/normal_font = SubResource("FontVariation_hintbold")
 theme_override_fonts/bold_font = SubResource("FontVariation_hintbold")
 theme_override_fonts/bold_italics_font = SubResource("FontVariation_hintbold")
@@ -129,7 +131,7 @@ text = "hospital"
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="Word" type="RichTextLabel" parent="Card" unique_id=1742220775]
+[node name="Word" type="RichTextLabel" parent="Card"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.068265684
@@ -152,7 +154,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Image" type="TextureRect" parent="Card" unique_id=84142673]
+[node name="Image" type="TextureRect" parent="Card"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.36811593
@@ -167,27 +169,80 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="ExitButton" type="Button" parent="Card" unique_id=1032024849]
+[node name="Beaver" type="TextureRect" parent="Card"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0647343
-anchor_top = 0.8376384
-anchor_right = 0.1294686
-anchor_bottom = 0.95571953
+anchor_left = 0.6437554
+anchor_top = 0.217859
+anchor_right = 1.1906303
+anchor_bottom = 1.6422417
+offset_left = 5.3125
+offset_top = -33.765427
+offset_right = 5.3125
+offset_bottom = -33.76544
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_8whsd")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Correct" type="TextureRect" parent="Card"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39294928
+anchor_top = 0.24104235
+anchor_right = 0.6079104
+anchor_bottom = 0.6726384
+offset_right = 0.00024414063
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_icm8x")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Question" type="TextureRect" parent="Card"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.783319
+anchor_top = 0.267101
+anchor_right = 0.9836764
+anchor_bottom = 0.57328993
+offset_right = 0.00012207031
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_p0wdh")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Button" parent="Card"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30094582
+anchor_top = 0.8387622
+anchor_right = 0.36568016
+anchor_bottom = 0.9568434
 grow_vertical = 0
 size_flags_horizontal = 3
-icon = ExtResource("6_ewh38")
+icon = ExtResource("9_icm8x")
 icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="RepeatButton" type="Button" parent="Card" unique_id=108361317]
+[node name="RepeatButton" type="Button" parent="Card"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.15169083
-anchor_top = 0.8376384
-anchor_right = 0.2173913
-anchor_bottom = 0.9538745
+anchor_left = 0.38177127
+anchor_top = 0.8387622
+anchor_right = 0.44747177
+anchor_bottom = 0.9549984
 grow_vertical = 0
 size_flags_horizontal = 3
 icon = ExtResource("6_y4qxv")
@@ -195,13 +250,13 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="ConfirmButton" type="Button" parent="Card" unique_id=559974488]
+[node name="ConfirmButton" type="Button" parent="Card"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.8859903
-anchor_top = 0.84686345
-anchor_right = 0.9516908
-anchor_bottom = 0.96309966
+anchor_left = 0.59587276
+anchor_top = 0.84039086
+anchor_right = 0.66157323
+anchor_bottom = 0.9566271
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -210,18 +265,18 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1677471093]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CnnPrediction" parent="." unique_id=1726328061 instance=ExtResource("8_y4qxv")]
+[node name="CnnPrediction" parent="." instance=ExtResource("8_y4qxv")]
 
-[node name="fail" type="AudioStreamPlayer" parent="." unique_id=1770998828]
+[node name="fail" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_ctthw")
 volume_db = -16.0
 
-[node name="correct" type="AudioStreamPlayer" parent="." unique_id=760145529]
+[node name="correct" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ewh38")
 volume_db = -16.0
 

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
 [ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/birthday_form/birthday_form.tscn" id="11_lqpn7"]
 [ext_resource type="PackedScene" uid="uid://vmjgcfgpg8tx" path="res://scenes/main_menu/gender_form/gender_form.tscn" id="12_qel0l"]
+[ext_resource type="PackedScene" path="res://scenes/main_menu/consent_form/consent_form.tscn" id="15_cnsnt"]
 [ext_resource type="Texture2D" uid="uid://b1xvffu843h4i" path="res://icons/UTFPR_logo.svg" id="13_rrgl4"]
 [ext_resource type="Texture2D" uid="uid://dco21ifwvu46i" path="res://icons/lesic.png" id="14_dn3lk"]
 
@@ -211,6 +212,10 @@ visible = false
 layout_mode = 1
 
 [node name="GenderForm" parent="." unique_id=77771531 instance=ExtResource("12_qel0l")]
+visible = false
+layout_mode = 1
+
+[node name="ConsentForm" parent="." instance=ExtResource("15_cnsnt")]
 visible = false
 layout_mode = 1
 

@@ -74,12 +74,20 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST:
 			track_scene(_current_scene_name)
-			finalize_session()
+			if _has_no_writings():
+				discard_session()
+			else:
+				finalize_session()
 			if db != null:
 				db.close_db()
 			get_tree().quit()
 		NOTIFICATION_APPLICATION_RESUMED:
 			finalize_session()
+
+func _has_no_writings() -> bool:
+	if db == null or session_id == "":
+		return false
+	return db.select_rows("writings", "session_id = '%s'" % session_id, ["id"]).is_empty()
 
 func _on_node_added(node: Node) -> void:
 	if node.get_parent() == get_tree().get_root() and node != self:
@@ -230,6 +238,15 @@ func finalize_session() -> void:
 		"dirty": 1,
 	})
 
+func discard_session() -> void:
+	if db == null or session_id == "":
+		return
+	db.delete_rows("writings", "session_id = '%s'" % session_id)
+	db.delete_rows("interactions", "session_id = '%s'" % session_id)
+	db.delete_rows("scenes", "session_id = '%s'" % session_id)
+	db.delete_rows("sessions", "session_id = '%s'" % session_id)
+	session_id = ""
+
 # ============================================
 # INPUT TRACKING
 
@@ -350,6 +367,8 @@ func _get_meaningful_parent(node: Node) -> Node:
 # RECORDING
 
 func track_scene(scene_name: String) -> void:
+	if db == null or session_id == "":
+		return
 	var now := Time.get_ticks_msec() / 1000.0
 
 	if _current_scene_row_id != -1 and _current_scene_name == scene_name:
@@ -371,6 +390,8 @@ func track_scene(scene_name: String) -> void:
 	_current_scene_start = now
 
 func add_click(root: Node, lvl: int, t: float, dur: float, pos: Vector2, clicked_node: Node) -> void:
+	if db == null or session_id == "":
+		return
 	db.insert_row("interactions", {
 		"session_id": session_id,
 		"type": "click",
@@ -384,6 +405,8 @@ func add_click(root: Node, lvl: int, t: float, dur: float, pos: Vector2, clicked
 	})
 
 func add_drag(root: Node, lvl: int, t: float, dur: float, start: Vector2, end: Vector2, drag_node: Node, drop_node: Node) -> void:
+	if db == null or session_id == "":
+		return
 	db.insert_row("interactions", {
 		"session_id": session_id,
 		"type": "drag",
@@ -400,6 +423,8 @@ func add_drag(root: Node, lvl: int, t: float, dur: float, start: Vector2, end: V
 	})
 
 func add_writing(img: Image, pred: Dictionary[String, float], k: BuildingData.Kind) -> void:
+	if db == null or session_id == "":
+		return
 	var png_bytes: PackedByteArray = img.save_png_to_buffer()
 	db.insert_row("writings", {
 		"session_id": session_id,

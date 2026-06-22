@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b304p5vhgs1gb"]
+[gd_scene load_steps=14 format=3 uid="uid://b304p5vhgs1gb"]
 
 [ext_resource type="Script" uid="uid://chyw00s7u3fcl" path="res://scenes/level/world/world.gd" id="1_3dm31"]
 [ext_resource type="Script" uid="uid://dy1s7a1rni51h" path="res://scenes/level/level.gd" id="1_pe1ox"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ce3lx2qs1lbmq" path="res://scenes/level/ui/completion_status/completion_status.tscn" id="5_hnne4"]
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="5_vpf64"]
 [ext_resource type="Script" uid="uid://bnaj30wml1gpm" path="res://scenes/level/ui/ui.gd" id="5_wcngd"]
-[ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="7_xv074"]
+[ext_resource type="Texture2D" uid="uid://btqfmpdm3arg1" path="res://icons/cancel.svg" id="8_m0bv2"]
 [ext_resource type="PackedScene" uid="uid://p4tx68w38bha" path="res://scenes/level/ui/win/win_card.tscn" id="8_xv074"]
 [ext_resource type="PackedScene" uid="uid://dv8xo103bpvdp" path="res://scenes/level/ui/blackboard/blackboard.tscn" id="9_sytrn"]
 [ext_resource type="PackedScene" uid="uid://c8w4hnupq7hik" path="res://scenes/level/ui/final_win/final_win_card.tscn" id="10_m0bv2"]
@@ -26,12 +26,12 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="Level" type="Node" unique_id=1193504177]
+[node name="Level" type="Node"]
 script = ExtResource("1_pe1ox")
 
-[node name="Background" type="CanvasLayer" parent="." unique_id=644466657]
+[node name="Background" type="CanvasLayer" parent="."]
 
-[node name="LevelBackground" type="ColorRect" parent="Background" unique_id=312516689]
+[node name="LevelBackground" type="ColorRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,7 +41,7 @@ mouse_filter = 2
 color = Color(0.30138263, 0.830506, 0.4931013, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Catalog" type="PanelContainer" parent="Background" unique_id=1964726576]
+[node name="Catalog" type="PanelContainer" parent="Background"]
 anchors_preset = -1
 anchor_right = 0.2621528
 anchor_bottom = 1.0
@@ -51,36 +51,36 @@ theme = ExtResource("5_vpf64")
 script = ExtResource("2_sytrn")
 metadata/_edit_use_anchors_ = true
 
-[node name="BuildingsPanel" type="PanelContainer" parent="Background/Catalog" unique_id=336384168]
+[node name="BuildingsPanel" type="PanelContainer" parent="Background/Catalog"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv074")
 
-[node name="BuildingsList" type="VBoxContainer" parent="Background/Catalog/BuildingsPanel" unique_id=686186045]
+[node name="BuildingsList" type="VBoxContainer" parent="Background/Catalog/BuildingsPanel"]
 layout_mode = 2
 focus_behavior_recursive = 1
 
-[node name="CompletionStatus" parent="Background" unique_id=714219907 instance=ExtResource("5_hnne4")]
+[node name="CompletionStatus" parent="Background" instance=ExtResource("5_hnne4")]
 anchor_left = 0.3628472
 anchor_right = 0.875382
 anchor_bottom = 0.17091359
 offset_right = 0.5599365
 offset_bottom = 0.24799347
 
-[node name="WorldLayer" type="CanvasLayer" parent="." unique_id=1254438683]
+[node name="WorldLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="World" type="Node2D" parent="WorldLayer" unique_id=1860023793]
+[node name="World" type="Node2D" parent="WorldLayer"]
 position = Vector2(576, 324)
 script = ExtResource("1_3dm31")
 
-[node name="Camera2D" type="Camera2D" parent="WorldLayer/World" unique_id=1359002401]
+[node name="Camera2D" type="Camera2D" parent="WorldLayer/World"]
 
-[node name="Grid" parent="WorldLayer/World" unique_id=1890802538 instance=ExtResource("2_3dm31")]
+[node name="Grid" parent="WorldLayer/World" instance=ExtResource("2_3dm31")]
 
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=474775640]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="UI" type="Control" parent="UILayer" unique_id=706075068]
+[node name="UI" type="Control" parent="UILayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,7 +94,7 @@ theme = ExtResource("5_vpf64")
 script = ExtResource("5_wcngd")
 metadata/_edit_use_anchors_ = true
 
-[node name="CatalogButtons" type="Control" parent="UILayer/UI" unique_id=729163080]
+[node name="CatalogButtons" type="Control" parent="UILayer/UI"]
 layout_mode = 1
 anchor_left = -0.109375
 anchor_top = -0.19753087
@@ -102,33 +102,33 @@ anchor_right = -0.067708336
 anchor_bottom = -0.1388889
 metadata/_edit_use_anchors_ = true
 
-[node name="BackButton" type="Button" parent="UILayer/UI" unique_id=1768598203]
+[node name="BackButton" type="Button" parent="UILayer/UI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.014756944
-anchor_top = 0.8888889
-anchor_right = 0.08680555
+anchor_left = 0.014756945
+anchor_top = 0.90694445
+anchor_right = 0.06875
 anchor_bottom = 0.9814815
 grow_horizontal = 0
 grow_vertical = 0
-icon = ExtResource("7_xv074")
+icon = ExtResource("8_m0bv2")
 icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="WinCard" parent="UILayer/UI" unique_id=1656096447 instance=ExtResource("8_xv074")]
+[node name="WinCard" parent="UILayer/UI" instance=ExtResource("8_xv074")]
 visible = false
 layout_mode = 1
 
-[node name="FinalWinCard" parent="UILayer/UI" unique_id=178194488 instance=ExtResource("10_m0bv2")]
+[node name="FinalWinCard" parent="UILayer/UI" instance=ExtResource("10_m0bv2")]
 visible = false
 layout_mode = 1
 
-[node name="Blackboard" parent="UILayer/UI" unique_id=810955824 instance=ExtResource("9_sytrn")]
+[node name="Blackboard" parent="UILayer/UI" instance=ExtResource("9_sytrn")]
 visible = false
 layout_mode = 1
 
-[node name="Tutorial" parent="UILayer" unique_id=1265096345 instance=ExtResource("10_tf2q7")]
+[node name="Tutorial" parent="UILayer" instance=ExtResource("10_tf2q7")]
 visible = false
 
 [connection signal="pressed" from="UILayer/UI/BackButton" to="UILayer/UI" method="_on_back_pressed"]

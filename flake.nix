@@ -42,6 +42,8 @@
             pkgs.godot_4-export-templates-bin
             pkgs.jdk17
             android.androidsdk
+
+            pkgs.sqlite-interactive
           ];
 
           ANDROID_SDK_ROOT = "${android.androidsdk}/libexec/android-sdk";

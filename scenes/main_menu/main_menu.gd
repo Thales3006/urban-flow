@@ -2,6 +2,7 @@ extends Control
 
 @onready var gender_form: GenderForm = $GenderForm
 @onready var birthday_form: BirthdayForm = $BirthdayForm
+@onready var consent_form: ConsentForm = $ConsentForm
 @onready var dimmer: ColorRect = $Dimmer
 
 @onready var sound_button: Button = $SoundButton
@@ -11,6 +12,8 @@ extends Control
 
 
 func _ready() -> void:
+	consent_form.consentAccepted.connect(_on_consent_accepted)
+	consent_form.consentDeclined.connect(_on_consent_declined)
 	gender_form.genderChoosen.connect(_on_gender_decided)
 	birthday_form.birthdateChoosen.connect(_on_birthdate_decided)
 	if Global.first_time:
@@ -33,14 +36,23 @@ func _ready() -> void:
 			0.6,
 			0.6,
 		)
-		
-		gender_form._on_appear()
+
+		consent_form._on_appear()
 		Global.first_time = false
 	else:
+		consent_form.visible = false
 		gender_form.visible = false
 		birthday_form.visible = false
 		dimmer.visible = false
-		
+
+func _on_consent_accepted() -> void:
+	consent_form._on_disapear()
+	gender_form._on_appear()
+
+func _on_consent_declined() -> void:
+	PlayerInfo.discard_session()
+	get_tree().quit()
+
 func _on_gender_decided(gender: PlayerInfo.Gender):
 	gender_form._on_disapear()
 	PlayerInfo.gender = gender

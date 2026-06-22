@@ -6,6 +6,7 @@ const MAX_TRIES : int = 2
 const HINT_FONT_MIN_SIZE := 24
 const HINT_FONT_MAX_SIZE := 260
 const HINT_FONT_FIT_MARGIN := 0.85 # leave some breathing room from the whiteboard's edges
+const HINT_FONT_SIZE_BOOST := 1.2
 
 @onready var dimmer := $Dimmer
 @onready var card := $Card
@@ -19,6 +20,9 @@ const HINT_FONT_FIT_MARGIN := 0.85 # leave some breathing room from the whiteboa
 @onready var cnn_prediction: CnnPrediction = $CnnPrediction
 @onready var fail: AudioStreamPlayer = $fail
 @onready var correct: AudioStreamPlayer = $correct
+@onready var beaver: TextureRect = $Card/Beaver
+@onready var correct_icon: TextureRect = $Card/Correct
+@onready var question_icon: TextureRect = $Card/Question
 
 signal correct_word(kind: BuildingData.Kind)
 
@@ -48,6 +52,7 @@ func _on_disable_others(nodes: Array[Node]):
 
 func _on_appear(kind: BuildingData.Kind, catalog: BuildingCatalog):
 	whiteboard.clear()
+	_reset_feedback_icons()
 	if GameState.level.level == 1:
 		hint_word.visible = true
 		hint_word.modulate.a = 0
@@ -105,7 +110,55 @@ func _fit_hint_word_to_whiteboard(word: String) -> void:
 			best_size = size
 			break
 
-	hint_word.add_theme_font_size_override("normal_font_size", best_size)
+	hint_word.add_theme_font_size_override("normal_font_size", roundi(best_size * HINT_FONT_SIZE_BOOST))
+
+func _reset_feedback_icons() -> void:
+	correct_icon.visible = false
+	question_icon.visible = false
+	correct_icon.scale = Vector2.ONE
+	question_icon.scale = Vector2.ONE
+	correct_icon.modulate.a = 1.0
+	question_icon.modulate.a = 1.0
+	beaver.rotation = 0.0
+
+func _show_correct_feedback() -> void:
+	correct_icon.pivot_offset = correct_icon.size / 2
+	correct_icon.visible = true
+	correct_icon.scale = Vector2.ZERO
+
+	var icon_tween := create_tween()
+	icon_tween.set_trans(Tween.TRANS_BACK)
+	icon_tween.set_ease(Tween.EASE_OUT)
+	icon_tween.tween_property(correct_icon, "scale", Vector2.ONE, 0.4)
+
+	beaver.pivot_offset = Vector2(beaver.size.x / 2, beaver.size.y)
+	var beaver_tween := create_tween()
+	beaver_tween.set_trans(Tween.TRANS_BACK)
+	beaver_tween.set_ease(Tween.EASE_OUT)
+	beaver_tween.tween_property(beaver, "rotation", deg_to_rad(4), 0.15)
+	beaver_tween.tween_property(beaver, "rotation", 0.0, 0.2)
+
+func _show_question_feedback() -> void:
+	question_icon.pivot_offset = question_icon.size / 2
+	question_icon.visible = true
+	question_icon.scale = Vector2.ZERO
+	question_icon.modulate.a = 1.0
+
+	var icon_tween := create_tween()
+	icon_tween.set_trans(Tween.TRANS_BACK)
+	icon_tween.set_ease(Tween.EASE_OUT)
+	icon_tween.tween_property(question_icon, "scale", Vector2.ONE, 0.3)
+	icon_tween.tween_interval(0.9)
+	icon_tween.tween_property(question_icon, "modulate:a", 0.0, 0.3)
+	icon_tween.tween_callback(func(): question_icon.visible = false)
+
+	beaver.pivot_offset = Vector2(beaver.size.x / 2, beaver.size.y)
+	var beaver_tween := create_tween()
+	beaver_tween.set_trans(Tween.TRANS_ELASTIC)
+	beaver_tween.tween_property(beaver, "rotation", deg_to_rad(-3), 0.08)
+	beaver_tween.tween_property(beaver, "rotation", deg_to_rad(3), 0.08)
+	beaver_tween.tween_property(beaver, "rotation", deg_to_rad(-2), 0.08)
+	beaver_tween.tween_property(beaver, "rotation", 0.0, 0.08)
 
 func _on_disapear():
 	var viewport_size := get_viewport().get_visible_rect().size
@@ -166,16 +219,21 @@ func prediction_failed():
 func right_anwser():
 	current_catalog.unlock_buildings()
 	correct.play()
+	_show_correct_feedback()
+	await get_tree().create_timer(0.7).timeout
+	if not is_inside_tree():
+		return
 	_on_disapear()
 	correct_word.emit(current_catalog.kind)
-	
-	
+
+
 func try_again():
 	fail.play()
 	whiteboard.clear()
 	tries += 1
 	if tries >= MAX_TRIES:
 		hint_word.visible = true
+	_show_question_feedback()
 
 
 func _on_repeat_button_pressed() -> void:

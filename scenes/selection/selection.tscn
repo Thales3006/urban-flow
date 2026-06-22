@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://b3w5uxwdno12l"]
+[gd_scene load_steps=5 format=3 uid="uid://b3w5uxwdno12l"]
 
 [ext_resource type="Theme" uid="uid://cnkxw3hufjeor" path="res://styles/ui_theme.tres" id="1_msfa0"]
 [ext_resource type="Script" uid="uid://dm20d5dlamab4" path="res://scenes/selection/selection.gd" id="2_5ef5c"]
 [ext_resource type="Texture2D" uid="uid://cf6xrxiixo3ji" path="res://images/background.png" id="3_kv5yx"]
 [ext_resource type="Texture2D" uid="uid://b66if1xu18j0y" path="res://icons/keyboard-return-rounded.svg" id="4_5ef5c"]
 
-[node name="Selection" type="Control" unique_id=1567779928]
+[node name="Selection" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_vertical = 2
 theme = ExtResource("1_msfa0")
 script = ExtResource("2_5ef5c")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=2080556659]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,12 +25,12 @@ grow_vertical = 2
 texture = ExtResource("3_kv5yx")
 expand_mode = 1
 
-[node name="GridContainer" type="GridContainer" parent="." unique_id=1244276836]
+[node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08680555
+anchor_left = 0.178125
 anchor_top = 0.15432099
-anchor_right = 0.9131944
+anchor_right = 0.8109375
 anchor_bottom = 0.8302469
 grow_horizontal = 2
 grow_vertical = 2
@@ -40,7 +40,7 @@ theme_override_constants/v_separation = 40
 columns = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="backButton" type="Button" parent="." unique_id=1492512967]
+[node name="backButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.041666668

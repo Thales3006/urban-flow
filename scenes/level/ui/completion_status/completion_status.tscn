@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ce3lx2qs1lbmq"]
+[gd_scene load_steps=8 format=3 uid="uid://ce3lx2qs1lbmq"]
 
 [ext_resource type="Script" uid="uid://ss04n3r18bpa" path="res://scenes/level/ui/completion_status/completion_status.gd" id="1_2var0"]
 [ext_resource type="PackedScene" uid="uid://p8vf6uet7sup" path="res://scenes/level/ui/star/star.tscn" id="1_kneg2"]
@@ -20,7 +20,7 @@ border_color = Color(0.35428062, 0.35658672, 0.38782108, 1)
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="CompletionStatus" type="PanelContainer" unique_id=673116882]
+[node name="CompletionStatus" type="PanelContainer"]
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = -1
 anchor_right = 1.0
@@ -35,17 +35,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_b6ec3")
 script = ExtResource("1_2var0")
 metadata/_edit_use_anchors_ = true
 
-[node name="HBox" type="HBoxContainer" parent="." unique_id=1215547385]
+[node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Spacer1" type="Control" parent="HBox" unique_id=836484519]
+[node name="Spacer1" type="Control" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="ProgressBar" type="TextureProgressBar" parent="HBox" unique_id=1041204555]
+[node name="ProgressBar" type="TextureProgressBar" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -56,26 +56,27 @@ nine_patch_stretch = true
 texture_under = ExtResource("2_0ulmd")
 texture_over = ExtResource("3_etwov")
 texture_progress = ExtResource("4_j01ln")
+texture_progress_offset = Vector2(-9, 0)
 
-[node name="Spacer2" type="Control" parent="HBox" unique_id=1032364207]
+[node name="Spacer2" type="Control" parent="HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=664497913]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="Spacer1" type="Control" parent="VBoxContainer" unique_id=1758387125]
+[node name="Spacer1" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="StarHBox" type="HBoxContainer" parent="VBoxContainer" unique_id=746822652]
+[node name="StarHBox" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 14.57
@@ -83,57 +84,57 @@ mouse_filter = 2
 alignment = 1
 script = ExtResource("1_sdjqs")
 
-[node name="Star1" parent="VBoxContainer/StarHBox" unique_id=213466192 instance=ExtResource("1_kneg2")]
+[node name="Star1" parent="VBoxContainer/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer1" type="Control" parent="VBoxContainer/StarHBox" unique_id=1330128896]
+[node name="Spacer1" type="Control" parent="VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star2" parent="VBoxContainer/StarHBox" unique_id=536347287 instance=ExtResource("1_kneg2")]
+[node name="Star2" parent="VBoxContainer/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer2" type="Control" parent="VBoxContainer/StarHBox" unique_id=124606045]
+[node name="Spacer2" type="Control" parent="VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star3" parent="VBoxContainer/StarHBox" unique_id=1887828139 instance=ExtResource("1_kneg2")]
+[node name="Star3" parent="VBoxContainer/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer3" type="Control" parent="VBoxContainer/StarHBox" unique_id=1854777631]
+[node name="Spacer3" type="Control" parent="VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star4" parent="VBoxContainer/StarHBox" unique_id=992844016 instance=ExtResource("1_kneg2")]
+[node name="Star4" parent="VBoxContainer/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer4" type="Control" parent="VBoxContainer/StarHBox" unique_id=1864315187]
+[node name="Spacer4" type="Control" parent="VBoxContainer/StarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Star5" parent="VBoxContainer/StarHBox" unique_id=691806699 instance=ExtResource("1_kneg2")]
+[node name="Star5" parent="VBoxContainer/StarHBox" instance=ExtResource("1_kneg2")]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=639677956]
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
