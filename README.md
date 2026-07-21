@@ -36,7 +36,7 @@ from the device for analysis.
 | Aspect | Detail |
 |---|---|
 | Engine | Godot 4.5.1, GL Compatibility renderer |
-| Target platform | Android (arm64); Linux; Windows |
+| Target platform | Android; Linux; Windows |
 | Levels | 12, unlocked sequentially |
 
 ### Flow
