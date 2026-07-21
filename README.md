@@ -36,10 +36,8 @@ from the device for analysis.
 | Aspect | Detail |
 |---|---|
 | Engine | Godot 4.5.1, GL Compatibility renderer |
-| Target platform | Android (arm64); Linux desktop for development |
-| Viewport | 1280 × 720, canvas-item stretch |
+| Target platform | Android (arm64); Linux; Windows |
 | Levels | 12, unlocked sequentially |
-| Max FPS | 30 |
 
 ### Flow
 
