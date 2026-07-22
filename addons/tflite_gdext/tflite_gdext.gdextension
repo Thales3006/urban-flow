@@ -9,6 +9,8 @@ linux.debug.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.linux.template_d
 linux.release.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.linux.template_release.x86_64.so"
 android.debug.arm64 = "res://addons/tflite_gdext/libtflite_gdext.android.template_debug.arm64.so"
 android.release.arm64 = "res://addons/tflite_gdext/libtflite_gdext.android.template_release.arm64.so"
+windows.debug.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/tflite_gdext/libtflite_gdext.windows.template_release.x86_64.dll"
 
 [dependencies]
 
@@ -23,4 +25,16 @@ android.debug.arm64 = {
 }
 android.release.arm64 = {
   "res://addons/tflite_gdext/android/libtensorflowlite_c.so" : ""
+}
+windows.debug.x86_64 = {
+  "res://addons/tflite_gdext/windows/libtensorflowlite_c.dll" : "",
+  "res://addons/tflite_gdext/windows/libgcc_s_seh-1.dll" : "",
+  "res://addons/tflite_gdext/windows/libstdc++-6.dll" : "",
+  "res://addons/tflite_gdext/windows/libmcfgthread-2.dll" : ""
+}
+windows.release.x86_64 = {
+  "res://addons/tflite_gdext/windows/libtensorflowlite_c.dll" : "",
+  "res://addons/tflite_gdext/windows/libgcc_s_seh-1.dll" : "",
+  "res://addons/tflite_gdext/windows/libstdc++-6.dll" : "",
+  "res://addons/tflite_gdext/windows/libmcfgthread-2.dll" : ""
 }
