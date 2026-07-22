@@ -22,5 +22,8 @@ model/*.tflite
 addons/tflite_gdext/*.so
 addons/tflite_gdext/android/*.so
 addons/tflite_gdext/godot-cpp/
+addons/tflite_gdext/bin/
+addons/tflite_gdext/src/*.os
+addons/tflite_gdext/.sconsign.dblite
 
 addons/godot-sqlite/bin/*.so

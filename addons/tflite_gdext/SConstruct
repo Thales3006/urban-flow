@@ -5,12 +5,36 @@ env = SConscript("godot-cpp/SConstruct")
 
 tflite_src = os.environ.get("TFLITE_SRC_DIR", "")
 tflite_include_dirs = os.environ.get("TFLITE_INCLUDE_DIRS", "").split(os.pathsep)
-tflite_lib_dir = os.environ.get("TFLITE_LIB_DIR", "")
+tflite_lib_dir = os.environ.get("TFLITE_LIB_DIR", ARGUMENTS.get("tflite_lib_dir", ""))
+
+if env["platform"] == "windows" and env.get("use_mingw"):
+    # MCFGThread (MinGW's threading backend) headers and import lib must be on
+    # the include/lib paths when cross-compiling with the Nix-provided MCF toolchain.
+    import glob as _glob
+    mcf_devs = _glob.glob("/nix/store/*-mcfgthread-x86_64-w64-mingw32-*-dev/include")
+    if mcf_devs:
+        env.Append(CPPPATH=[mcf_devs[0]])
+    mcf_lib_dirs = _glob.glob("/nix/store/*-mcfgthread-x86_64-w64-mingw32-[0-9]*/lib")
+    if mcf_lib_dirs:
+        # SCons LIBPATH expansion is silently broken for this cross-compile target;
+        # inject -L directly into LINKFLAGS so the linker actually sees it.
+        env.Append(LINKFLAGS=[f"-L{mcf_lib_dirs[0]}"])
+
+    # godot-cpp's Windows MinGW build adds -static, which prevents the linker from
+    # resolving any .dll.a import libraries (including TFLite and mcfgthread).
+    # Strip it: -static-libgcc and -static-libstdc++ already handle the C/C++
+    # runtimes, and godot-cpp itself is an explicit .a file so it stays static.
+    env["LINKFLAGS"] = [f for f in env["LINKFLAGS"] if f != "-static"]
 
 env.Append(CPPPATH=["src/", tflite_src] + [d for d in tflite_include_dirs if d])
-env.Append(LIBPATH=[tflite_lib_dir])
 env.Append(LIBS=["tensorflowlite_c"])
-env.Append(RPATH=[tflite_lib_dir])
+if env["platform"] != "windows":
+    env.Append(LIBPATH=[tflite_lib_dir])
+    env.Append(RPATH=[tflite_lib_dir])
+else:
+    # LIBPATH expansion is broken for this cross-compile; pass -L directly.
+    if tflite_lib_dir:
+        env.Append(LINKFLAGS=[f"-L{tflite_lib_dir}"])
 
 sources = Glob("src/*.cpp")
 
