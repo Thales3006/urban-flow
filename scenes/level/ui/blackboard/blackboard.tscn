@@ -176,17 +176,16 @@ anchor_left = 0.6437554
 anchor_top = 0.217859
 anchor_right = 1.1906303
 anchor_bottom = 1.6422417
-offset_left = 5.3125
+offset_left = 47.3125
 offset_top = -33.765427
-offset_right = 5.3125
+offset_right = 47.3125
 offset_bottom = -33.76544
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("12_8whsd")
 expand_mode = 1
 stretch_mode = 5
-metadata/_edit_use_anchors_ = true
 
 [node name="Correct" type="TextureRect" parent="Card"]
 visible = false
