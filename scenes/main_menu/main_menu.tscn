@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c88bdx63kuuua"]
+[gd_scene load_steps=21 format=3 uid="uid://c88bdx63kuuua"]
 
 [ext_resource type="Script" uid="uid://drthi7t5k8jmm" path="res://scenes/main_menu/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://cf6xrxiixo3ji" path="res://images/background.png" id="2_wu84c"]
@@ -12,9 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://e4lnjob5uy5p" path="res://icons/sound.png" id="9_thkx5"]
 [ext_resource type="PackedScene" uid="uid://d3u2fikis4qbm" path="res://scenes/main_menu/birthday_form/birthday_form.tscn" id="11_lqpn7"]
 [ext_resource type="PackedScene" uid="uid://vmjgcfgpg8tx" path="res://scenes/main_menu/gender_form/gender_form.tscn" id="12_qel0l"]
-[ext_resource type="PackedScene" path="res://scenes/main_menu/consent_form/consent_form.tscn" id="15_cnsnt"]
 [ext_resource type="Texture2D" uid="uid://b1xvffu843h4i" path="res://icons/UTFPR_logo.svg" id="13_rrgl4"]
 [ext_resource type="Texture2D" uid="uid://dco21ifwvu46i" path="res://icons/lesic.png" id="14_dn3lk"]
+[ext_resource type="PackedScene" uid="uid://qvv2iei8hkt8" path="res://scenes/main_menu/consent_form/consent_form.tscn" id="15_cnsnt"]
+[ext_resource type="Texture2D" uid="uid://c450hh7dc24pn" path="res://icons/report.svg" id="16_rprt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xg86"]
 content_margin_left = 10.0
@@ -88,7 +89,7 @@ shadow_color = Color(0, 0, 0, 0.23921569)
 shadow_size = 10
 shadow_offset = Vector2(0, 5)
 
-[node name="MainMenu" type="Control" unique_id=1537581856]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +101,7 @@ script = ExtResource("1_bqqt6")
 icon_on = ExtResource("9_thkx5")
 icon_off = ExtResource("4_x2yjq")
 
-[node name="BackGround" type="TextureRect" parent="." unique_id=56700780]
+[node name="BackGround" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +111,7 @@ grow_vertical = 2
 texture = ExtResource("2_wu84c")
 expand_mode = 1
 
-[node name="MainTitle" type="TextureRect" parent="." unique_id=93675064]
+[node name="MainTitle" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.20700002
@@ -126,7 +127,7 @@ texture = ExtResource("4_5seab")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Buttons" type="VBoxContainer" parent="." unique_id=1729297834]
+[node name="Buttons" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -140,7 +141,7 @@ theme_override_constants/separation = 20
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayButton" type="Button" parent="Buttons" unique_id=953454258]
+[node name="PlayButton" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
@@ -148,7 +149,7 @@ icon = ExtResource("4_rtw2f")
 icon_alignment = 1
 expand_icon = true
 
-[node name="SettingsButton" type="Button" parent="Buttons" unique_id=684608519]
+[node name="SettingsButton" type="Button" parent="Buttons"]
 visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -157,7 +158,7 @@ icon = ExtResource("5_oa1go")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ExitButton" type="Button" parent="Buttons" unique_id=6133149]
+[node name="ExitButton" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
@@ -166,7 +167,7 @@ icon = ExtResource("6_tbmy8")
 icon_alignment = 1
 expand_icon = true
 
-[node name="SoundButton" type="Button" parent="." unique_id=911926682]
+[node name="SoundButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.058159724
@@ -183,7 +184,28 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Beaver" type="TextureRect" parent="." unique_id=996573212]
+[node name="ReportButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.7452054
+anchor_top = -5.589189
+anchor_right = -0.7084867
+anchor_bottom = -5.523911
+offset_left = 967.8629
+offset_top = 4140.216
+offset_right = 967.8629
+offset_bottom = 4140.216
+theme_override_styles/normal = SubResource("StyleBoxFlat_4xg86")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x2yjq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lqpn7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_thkx5")
+toggle_mode = true
+icon = ExtResource("16_rprt")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Beaver" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.6397569
@@ -198,7 +220,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Dimmer" type="ColorRect" parent="." unique_id=1476288339]
+[node name="Dimmer" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -207,11 +229,11 @@ anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.50980395)
 metadata/_edit_use_anchors_ = true
 
-[node name="BirthdayForm" parent="." unique_id=1684473883 instance=ExtResource("11_lqpn7")]
+[node name="BirthdayForm" parent="." instance=ExtResource("11_lqpn7")]
 visible = false
 layout_mode = 1
 
-[node name="GenderForm" parent="." unique_id=77771531 instance=ExtResource("12_qel0l")]
+[node name="GenderForm" parent="." instance=ExtResource("12_qel0l")]
 visible = false
 layout_mode = 1
 
@@ -219,7 +241,7 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="lesic" type="TextureRect" parent="." unique_id=1408233879]
+[node name="lesic" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.009548611
@@ -235,7 +257,7 @@ expand_mode = 1
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="utfpr" type="TextureRect" parent="." unique_id=723563946]
+[node name="utfpr" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.8203125
@@ -247,7 +269,19 @@ expand_mode = 1
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
+[node name="ReportDialog" type="FileDialog" parent="."]
+visible = false
+title = "Salvar relatório"
+size = Vector2i(700, 500)
+ok_button_text = "Salvar"
+file_mode = 4
+access = 2
+filters = PackedStringArray("*.json ; JSON")
+use_native_dialog = true
+
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="toggled" from="SoundButton" to="." method="_on_button_toggled"]
+[connection signal="pressed" from="ReportButton" to="." method="_on_report_button_pressed"]
+[connection signal="file_selected" from="ReportDialog" to="." method="_on_report_dialog_file_selected"]

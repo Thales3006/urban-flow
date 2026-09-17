@@ -6,6 +6,7 @@ extends Control
 @onready var dimmer: ColorRect = $Dimmer
 
 @onready var sound_button: Button = $SoundButton
+@onready var report_dialog: FileDialog = $ReportDialog
 
 @export var icon_on: Texture2D
 @export var icon_off: Texture2D
@@ -96,3 +97,19 @@ func _on_button_toggled(toggled_on: bool) -> void:
 		sound_button.icon = icon_on
 	else:
 		sound_button.icon = icon_off
+
+
+func _on_report_button_pressed() -> void:
+	AudioManager.play_click()
+	report_dialog.current_file = PlayerInfo.suggested_report_filename()
+	report_dialog.popup_centered()
+
+
+func _on_report_dialog_file_selected(path: String) -> void:
+	var json := PlayerInfo.build_report_json()
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		push_error("Report export failed: %s" % FileAccess.get_open_error())
+		return
+	f.store_string(json)
+	f.close()
