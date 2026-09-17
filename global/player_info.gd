@@ -432,3 +432,48 @@ func add_writing(img: Image, pred: Dictionary[String, float], k: BuildingData.Ki
 		"image": png_bytes,
 		"prediction_json": JSON.stringify(pred),
 	})
+
+# ============================================
+# REPORT EXPORT (research data extraction)
+
+const REPORT_VERSION := 1
+
+func suggested_report_filename() -> String:
+	return "players_info.json"
+
+# Dumps this device's whole database as one JSON bundle. device_id is at the
+# top level (and on every row) so files merged from many devices stay
+# unambiguous even though they share the filename.
+func build_report_json() -> String:
+	finalize_session()
+	var report := {
+		"export_version": REPORT_VERSION,
+		"device_id": device_id,
+		"exported_at": Time.get_unix_time_from_system(),
+		"sessions": _dump_table("sessions"),
+		"scenes": _dump_table("scenes"),
+		"interactions": _dump_table("interactions"),
+		"writings": _dump_writings(),
+	}
+	return JSON.stringify(report, "\t")
+
+func _dump_table(table: String) -> Array:
+	if db == null:
+		return []
+	if not db.query("SELECT * FROM %s" % table):
+		return []
+	return db.query_result.duplicate(true)
+
+func _dump_writings() -> Array:
+	var rows := _dump_table("writings")
+	for row in rows:
+		# PackedByteArray isn't JSON-serializable, so the PNG blob becomes base64.
+		var img: PackedByteArray = row.get("image", PackedByteArray())
+		row.erase("image")
+		row["image_b64"] = Marshalls.raw_to_base64(img)
+		# prediction_json is stored as a text string; embed it as a nested object.
+		var parsed: Variant = JSON.parse_string(String(row.get("prediction_json", "")))
+		if parsed != null:
+			row["prediction"] = parsed
+			row.erase("prediction_json")
+	return rows
