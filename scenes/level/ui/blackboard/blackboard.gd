@@ -6,7 +6,7 @@ const MAX_TRIES : int = 2
 const HINT_FONT_MIN_SIZE := 24
 const HINT_FONT_MAX_SIZE := 260
 const HINT_FONT_FIT_MARGIN := 0.85 # leave some breathing room from the whiteboard's edges
-const HINT_FONT_SIZE_BOOST := 1.2
+const HINT_FONT_SIZE_BOOST := 1.08
 
 @onready var dimmer := $Dimmer
 @onready var card := $Card
@@ -196,18 +196,17 @@ func _on_confirm_button_pressed() -> void:
 		prediction_failed()
 		return
 
-	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
-	var result = prediction.get(word)
-	
-	if result == null:
-		PlayerInfo.add_writing(img, { "prediction_error": 0.0 }, current_catalog.kind)
-		prediction_failed()
-		return
-		
 	PlayerInfo.add_writing(img, prediction, current_catalog.kind)
 
-	var threshold: float = Building.BUILDING_DATA[current_catalog.kind].confidence_threshold
-	if result >= threshold:
+	var best_class: String = ""
+	var best_score: float = -1.0
+	for cls: String in prediction:
+		if prediction[cls] > best_score:
+			best_score = prediction[cls]
+			best_class = cls
+
+	var word: String = Building.BUILDING_DATA[current_catalog.kind].word.capitalize()
+	if best_class == word:
 		right_anwser()
 	else:
 		try_again()
