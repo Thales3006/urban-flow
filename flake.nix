@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    # Godot only: 25.11 is pinned to 4.5.1, so pull the editor + export
+    # templates from unstable to get 4.6+ (full Android SAF Save dialog).
+    # Everything else (Android SDK/NDK, JDK) stays on 25.11.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -10,6 +14,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       flake-utils,
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -21,6 +26,11 @@
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
+        };
+
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
         };
 
         android = pkgs.androidenv.composeAndroidPackages {
@@ -38,8 +48,8 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.godot_4
-            pkgs.godot_4-export-templates-bin
+            pkgs-unstable.godot_4
+            pkgs-unstable.godot_4-export-templates-bin
             pkgs.jdk17
             android.androidsdk
 
@@ -60,10 +70,12 @@
             # Godot looks up export templates at a hardcoded path under
             # ~/.local/share/godot (no env var override, same deal as the
             # Editor Settings SDK/JDK paths above) -- keep it pointed at
-            # the Nix-provided package matching this exact Godot version.
+            # the Nix-provided package. Link whatever version dir the package
+            # ships so this survives Godot version bumps without editing here.
             mkdir -p "$HOME/.local/share/godot/export_templates"
-            ln -sfn "${pkgs.godot_4-export-templates-bin}/share/godot/export_templates/4.5.1.stable" \
-              "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+            for tpl in ${pkgs-unstable.godot_4-export-templates-bin}/share/godot/export_templates/*; do
+              ln -sfn "$tpl" "$HOME/.local/share/godot/export_templates/$(basename "$tpl")"
+            done
 
             echo "Urban Flow dev environment ready."
             echo "Godot editor: godot --editor . (run from the repo root)"
