@@ -2,11 +2,12 @@
   description = "Urban Flow dev environment: Godot editor + Android SDK/NDK";
 
   inputs = {
+    # Pinned to nixos-25.11 = Godot 4.5.1 ON PURPOSE. Bumping to 4.6/4.7 broke
+    # Windows touch input (a finger drag ramps CPU until the app freezes; mouse
+    # is fine). Do NOT bump to 4.6+ without first re-testing touch on a Windows
+    # touch device. Trade-off: the report export loses the 4.6+ native Android
+    # SAF Save dialog -- acceptable for working touch.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    # Godot only: 25.11 is pinned to 4.5.1, so pull the editor + export
-    # templates from unstable to get 4.6+ (full Android SAF Save dialog).
-    # Everything else (Android SDK/NDK, JDK) stays on 25.11.
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -14,7 +15,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       flake-utils,
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -26,11 +26,6 @@
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
-        };
-
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
         };
 
         android = pkgs.androidenv.composeAndroidPackages {
@@ -48,8 +43,8 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs-unstable.godot_4
-            pkgs-unstable.godot_4-export-templates-bin
+            pkgs.godot_4
+            pkgs.godot_4-export-templates-bin
             pkgs.jdk17
             android.androidsdk
 
@@ -73,7 +68,7 @@
             # the Nix-provided package. Link whatever version dir the package
             # ships so this survives Godot version bumps without editing here.
             mkdir -p "$HOME/.local/share/godot/export_templates"
-            for tpl in ${pkgs-unstable.godot_4-export-templates-bin}/share/godot/export_templates/*; do
+            for tpl in ${pkgs.godot_4-export-templates-bin}/share/godot/export_templates/*; do
               ln -sfn "$tpl" "$HOME/.local/share/godot/export_templates/$(basename "$tpl")"
             done
 

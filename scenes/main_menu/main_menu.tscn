@@ -187,14 +187,10 @@ metadata/_edit_use_anchors_ = true
 [node name="ReportButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.7452054
-anchor_top = -5.589189
-anchor_right = -0.7084867
-anchor_bottom = -5.523911
-offset_left = 967.8629
-offset_top = 4140.216
-offset_right = 967.8629
-offset_bottom = 4140.216
+anchor_left = 0.0109375
+anchor_top = 0.16111077
+anchor_right = 0.04765625
+anchor_bottom = 0.22638889
 theme_override_styles/normal = SubResource("StyleBoxFlat_4xg86")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_x2yjq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lqpn7")
@@ -270,11 +266,9 @@ stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="ReportDialog" type="FileDialog" parent="."]
-visible = false
 title = "Salvar relatório"
 size = Vector2i(700, 500)
 ok_button_text = "Salvar"
-file_mode = 4
 access = 2
 filters = PackedStringArray("*.json ; JSON")
 use_native_dialog = true
